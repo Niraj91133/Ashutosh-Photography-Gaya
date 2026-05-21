@@ -1,16 +1,13 @@
 export default function Process() {
     return (
-        <section className="relative w-full h-[75vh] min-h-[550px] flex items-center overflow-hidden bg-[#050505] border-b border-white/5">
+        <section className="relative w-full h-[50vh] flex items-center overflow-hidden bg-[#050505] border-b border-white/5">
             {/* Background Image (Black and White filter) */}
-            <div className="absolute inset-0 z-0">
+            <div className="absolute inset-0 z-0 bg-[#050505]">
                 <img
                     src="https://images.pexels.com/photos/1024993/pexels-photo-1024993.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop"
                     alt="Background"
-                    className="w-full h-full object-cover grayscale opacity-80 scale-105"
+                    className="w-full h-full object-cover grayscale opacity-60 scale-105"
                 />
-                {/* Heavy Dark Gradients for Vignette and Text Readability */}
-                <div className="absolute inset-0 bg-gradient-to-r from-[#050505]/95 via-[#050505]/60 to-transparent" />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#050505]/90 via-[#050505]/30 to-transparent" />
             </div>
 
             {/* Content (Left Aligned) */}
