@@ -1,42 +1,31 @@
 export default function Process() {
-    const steps = [
-        { number: '01', title: 'Consultation', desc: 'A personal meeting to understand your vision, style, and essential details.' },
-        { number: '02', title: 'Planning', desc: 'Crafting a unique mood board, scouting locations, and finalizing the schedule.' },
-        { number: '03', title: 'Shooting', desc: 'The big day! Seamless documentation with high-performance gear and passion.' },
-        { number: '04', title: 'Delivery', desc: 'Masterfully edited photos and films delivered in a premium digital gallery.' }
-    ];
-
     return (
-        <section className="py-24 md:py-40 bg-[#0a0a0a] border-b border-white/5 overflow-hidden">
-            <div className="w-full">
-                <div className="flex flex-col md:flex-row md:items-end justify-between mb-24 gap-8 px-12">
-                    <div className="space-y-4">
-                        <span className="text-gold-600 font-bold uppercase tracking-[0.3em] text-[10px]">The Journey</span>
-                        <h2 className="text-4xl md:text-5xl font-serif text-white font-medium leading-tight">Our Effortless Process</h2>
-                        <div className="w-12 h-[2px] bg-gold-200"></div>
-                    </div>
-                    <p className="text-gray-500 font-light max-w-sm">From the first call to the final reveal, we ensure a smooth, professional, and luxury experience.</p>
-                </div>
+        <section className="relative w-full h-[60vh] min-h-[500px] flex items-center overflow-hidden bg-[#050505] border-b border-white/5">
+            {/* Background Image (Black and White filter) */}
+            <div className="absolute inset-0 z-0">
+                <img
+                    src="https://images.pexels.com/photos/1024993/pexels-photo-1024993.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop"
+                    alt="Background"
+                    className="w-full h-full object-cover grayscale opacity-80 scale-105"
+                />
+                {/* Heavy Dark Gradients for Vignette and Text Readability */}
+                <div className="absolute inset-0 bg-gradient-to-r from-[#050505]/95 via-[#050505]/60 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#050505]/90 via-[#050505]/30 to-transparent" />
+            </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-0">
-                    {steps.map((step, index) => (
-                        <div key={index} className="relative p-8 md:p-12 border-b md:border-b-0 md:border-r border-gray-200 last:border-0 transition-all duration-500 overflow-hidden">
-                            {/* Background Number */}
-                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-9xl font-serif text-gray-100/50 transition-colors duration-500 -z-0">
-                                {step.number}
-                            </div>
+            {/* Content (Left Aligned) */}
+            <div className="relative z-10 w-full max-w-[1400px] mx-auto px-16 lg:px-32 mt-12">
+                <p className="font-sans text-sm md:text-[17px] text-gray-300 mb-10 max-w-[500px] leading-relaxed font-medium tracking-wide">
+                    Write Something About the Asutosh Photography so That User get Attracted and book Us FAst
+                </p>
 
-                            <div className="relative z-10 space-y-6">
-                                <span className="w-8 h-8 rounded-full border border-gold-400 text-gold-600 flex items-center justify-center text-[10px] font-black transition-all">
-                                    {step.number}
-                                </span>
-                                <div className="space-y-3">
-                                    <h3 className="text-2xl font-serif font-black text-white transition-colors">{step.title}</h3>
-                                    <p className="text-sm text-gray-500 font-light leading-relaxed">{step.desc}</p>
-                                </div>
-                            </div>
-                        </div>
-                    ))}
+                <div>
+                    <a
+                        href="#contact"
+                        className="inline-flex items-center justify-center bg-[#050505] text-white px-12 py-3.5 rounded-sm border border-[#ff3333]/60 hover:border-[#ff3333] hover:bg-[#ff3333] transition-all duration-300 text-sm font-semibold tracking-wide shadow-[0_0_15px_rgba(255,51,51,0.15)] hover:shadow-[0_0_20px_rgba(255,51,51,0.5)]"
+                    >
+                        Book Us
+                    </a>
                 </div>
             </div>
         </section>
