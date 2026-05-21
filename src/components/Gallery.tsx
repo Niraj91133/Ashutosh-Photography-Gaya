@@ -90,82 +90,72 @@ export default function Gallery({ activeFilter, setActiveFilter }: GalleryProps)
   }, [selectedIndex, handlePrev, handleNext]);
 
   return (
-    <section id="gallery" className="py-24 md:py-40 bg-[#050505] border-b border-white/5">
-      <div className="w-full">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 md:mb-24 gap-6 md:gap-8 px-6 md:px-12">
-          <div className="space-y-2 md:space-y-4">
-            <span className="text-gold-600 font-bold uppercase tracking-[0.3em] text-[10px]">The Showcase</span>
-            <h2 className="text-3xl md:text-5xl font-serif text-white font-medium leading-tight">Collected Masterpieces</h2>
-            <div className="w-12 h-[2px] bg-gold-200"></div>
-          </div>
-
-          {/* Filter Tabs - Mobile Responsive */}
-          <div className="w-full md:w-auto -mx-6 md:mx-0 px-6 md:px-0 overflow-x-auto scrollbar-hide flex">
-            <div className="flex bg-[#0a0a0a] p-1 rounded-full border border-white/5 whitespace-nowrap">
-              {filters.map((filter) => (
-                <button
-                  key={filter}
-                  onClick={() => setActiveFilter(filter)}
-                  className={`px-5 md:px-6 py-2 text-[10px] font-black uppercase tracking-widest transition-all rounded-full ${activeFilter === filter
-                    ? 'bg-gold-600 text-white shadow-md'
-                    : 'text-gray-400 hover:text-white'
-                    }`}
-                >
-                  {filter}
-                </button>
-              ))}
-            </div>
-          </div>
+    <section id="gallery" className="py-20 bg-white">
+      <div className="w-full max-w-[1600px] mx-auto px-6 lg:px-12">
+        {/* Title Section */}
+        <div className="mb-12">
+          <span className="text-gray-500 font-bold uppercase tracking-[0.2em] text-[10px]">The Showcase</span>
+          <h2 className="text-3xl md:text-5xl font-serif text-[#050505] font-medium leading-tight mt-2">Collected Masterpieces</h2>
         </div>
 
-        {/* Elite Gallery Grid - Optimized for Mobile 2-columns */}
-        <div className="px-2 md:px-4 lg:px-6">
-          <div className="columns-2 md:columns-3 lg:columns-4 xl:columns-5 gap-2 md:gap-4 space-y-2 md:space-y-4">
-            {filteredImages.map((image, index) => (
-              <div
-                key={index}
-                onClick={() => setSelectedIndex(index)}
-                className="break-inside-avoid relative group rounded-xl md:rounded-2xl overflow-hidden bg-gray-100 shadow-sm transition-all duration-700 cursor-zoom-in border border-white/5"
+        {/* Filter Tabs - Matching Reference exactly */}
+        <div className="flex flex-wrap gap-2 md:gap-3 mb-10 overflow-x-auto pb-4 scrollbar-hide">
+          {filters.map((filter) => {
+            const isActive = activeFilter === filter;
+            return (
+              <button
+                key={filter}
+                onClick={() => setActiveFilter(filter)}
+                className={`px-5 py-2 text-[13px] font-medium transition-all rounded-[4px] border whitespace-nowrap
+                  ${isActive 
+                    ? 'bg-[#c1272d] text-white border-[#c1272d]' 
+                    : 'bg-white text-gray-600 border-gray-300 hover:border-gray-400 hover:text-gray-900'
+                  }`}
               >
-                {image.media_type === 'video' ? (
-                  <div className="relative">
-                    <video
-                      src={image.url}
-                      className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000"
-                      autoPlay muted loop playsInline
-                    />
-                    <div className="absolute top-2 right-2 md:top-4 md:right-4 w-6 h-6 md:w-8 md:h-8 bg-black/20 backdrop-blur-md rounded-full flex items-center justify-center">
-                      <Film className="w-3 h-3 text-white/70" />
-                    </div>
-                  </div>
-                ) : (
-                  <img
-                    src={image.url}
-                    alt={image.title}
-                    loading="lazy"
-                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000"
-                  />
-                )}
+                {filter}
+              </button>
+            );
+          })}
+        </div>
 
-                {/* Minimal Luxury Overlay - Simplified for Mobile */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div className="absolute bottom-0 left-0 right-0 p-3 md:p-6 translate-y-2 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500 pointer-events-none">
-                  <p className="text-gold-400 text-[7px] md:text-[8px] font-black uppercase tracking-[0.2em] mb-1">{image.category}</p>
-                  <h3 className="text-white text-[10px] md:text-sm font-serif tracking-wide truncate">{image.title}</h3>
+        {/* Clean Masonry Layout */}
+        <div className="columns-2 md:columns-3 lg:columns-4 xl:columns-6 gap-4 space-y-4">
+          {filteredImages.map((image, index) => (
+            <div
+              key={index}
+              onClick={() => setSelectedIndex(index)}
+              className="break-inside-avoid relative group overflow-hidden bg-gray-100 cursor-zoom-in"
+            >
+              {image.media_type === 'video' ? (
+                <div className="relative">
+                  <video
+                    src={image.url}
+                    className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
+                    autoPlay muted loop playsInline
+                  />
+                  <div className="absolute top-2 right-2 w-6 h-6 bg-black/40 backdrop-blur-sm rounded-full flex items-center justify-center">
+                    <Film className="w-3 h-3 text-white" />
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ) : (
+                <img
+                  src={image.url}
+                  alt={image.title}
+                  loading="lazy"
+                  className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+              )}
+            </div>
+          ))}
         </div>
       </div>
 
       {/* Luxury Lightbox / Previewer */}
       {selectedIndex !== null && (
         <div
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-dark-950/95 backdrop-blur-xl animate-in fade-in duration-300"
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 backdrop-blur-xl animate-in fade-in duration-300"
           onClick={() => setSelectedIndex(null)}
         >
-          {/* Close Button */}
           <button
             className="absolute top-6 right-6 md:top-8 md:right-8 text-white/50 hover:text-white transition-colors z-[110]"
             onClick={() => setSelectedIndex(null)}
@@ -173,57 +163,45 @@ export default function Gallery({ activeFilter, setActiveFilter }: GalleryProps)
             <X className="w-8 h-8" />
           </button>
 
-          {/* Navigation Buttons - More Prominent */}
           <button
-            className="absolute left-2 md:left-8 w-14 h-14 md:w-16 md:h-16 rounded-full bg-black/40 backdrop-blur-md border border-white/10 flex items-center justify-center text-white hover:bg-gold-600 transition-all z-[110] shadow-xl group active:scale-90"
+            className="absolute left-2 md:left-8 w-14 h-14 md:w-16 md:h-16 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-all z-[110]"
             onClick={handlePrev}
             aria-label="Previous"
           >
-            <ChevronLeft className="w-8 h-8 md:w-10 md:h-10 transition-transform group-hover:-translate-x-1" />
+            <ChevronLeft className="w-8 h-8 md:w-10 md:h-10" />
           </button>
+          
           <button
-            className="absolute right-2 md:right-8 w-14 h-14 md:w-16 md:h-16 rounded-full bg-black/40 backdrop-blur-md border border-white/10 flex items-center justify-center text-white hover:bg-gold-600 transition-all z-[110] shadow-xl group active:scale-90"
+            className="absolute right-2 md:right-8 w-14 h-14 md:w-16 md:h-16 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-all z-[110]"
             onClick={handleNext}
             aria-label="Next"
           >
-            <ChevronRight className="w-8 h-8 md:w-10 md:h-10 transition-transform group-hover:translate-x-1" />
+            <ChevronRight className="w-8 h-8 md:w-10 md:h-10" />
           </button>
 
-          {/* Preview Content */}
           <div
-            className="relative max-w-5xl max-h-[80vh] w-full mx-4 md:mx-0 flex flex-col items-center animate-in zoom-in-95 duration-500"
+            className="relative max-w-5xl max-h-[80vh] w-full mx-4 md:mx-0 flex flex-col items-center"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="w-full h-full rounded-2xl overflow-hidden shadow-2xl border border-white/10 bg-black flex items-center justify-center">
+            <div className="w-full h-full flex items-center justify-center">
               {filteredImages[selectedIndex].media_type === 'video' ? (
                 <video
                   src={filteredImages[selectedIndex].url}
                   controls
                   autoPlay
-                  className="max-h-[80vh] w-auto h-full"
+                  className="max-h-[85vh] w-auto h-full object-contain"
                 />
               ) : (
                 <img
                   src={filteredImages[selectedIndex].url}
                   alt={filteredImages[selectedIndex].title}
-                  className="max-h-[80vh] w-auto h-full object-contain"
+                  className="max-h-[85vh] w-auto h-full object-contain"
                 />
               )}
             </div>
-
-            {/* Overlay Text */}
-            <div className="mt-6 text-center">
-              <span className="text-gold-500 text-[10px] font-black uppercase tracking-[0.3em] mb-2 block">
-                {filteredImages[selectedIndex].category}
-              </span>
-              <h3 className="text-white text-xl md:text-2xl font-serif">
-                {filteredImages[selectedIndex].title}
-              </h3>
-            </div>
           </div>
 
-          {/* Pagination Counter */}
-          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/40 text-[10px] font-black uppercase tracking-widest">
+          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/60 text-sm font-medium">
             {selectedIndex + 1} / {filteredImages.length}
           </div>
         </div>
