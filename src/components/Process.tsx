@@ -1,6 +1,6 @@
 export default function Process() {
     return (
-        <section className="relative w-full h-[60vh] min-h-[500px] flex items-center overflow-hidden bg-[#050505] border-b border-white/5">
+        <section className="relative w-full min-h-screen flex items-center overflow-hidden bg-[#050505] border-b border-white/5">
             {/* Background Image (Black and White filter) */}
             <div className="absolute inset-0 z-0">
                 <img
