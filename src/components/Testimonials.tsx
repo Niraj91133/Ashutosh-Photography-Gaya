@@ -77,11 +77,11 @@ export default function Testimonials() {
         <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-[#c1272d]/5 rounded-full blur-[120px]"></div>
       </div>
 
-      <div className="w-full">
-        <div className="text-center mb-20 w-full px-12 space-y-4 relative z-10">
+      <div className="w-full relative px-6 md:px-12">
+        <div className="flex flex-col items-start text-left mb-20 space-y-4 relative z-10">
           <span className="text-[#c1272d] font-bold uppercase tracking-[0.3em] text-[10px]">Client Love</span>
           <h2 className="text-4xl md:text-5xl font-serif text-white font-medium leading-tight">Words of Praise</h2>
-          <div className="w-12 h-[1px] bg-white/20 mx-auto"></div>
+          <div className="w-12 h-[1px] bg-white/20"></div>
         </div>
 
         {/* Continuous Marquee Container */}

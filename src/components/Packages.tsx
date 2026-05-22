@@ -88,11 +88,11 @@ export default function Packages() {
         <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-white/[0.02] rounded-full blur-[100px]"></div>
       </div>
 
-      <div className="w-full max-w-[1400px] mx-auto px-6 lg:px-12 relative z-10">
+      <div className="w-full relative px-6 md:px-12 z-10">
         
-        {/* Simple Centered Header */}
-        <div className="flex flex-col items-center text-center mb-16 md:mb-20 space-y-8">
-          <div className="space-y-4 flex flex-col items-center">
+        {/* Simple Left-Aligned Header */}
+        <div className="flex flex-col items-start text-left mb-16 md:mb-20 space-y-8">
+          <div className="space-y-4 flex flex-col items-start">
             <span className="text-[#c1272d] font-bold uppercase tracking-[0.3em] text-[10px]">Offerings</span>
             <h2 className="text-4xl md:text-5xl font-serif text-white font-medium leading-tight">
               Our Packages
@@ -118,8 +118,8 @@ export default function Packages() {
           </div>
         </div>
 
-        {/* Centered Editorial Cards - Narrower Width */}
-        <div className="flex flex-wrap justify-center gap-6 md:gap-10">
+        {/* Editorial Cards - Narrower Width */}
+        <div className="flex flex-wrap justify-start gap-6 md:gap-10">
           {filteredPackages.map((pkg, index) => (
             <div
               key={index}
@@ -138,8 +138,8 @@ export default function Packages() {
                 </div>
               )}
 
-              {/* Card Header text-center */}
-              <div className="mb-10 relative z-10 text-center flex flex-col items-center">
+              {/* Card Header text-left */}
+              <div className="mb-10 relative z-10 text-left flex flex-col items-start">
                 <h3 className="text-2xl md:text-3xl font-serif text-white mb-4 leading-snug group-hover:text-gray-100 transition-colors">
                   {pkg.name}
                 </h3>

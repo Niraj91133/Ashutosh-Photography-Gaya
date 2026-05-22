@@ -14,7 +14,7 @@ export default function Process() {
       </div>
 
       {/* Content aligned with landing page */}
-      <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 lg:px-12">
+      <div className="w-full relative px-6 md:px-12 z-10">
         <div className="max-w-2xl">
           <p className="font-sans text-base md:text-[19px] text-gray-200 mb-10 leading-[1.8] font-medium tracking-wide">
             Write Something About the Asutosh Potography<br />

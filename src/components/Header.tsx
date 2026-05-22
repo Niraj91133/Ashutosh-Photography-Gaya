@@ -51,7 +51,7 @@ export default function Header({ activeSection, onNavClick }: HeaderProps) {
           : 'bg-gradient-to-b from-black/70 to-transparent py-6'
       }`}
     >
-      <nav className="max-w-[1400px] mx-auto px-6 lg:px-12">
+      <nav className="w-full relative px-6 md:px-12">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center group cursor-pointer">

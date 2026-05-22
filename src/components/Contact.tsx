@@ -80,7 +80,7 @@ Message: ${formData.message}`;
       {/* Background Ambience */}
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#c1272d]/5 rounded-full blur-[150px] pointer-events-none"></div>
 
-      <div className="w-full max-w-[1400px] mx-auto px-6 lg:px-12 relative z-10">
+      <div className="w-full relative px-6 md:px-12 z-10">
         <div className="grid lg:grid-cols-12 gap-16 items-start">
 
           {/* Left Column: Contact Info */}

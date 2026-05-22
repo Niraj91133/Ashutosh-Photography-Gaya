@@ -99,7 +99,7 @@ export default function Gallery({ activeFilter, setActiveFilter }: GalleryProps)
 
   return (
     <section id="gallery" className="py-24 md:py-32 bg-[#050505]">
-      <div className="w-full max-w-[1600px] mx-auto px-6 lg:px-12">
+      <div className="w-full relative px-6 md:px-12">
         {/* Filter Tabs - Single Row with Invisible Scroll */}
         <div className="flex flex-nowrap overflow-x-auto gap-3 mb-10 pb-4 scrollbar-hide" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
           {filters.map((filter) => {

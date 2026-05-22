@@ -110,7 +110,7 @@ export default function Hero({ onNavClick }: HeroProps) {
       </div>
 
       {/* Text Content (Left Aligned) */}
-      <div className="relative z-10 w-full max-w-[1400px] mx-auto px-16 lg:px-32 mt-12 md:mt-20">
+      <div className="relative z-10 w-full px-6 md:px-12 mt-12 md:mt-20">
         <h1 className="font-sans font-black text-[clamp(2.8rem,7vw,6.5rem)] text-white leading-[1] mb-6 tracking-tight fade-in drop-shadow-2xl uppercase">
           ASUTOSH
           <br />

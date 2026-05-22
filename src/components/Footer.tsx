@@ -10,7 +10,7 @@ export default function Footer() {
     <footer className="bg-dark-900 pt-24 pb-12 border-t border-white/5 relative overflow-hidden">
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#c1272d]/20 to-transparent"></div>
 
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="w-full relative px-6 md:px-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-16">
 
           {/* Brand Column */}

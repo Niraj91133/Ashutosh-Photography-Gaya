@@ -37,7 +37,15 @@ export default function WhyChooseUs() {
             {/* Subtle background glow */}
             <div className="absolute top-1/2 left-0 -translate-y-1/2 w-[500px] h-[500px] bg-[#c1272d]/5 rounded-full blur-[150px] pointer-events-none"></div>
 
-            <div className="w-full max-w-[1400px] mx-auto px-6 lg:px-12">
+            <div className="w-full relative px-6 md:px-12 z-10">
+                <div className="flex flex-col items-start text-left mb-20 relative z-10">
+                    <span className="text-[#c1272d] font-bold uppercase tracking-[0.3em] text-[10px]">Why Choose Us</span>
+                    <h2 className="text-4xl md:text-5xl font-serif text-white font-medium mt-4 mb-6 leading-tight">
+                        The Asutosh Photography <span className="italic text-gray-500">Difference</span>
+                    </h2>
+                    <div className="w-12 h-[1px] bg-white/20"></div>
+                </div>
+
                 <div className="flex flex-col lg:flex-row gap-16 lg:gap-32">
                     
                     {/* Left Sticky Content */}
