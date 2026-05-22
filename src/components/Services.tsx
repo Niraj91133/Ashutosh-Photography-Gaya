@@ -32,7 +32,7 @@ export default function Services({ onCategoryClick }: ServicesProps) {
   useEffect(() => {
     const fetchServices = async () => {
       if (!supabase) return;
-      const { data } = await supabase.from('site_images').select('*').eq('section', 'service_covers');
+      const { data } = await supabase.from('site_images').select('*').eq('section', 'services');
       if (data) setDbImages(data);
     };
     fetchServices();

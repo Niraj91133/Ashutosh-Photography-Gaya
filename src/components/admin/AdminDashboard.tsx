@@ -1,15 +1,17 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ImageIcon, CheckCircle, AlertCircle, LogOut, MessageSquare, Trash2, Camera, Film, Home, Plus, Layers, IndianRupee, Edit, X, Settings, Phone, EyeOff } from 'lucide-react';
+import { ImageIcon, CheckCircle, AlertCircle, LogOut, MessageSquare, Trash2, Camera, Film, Home, Plus, Layers, IndianRupee, Edit, X, Settings, Phone, EyeOff, FileText, BookOpen } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 import imageCompression from 'browser-image-compression';
 
 const SECTIONS = [
-    { id: 'hero', name: 'Banner', icon: ImageIcon, categories: ['Main Banner'] },
-    { id: 'services', name: 'Gallery', icon: Camera, categories: ['Wedding', 'Pre-Wedding', 'Birthday', 'Product', 'Baby', 'Videography', 'Reels', 'Wedding Films', 'Editing', 'Photo & Video Editing', 'Album Design', 'Custom Album', 'Backlit Printing', 'Portrait', 'Commercial', 'Cinematic Films'] },
+    { id: 'hero', name: 'Hero', icon: ImageIcon, categories: ['Main Banner'] },
+    { id: 'services', name: 'Services', icon: Layers, categories: ['Wedding', 'Pre-Wedding', 'Birthday', 'Product', 'Baby', 'Videography', 'Reels', 'Wedding Films', 'Editing', 'Photo & Video Editing', 'Album Design', 'Custom Album', 'Backlit Printing', 'Portrait', 'Commercial', 'Cinematic Films'] },
+    { id: 'gallery', name: 'Gallery', icon: Camera, categories: ['Wedding', 'Pre-Wedding', 'Birthday', 'Product', 'Baby', 'Videography', 'Reels', 'Wedding Films', 'Editing', 'Photo & Video Editing', 'Album Design', 'Custom Album', 'Backlit Printing', 'Portrait', 'Commercial', 'Cinematic Films'] },
     { id: 'packages', name: 'Packages', icon: IndianRupee, categories: ['Basic Plan', 'Premium Plan'] },
-    { id: 'testimonials', name: 'Reviews', icon: MessageSquare, categories: ['Happy Client'] },
-    { id: 'clients', name: 'Clients', icon: Camera, categories: ['Private Gallery'] },
+    { id: 'testimonials', name: 'Testimonials', icon: MessageSquare, categories: ['Happy Client'] },
+    { id: 'blog', name: 'Blog', icon: FileText, categories: ['Tips', 'Trends', 'Guide', 'Story'] },
+    { id: 'clients', name: 'Client Portal', icon: BookOpen, categories: ['Private Gallery'] },
     { id: 'admin_settings', name: 'Settings', icon: Settings, categories: ['Website Settings'] },
 ];
 
@@ -164,6 +166,10 @@ export default function AdminDashboard() {
                 const [n, p] = item.title.split(' | ');
                 setTitle(n);
                 setPrice(p || '');
+            } else if (activeTab === 'blog') {
+                const [n, d] = item.title.split(' | ');
+                setTitle(n);
+                setClientDate(d || '');
             } else {
                 setTitle(item.title);
             }
@@ -180,6 +186,7 @@ export default function AdminDashboard() {
 
             let finalTitle = title;
             if (activeTab === 'packages') finalTitle = `${title} | ${price}`;
+            if (activeTab === 'blog') finalTitle = `${title} | ${clientDate}`;
 
             const payload = activeTab === 'clients' ? {
                 name: title,
@@ -262,6 +269,10 @@ export default function AdminDashboard() {
                 const result = await response.json();
                 const publicUrl = result.data.url;
 
+                let finalTitle = title;
+                if (activeTab === 'packages') finalTitle = `${title} | ${price}`;
+                if (activeTab === 'blog') finalTitle = `${title} | ${clientDate}`;
+
                 const payload = activeTab === 'clients' ? {
                     name: title,
                     wedding_date: clientDate,
@@ -272,7 +283,7 @@ export default function AdminDashboard() {
                     url: publicUrl,
                     section: activeTab,
                     category: category,
-                    title: title || 'Asutosh Moment',
+                    title: finalTitle || 'Asutosh Moment',
                     description: description,
                     media_type: file.type.startsWith('video/') ? 'video' : 'image'
                 };
@@ -389,7 +400,7 @@ export default function AdminDashboard() {
                                 <h3 className="font-serif font-bold text-xl">Hide Sections</h3>
                             </div>
                             <div className="flex flex-wrap gap-3">
-                                {['hero', 'services', 'gallery', 'packages', 'about', 'testimonials', 'contact'].map(sec => (
+                                {['hero', 'services', 'gallery', 'packages', 'about', 'testimonials', 'blog', 'contact'].map(sec => (
                                     <button
                                         key={sec}
                                         onClick={() => toggleSection(sec)}
@@ -430,6 +441,10 @@ export default function AdminDashboard() {
                                         <input type="text" placeholder="Price (₹50k - ₹80k)" className="w-full bg-black/50 border border-white/5 p-4 md:p-5 rounded-2xl text-sm focus:outline-none focus:border-[#c1272d] transition-all font-bold text-[#c1272d]" value={price} onChange={e => setPrice(e.target.value)} />
                                     )}
 
+                                    {activeTab === 'blog' && (
+                                        <input type="text" placeholder="Date (e.g. August 15, 2026)" className="w-full bg-black/50 border border-white/5 p-4 md:p-5 rounded-2xl text-sm focus:outline-none focus:border-[#c1272d] transition-all font-bold" value={clientDate} onChange={e => setClientDate(e.target.value)} />
+                                    )}
+
                                     {activeTab === 'clients' && (
                                         <div className="grid grid-cols-1 gap-4">
                                             <input type="text" placeholder="Date (e.g. 12 Feb 2026)" className="w-full bg-black/50 border border-white/5 p-4 md:p-5 rounded-2xl text-sm focus:outline-none focus:border-[#c1272d] transition-all font-bold" value={clientDate} onChange={e => setClientDate(e.target.value)} />
@@ -437,7 +452,7 @@ export default function AdminDashboard() {
                                         </div>
                                     )}
 
-                                    <textarea placeholder={activeTab === 'clients' ? "Paste Drive Link Here" : activeTab === 'packages' ? "Features (1 per line)" : "Description..."} rows={4} className="w-full bg-black/50 border border-white/5 p-4 md:p-5 rounded-2xl text-sm focus:outline-none focus:border-[#c1272d] transition-all font-bold resize-none" value={description} onChange={e => setDescription(e.target.value)} />
+                                    <textarea placeholder={activeTab === 'clients' ? "Paste Drive Link Here" : activeTab === 'packages' ? "Features (1 per line)" : activeTab === 'blog' ? "Blog Description..." : "Description..."} rows={4} className="w-full bg-black/50 border border-white/5 p-4 md:p-5 rounded-2xl text-sm focus:outline-none focus:border-[#c1272d] transition-all font-bold resize-none" value={description} onChange={e => setDescription(e.target.value)} />
                                 </div>
 
                                 <div className="flex flex-col justify-center">
@@ -504,6 +519,17 @@ export default function AdminDashboard() {
                                                         <h4 className="text-sm font-bold text-white">{item.name}</h4>
                                                         <p className="text-[10px] text-[#c1272d] font-black uppercase tracking-widest">Key: {item.password}</p>
                                                         <p className="text-[9px] text-gray-500 font-bold mt-1 uppercase">{item.wedding_date}</p>
+                                                    </div>
+                                                </div>
+                                            ) : activeTab === 'blog' ? (
+                                                <div className="w-full h-full">
+                                                    <div className="absolute inset-0 flex items-center justify-center bg-black">
+                                                        <img src={item.url} className="w-full h-full object-cover opacity-60" />
+                                                    </div>
+                                                    <div className="absolute inset-0 p-4 flex flex-col justify-end bg-gradient-to-t from-black to-transparent">
+                                                        <h4 className="text-sm font-bold text-white line-clamp-2">{item.title.split(' | ')[0]}</h4>
+                                                        <p className="text-[9px] text-[#c1272d] font-black uppercase tracking-widest mt-1">{item.category}</p>
+                                                        <p className="text-[9px] text-gray-500 font-bold uppercase">{item.title.split(' | ')[1]}</p>
                                                     </div>
                                                 </div>
                                             ) : item.media_type === 'video' ? (

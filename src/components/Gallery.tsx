@@ -43,7 +43,7 @@ export default function Gallery({ activeFilter, setActiveFilter }: GalleryProps)
         const { data } = await supabase
           .from('site_images')
           .select('*')
-          .eq('section', 'services')
+          .eq('section', 'gallery')
           .order('created_at', { ascending: false });
 
         if (data && data.length > 0) {

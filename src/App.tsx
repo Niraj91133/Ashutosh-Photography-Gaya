@@ -18,6 +18,7 @@ import AdminLogin from './components/admin/AdminLogin';
 import AdminDashboard from './components/admin/AdminDashboard';
 import ProtectedRoute from './components/admin/ProtectedRoute';
 import ClientPortal from './pages/ClientPortal';
+import BlogDetail from './pages/BlogDetail';
 import { useSiteSettings } from './hooks/useSiteSettings';
 
 function MainSite() {
@@ -73,7 +74,7 @@ function MainSite() {
         <FAQ />
         {!isHidden('about') && <About />}
         {!isHidden('testimonials') && <Testimonials />}
-        <Blog />
+        {!isHidden('blog') && <Blog />}
         <CTA />
         {!isHidden('contact') && <Contact />}
       </main>
@@ -96,6 +97,13 @@ function App() {
         <>
           <Header activeSection="" onNavClick={() => { }} />
           <ClientPortal />
+          <Footer />
+        </>
+      } />
+      <Route path="/blog/:id" element={
+        <>
+          <Header activeSection="" onNavClick={() => { }} />
+          <BlogDetail />
           <Footer />
         </>
       } />
