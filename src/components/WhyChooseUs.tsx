@@ -49,8 +49,8 @@ export default function WhyChooseUs() {
                     <div className="hidden md:block w-32 h-[1px] bg-white/20 mb-3"></div>
                 </div>
 
-                {/* Compact Grid Layout (Desktop/Tablet) */}
-                <div className="hidden md:grid grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
+                {/* Compact Grid Layout */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
                     {features.map((item, index) => (
                         <div 
                             key={index} 
@@ -60,26 +60,6 @@ export default function WhyChooseUs() {
                                 {item.number}.
                             </span>
                             <h3 className="text-xl font-serif text-white mb-3 tracking-wide">
-                                {item.title}
-                            </h3>
-                            <p className="text-gray-400 font-light leading-relaxed text-sm">
-                                {item.desc}
-                            </p>
-                        </div>
-                    ))}
-                </div>
-
-                {/* Mobile Sticky Stack Layout */}
-                <div className="flex md:hidden flex-col mt-8">
-                    {features.map((item, index) => (
-                        <div 
-                            key={index} 
-                            className="sticky top-[15vh] bg-[#0a0a0a] z-10 flex flex-col items-start p-8 border-t border-white/10 rounded-2xl min-h-[40vh] mb-[40vh] last:mb-0 shadow-[0_-20px_40px_rgba(0,0,0,0.9)]"
-                        >
-                            <span className="text-6xl font-serif italic text-[#c1272d]/20 mb-6">
-                                {item.number}
-                            </span>
-                            <h3 className="text-2xl font-serif text-white mb-4">
                                 {item.title}
                             </h3>
                             <p className="text-gray-400 font-light leading-relaxed text-sm">

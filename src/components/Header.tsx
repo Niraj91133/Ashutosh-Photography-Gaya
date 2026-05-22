@@ -113,29 +113,47 @@ export default function Header({ activeSection, onNavClick }: HeaderProps) {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2 text-white hover:text-[#ff3333] transition-colors"
+            className="md:hidden p-2 text-white hover:text-[#c1272d] transition-colors flex items-center justify-center w-10 h-10"
           >
-            {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {isMenuOpen ? (
+              <X className="w-7 h-7" />
+            ) : (
+              <div className="flex flex-col gap-1.5 w-6">
+                <span className="w-full h-[2px] bg-current rounded-full"></span>
+                <span className="w-full h-[2px] bg-current rounded-full"></span>
+              </div>
+            )}
           </button>
         </div>
 
         {/* Mobile Navigation Overlay */}
-        <div className={`md:hidden fixed inset-0 z-[60] bg-[#050505] backdrop-blur-3xl transition-all duration-500 transform ${isMenuOpen ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0 pointer-events-none'}`}>
-          <div className="flex items-center justify-between px-6 pt-8 pb-4 border-b border-white/5">
-            <Link to="/" onClick={() => setIsMenuOpen(false)}>
-              <span className="text-2xl font-serif font-bold text-[#ff3333]">
-                Asutosh Photography
-              </span>
-            </Link>
-            <button
-              onClick={() => setIsMenuOpen(false)}
-              className="p-2 text-white hover:text-[#ff3333] transition-colors"
-            >
-              <X className="w-8 h-8" />
-            </button>
+        <div className={`md:hidden fixed inset-0 z-[60] bg-[#050505] transition-all duration-500 transform ${isMenuOpen ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0 pointer-events-none'}`}>
+          {/* Background Image */}
+          <div className="absolute inset-0 z-0">
+            <img 
+              src="https://images.pexels.com/photos/1043474/pexels-photo-1043474.jpeg?auto=compress&cs=tinysrgb&w=1200" 
+              alt="Menu Background" 
+              className="w-full h-full object-cover opacity-20"
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-[#050505]/95 via-[#050505]/80 to-[#050505]/95 backdrop-blur-sm"></div>
           </div>
 
-          <div className="flex flex-col h-[calc(100vh-100px)] overflow-y-auto">
+          <div className="relative z-10 flex flex-col h-full">
+            <div className="flex items-center justify-between px-6 pt-8 pb-4 border-b border-white/5">
+              <Link to="/" onClick={() => setIsMenuOpen(false)}>
+                <span className="text-2xl font-serif font-bold text-[#c1272d]">
+                  Asutosh Photography
+                </span>
+              </Link>
+              <button
+                onClick={() => setIsMenuOpen(false)}
+                className="p-2 text-white hover:text-[#c1272d] transition-colors"
+              >
+                <X className="w-8 h-8" />
+              </button>
+            </div>
+
+            <div className="flex flex-col flex-1 overflow-y-auto">
             <div className="flex flex-col space-y-6 px-8 py-12">
               <p className="text-[#ff3333] text-[10px] font-black uppercase tracking-[0.3em] ml-1">Menu</p>
               {navItems.map((item, index) => (
