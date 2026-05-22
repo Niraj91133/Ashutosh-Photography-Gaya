@@ -67,11 +67,15 @@ export default function WhyChooseUs() {
 
                     {/* Right Editorial List */}
                     <div className="lg:w-7/12">
-                        <div className="flex flex-col">
+                        <div className="flex flex-col gap-4 pb-20">
                             {features.map((item, index) => (
                                 <div 
                                     key={index} 
-                                    className="group relative flex flex-col md:flex-row md:items-start gap-6 md:gap-12 py-10 md:py-14 border-t border-white/10 first:border-t-0 transition-all duration-500 hover:bg-white/[0.02] -mx-6 px-6 md:mx-0 md:px-6 rounded-lg"
+                                    className="group sticky flex flex-col md:flex-row md:items-start gap-6 md:gap-10 p-8 md:p-12 border border-white/10 bg-[#0a0a0a] transition-all duration-500 rounded-[2rem] shadow-[0_-10px_40px_rgba(0,0,0,0.6)]"
+                                    style={{ 
+                                        top: `calc(100px + ${index * 16}px)`,
+                                        zIndex: index + 10
+                                    }}
                                 >
                                     {/* Large Number */}
                                     <div className="text-5xl md:text-7xl font-serif italic text-white/10 font-light group-hover:text-[#c1272d]/40 transition-colors duration-500">
