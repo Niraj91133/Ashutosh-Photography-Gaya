@@ -5,7 +5,6 @@ import { supabase } from '../lib/supabase';
 const DEFAULT_PACKAGES = [
   {
     name: 'Traditional Package',
-    price: '₹45,000 – ₹60,000',
     description: 'Perfect for traditional ceremonies and celebrations',
     features: [
       '2–3 Professional Cameramen',
@@ -19,7 +18,6 @@ const DEFAULT_PACKAGES = [
   },
   {
     name: 'Storytelling Story',
-    price: '₹65,000 – ₹3,00,000',
     description: 'Complete coverage with cinematic storytelling',
     features: [
       'Cinematic Short Film + Full Coverage',
@@ -59,7 +57,6 @@ export default function Packages() {
 
             return {
               name: name,
-              price: price,
               plan: item.category, // Storing plan name (Basic Plan/Premium Plan) in category
               description: item.category,
               features: item.description?.split('\n').filter((f: string) => f.trim()) || [],
@@ -139,12 +136,9 @@ export default function Packages() {
                 <h3 className="text-2xl font-serif text-white mb-4">
                   {pkg.name}
                 </h3>
-                <p className="text-gray-400 mb-6 font-light">
+                <p className="text-gray-400 font-light">
                   {pkg.description}
                 </p>
-                <div className={`text-3xl font-bold font-serif ${pkg.popular ? 'text-gold-500' : 'text-white'}`}>
-                  {pkg.price}
-                </div>
               </div>
 
               <div className="space-y-4 mb-10">
@@ -200,10 +194,7 @@ export default function Packages() {
                   <h3 className="text-2xl font-serif text-white mb-2 leading-tight">
                     {pkg.name}
                   </h3>
-                  <div className={`text-2xl font-bold font-serif mb-4 ${pkg.popular ? 'text-gold-500' : 'text-gray-200'}`}>
-                    {pkg.price}
-                  </div>
-                  <p className="text-gray-400 text-sm font-light">
+                  <p className="text-gray-400 text-sm font-light mt-3">
                     {pkg.description}
                   </p>
                 </div>
