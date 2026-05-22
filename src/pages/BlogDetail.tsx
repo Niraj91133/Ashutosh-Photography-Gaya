@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { supabase } from '../lib/supabase';
+import { BLOGS } from '../lib/data';
 
 export default function BlogDetail() {
   const { id } = useParams();
@@ -15,20 +16,32 @@ export default function BlogDetail() {
     const fetchBlogData = async () => {
       if (!supabase) return;
       
-      // Fetch the specific blog post
-      const { data: currentBlog } = await supabase
-        .from('site_images')
-        .select('*')
-        .eq('id', id)
-        .maybeSingle();
+      let currentBlog = null;
+      let others = [];
 
-      // Fetch other blog posts
-      const { data: others } = await supabase
-        .from('site_images')
-        .select('*')
-        .eq('section', 'blog')
-        .neq('id', id)
-        .order('created_at', { ascending: false });
+      try {
+        // Fetch the specific blog post (only if ID is not a number/static ID)
+        if (isNaN(Number(id))) {
+          const { data } = await supabase
+            .from('site_images')
+            .select('*')
+            .eq('id', id)
+            .maybeSingle();
+          currentBlog = data;
+        }
+
+        // Fetch other blog posts
+        const { data: dbOthers } = await supabase
+          .from('site_images')
+          .select('*')
+          .eq('section', 'blog')
+          .neq('id', id)
+          .order('created_at', { ascending: false });
+        
+        if (dbOthers) others = dbOthers;
+      } catch (err) {
+        console.warn("Using fallback data for blogs");
+      }
 
       if (currentBlog) {
         const [title, date] = (currentBlog.title || '').split(' | ');
@@ -40,9 +53,13 @@ export default function BlogDetail() {
           title: title || 'Blog Post',
           desc: currentBlog.description
         });
+      } else {
+        // Fallback to static data if not found in DB
+        const staticBlog = BLOGS.find((b) => b.id === Number(id));
+        if (staticBlog) setBlog(staticBlog);
       }
 
-      if (others) {
+      if (others && others.length > 0) {
         setOtherBlogs(others.map(item => {
           const [title, date] = (item.title || '').split(' | ');
           return {
@@ -54,6 +71,9 @@ export default function BlogDetail() {
             desc: item.description
           };
         }));
+      } else {
+        // Fallback to static others
+        setOtherBlogs(BLOGS.filter(b => b.id !== Number(id)));
       }
       
       setLoading(false);
@@ -117,18 +137,10 @@ export default function BlogDetail() {
         </div>
 
         {/* Content */}
-        <div className="prose prose-invert max-w-none text-gray-300 font-light text-base md:text-lg lg:text-xl leading-relaxed mb-24">
-          <p className="first-letter:text-5xl first-letter:font-serif first-letter:text-[#c1272d] first-letter:mr-3 first-letter:float-left">
-            {blog.desc}
-          </p>
-          <p className="mt-8">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
-          </p>
-          <h3 className="text-2xl md:text-3xl font-serif text-white mt-12 mb-6">The Importance of Light</h3>
-          <p>
-            Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi.
-          </p>
-        </div>
+        <div 
+          className="prose prose-invert max-w-none text-gray-300 font-light text-base md:text-lg lg:text-xl leading-relaxed mb-24 blog-content-html"
+          dangerouslySetInnerHTML={{ __html: blog.desc || '' }}
+        />
 
         {/* Divider */}
         <div className="w-full h-px bg-white/10 mb-16"></div>

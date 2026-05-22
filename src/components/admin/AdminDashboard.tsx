@@ -1,15 +1,17 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ImageIcon, CheckCircle, AlertCircle, LogOut, MessageSquare, Trash2, Camera, Film, Home, Plus, Layers, IndianRupee, Edit, X, Settings, Phone, EyeOff, FileText, BookOpen } from 'lucide-react';
+import { ImageIcon, CheckCircle, AlertCircle, LogOut, MessageSquare, Trash2, Camera, Film, Home, Plus, Layers, IndianRupee, Edit, X, Settings, Phone, EyeOff, FileText, BookOpen, User } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 import imageCompression from 'browser-image-compression';
 
 const SECTIONS = [
-    { id: 'hero', name: 'Hero', icon: ImageIcon, categories: ['Main Banner'] },
+    { id: 'hero', name: 'Hero', icon: ImageIcon, categories: ['Slider Images', 'Hero Settings'] },
     { id: 'services', name: 'Services', icon: Layers, categories: ['Wedding', 'Pre-Wedding', 'Birthday', 'Product', 'Baby', 'Videography', 'Reels', 'Wedding Films', 'Editing', 'Photo & Video Editing', 'Album Design', 'Custom Album', 'Backlit Printing', 'Portrait', 'Commercial', 'Cinematic Films'] },
-    { id: 'gallery', name: 'Gallery', icon: Camera, categories: ['Wedding', 'Pre-Wedding', 'Birthday', 'Product', 'Baby', 'Videography', 'Reels', 'Wedding Films', 'Editing', 'Photo & Video Editing', 'Album Design', 'Custom Album', 'Backlit Printing', 'Portrait', 'Commercial', 'Cinematic Films'] },
-    { id: 'packages', name: 'Packages', icon: IndianRupee, categories: ['Basic Plan', 'Premium Plan'] },
-    { id: 'testimonials', name: 'Testimonials', icon: MessageSquare, categories: ['Happy Client'] },
+    { id: 'process', name: 'Process', icon: Film, categories: ['Process Settings'] },
+    { id: 'packages', name: 'Packages', icon: IndianRupee, categories: ['Basic Plan', 'Premium Plan', 'Packages Settings'] },
+    { id: 'faqs', name: 'FAQs', icon: MessageSquare, categories: ['General'] },
+    { id: 'about', name: 'About', icon: User, categories: ['About Settings'] },
+    { id: 'testimonials', name: 'Client Love', icon: MessageSquare, categories: ['Happy Client'] },
     { id: 'blog', name: 'Blog', icon: FileText, categories: ['Tips', 'Trends', 'Guide', 'Story'] },
     { id: 'clients', name: 'Client Portal', icon: BookOpen, categories: ['Private Gallery'] },
     { id: 'admin_settings', name: 'Settings', icon: Settings, categories: ['Website Settings'] },
@@ -41,6 +43,13 @@ export default function AdminDashboard() {
         facebook_link: '',
         instagram_link: '',
         disabled_sections: [] as string[]
+    });
+
+    const [configs, setConfigs] = useState({
+        hero: { id: null as string | null, big_text: '', small_text: '', autoscroll: true, url: '' },
+        process: { id: null as string | null, text: '', url: '' },
+        about: { id: null as string | null, text: '', url: '' },
+        packages: { id: null as string | null, basic_limit: 4, premium_limit: 6 }
     });
 
     const navigate = useNavigate();
@@ -104,7 +113,7 @@ export default function AdminDashboard() {
                 console.warn('Clients table might not exist');
             }
 
-            setImages([...(data || []), ...clientData.map(c => ({
+            const allImages = [...(data || []), ...clientData.map(c => ({
                 ...c,
                 section: 'clients',
                 category: 'Private Gallery',
@@ -112,9 +121,78 @@ export default function AdminDashboard() {
                 title: c.name,
                 description: c.wedding_date,
                 isClient: true
-            }))]);
+            }))];
+
+            setImages(allImages);
+
+            // Parse configs
+            const configRows = allImages.filter(i => i.section === 'config');
+            const newConfigs = { ...configs };
+            configRows.forEach(row => {
+                try {
+                    const parsed = JSON.parse(row.description || '{}');
+                    if (row.category === 'hero') newConfigs.hero = { id: row.id, ...parsed, url: row.url };
+                    if (row.category === 'process') newConfigs.process = { id: row.id, ...parsed, url: row.url };
+                    if (row.category === 'about') newConfigs.about = { id: row.id, ...parsed, url: row.url };
+                    if (row.category === 'packages') newConfigs.packages = { id: row.id, ...parsed };
+                } catch (e) { console.warn('Failed to parse config row', row); }
+            });
+            setConfigs(newConfigs);
         } catch (error) {
             console.error('Error fetching data:', error);
+        }
+    };
+
+    const handleSaveConfig = async (categoryKey: 'hero' | 'process' | 'about' | 'packages', file?: File) => {
+        if (!supabase) return;
+        setUploading(true);
+        setStatus(null);
+        try {
+            let uploadedUrl = configs[categoryKey].url;
+
+            if (file) {
+                // Upload file to Supabase Storage
+                setUploadProgress(50);
+                
+                const fileExt = file.name.split('.').pop();
+                const fileName = `${Date.now()}_${Math.random().toString(36).substring(7)}.${fileExt}`;
+                const { error: uploadError } = await supabase.storage.from('site_media').upload(fileName, file);
+                
+                if (uploadError) throw uploadError;
+                
+                const { data: publicUrlData } = supabase.storage.from('site_media').getPublicUrl(fileName);
+                uploadedUrl = publicUrlData.publicUrl;
+            }
+
+            setUploadProgress(80);
+
+            const payloadData = { ...configs[categoryKey] };
+            delete payloadData.id;
+            delete payloadData.url;
+
+            const payload = {
+                section: 'config',
+                category: categoryKey,
+                title: `${categoryKey}_settings`,
+                description: JSON.stringify(payloadData),
+                url: uploadedUrl,
+                media_type: 'text'
+            };
+
+            const existingId = configs[categoryKey].id;
+            if (existingId) {
+                await supabase.from('site_images').update(payload).eq('id', existingId);
+            } else {
+                await supabase.from('site_images').insert([payload]);
+            }
+
+            setStatus({ type: 'success', message: `${categoryKey.toUpperCase()} Settings Saved!` });
+            fetchImages();
+        } catch (error: any) {
+            setStatus({ type: 'error', message: error.message });
+        } finally {
+            setUploading(false);
+            setUploadProgress(0);
         }
     };
 
@@ -232,42 +310,27 @@ export default function AdminDashboard() {
 
             for (let i = 0; i < files.length; i++) {
                 let file = files[i];
-                let base64Image = '';
+                let fileToUpload = file;
 
                 if (file.type.startsWith('image/')) {
-                    const options = { maxSizeMB: 1, maxWidthOrHeight: 1920, useWebWorker: true };
+                    // Less aggressive compression to preserve quality
+                    const options = { maxSizeMB: 3, maxWidthOrHeight: 2560, useWebWorker: true };
                     try {
-                        const compressedFile = await imageCompression(file, options);
-                        base64Image = await new Promise((resolve, reject) => {
-                            const reader = new FileReader();
-                            reader.readAsDataURL(compressedFile);
-                            reader.onloadend = () => resolve(reader.result as string);
-                            reader.onerror = error => reject(error);
-                        });
+                        fileToUpload = await imageCompression(file, options);
                     } catch (err) {
                         throw new Error('Image compression failed');
                     }
-                } else {
-                    base64Image = await new Promise((resolve, reject) => {
-                        const reader = new FileReader();
-                        reader.readAsDataURL(file);
-                        reader.onloadend = () => resolve(reader.result as string);
-                        reader.onerror = error => reject(error);
-                    });
                 }
 
-                const response = await fetch('/api/cloudinary-upload', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        image: base64Image,
-                        resource_type: file.type.startsWith('video/') ? 'video' : 'image'
-                    })
-                });
+                // Upload to Supabase Storage
+                const fileExt = fileToUpload.name.split('.').pop() || 'jpg';
+                const fileName = `${Date.now()}_${Math.random().toString(36).substring(7)}.${fileExt}`;
+                
+                const { error: uploadError } = await supabase.storage.from('site_media').upload(fileName, fileToUpload);
+                if (uploadError) throw uploadError;
 
-                if (!response.ok) throw new Error('Cloudinary upload failed');
-                const result = await response.json();
-                const publicUrl = result.data.url;
+                const { data: publicUrlData } = supabase.storage.from('site_media').getPublicUrl(fileName);
+                const publicUrl = publicUrlData.publicUrl;
 
                 let finalTitle = title;
                 if (activeTab === 'packages') finalTitle = `${title} | ${price}`;
@@ -421,7 +484,7 @@ export default function AdminDashboard() {
                 ) : (
                     <>
                         {/* Categories */}
-                        {activeTab !== 'clients' && activeTab !== 'hero' && (
+                        {activeTab !== 'clients' && (
                             <div className="flex gap-2 overflow-x-auto pb-4 scrollbar-hide">
                                 {SECTIONS.find(s => s.id === activeTab)?.categories.map(cat => (
                                     <button key={cat} onClick={() => setCategory(cat)} className={`flex-none px-4 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest border transition-all ${category === cat ? 'bg-[#c1272d] border-[#c1272d] text-black' : 'border-white/10 text-gray-500'}`}>
@@ -432,27 +495,107 @@ export default function AdminDashboard() {
                         )}
 
                         {/* Form Editor */}
+                        {category.includes('Settings') ? (
+                            <div className="bg-[#0a0a0a] p-6 md:p-10 rounded-[2rem] border border-white/5 shadow-xl space-y-6">
+                                {activeTab === 'hero' && (
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        <div className="space-y-4">
+                                            <label className="text-[10px] uppercase font-black text-gray-500 tracking-widest ml-4">Hero Big Text</label>
+                                            <input type="text" className="w-full bg-black/50 border border-white/5 p-4 rounded-2xl text-sm focus:outline-none focus:border-[#c1272d] transition-all font-bold" value={configs.hero.big_text} onChange={e => setConfigs({...configs, hero: {...configs.hero, big_text: e.target.value}})} />
+                                            
+                                            <label className="text-[10px] uppercase font-black text-gray-500 tracking-widest ml-4 mt-4 block">Hero Small Text</label>
+                                            <input type="text" className="w-full bg-black/50 border border-white/5 p-4 rounded-2xl text-sm focus:outline-none focus:border-[#c1272d] transition-all font-bold" value={configs.hero.small_text} onChange={e => setConfigs({...configs, hero: {...configs.hero, small_text: e.target.value}})} />
+
+                                            <label className="flex items-center gap-4 mt-4 ml-4 cursor-pointer">
+                                                <input type="checkbox" className="w-4 h-4 accent-[#c1272d]" checked={configs.hero.autoscroll} onChange={e => setConfigs({...configs, hero: {...configs.hero, autoscroll: e.target.checked}})} />
+                                                <span className="text-[10px] uppercase font-black text-gray-500 tracking-widest">Enable Autoscroll</span>
+                                            </label>
+                                        </div>
+                                        <div className="flex flex-col gap-4">
+                                            <label className="text-[10px] uppercase font-black text-gray-500 tracking-widest ml-4">Upload Logo</label>
+                                            <input type="file" onChange={e => e.target.files?.[0] && handleSaveConfig('hero', e.target.files[0])} accept="image/*" className="text-sm file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-[#c1272d] file:text-white hover:file:bg-[#c1272d]" />
+                                            {configs.hero.url && <img src={configs.hero.url} className="h-20 object-contain mt-2 bg-black rounded" />}
+                                            <button onClick={() => handleSaveConfig('hero')} disabled={uploading} className="w-full py-4 mt-auto bg-[#c1272d] text-black rounded-2xl font-black uppercase tracking-widest shadow-xl hover:bg-[#c1272d] transition-all">
+                                                {uploading ? 'Saving...' : 'Save Hero Settings'}
+                                            </button>
+                                        </div>
+                                    </div>
+                                )}
+                                {activeTab === 'process' && (
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        <div className="space-y-4">
+                                            <label className="text-[10px] uppercase font-black text-gray-500 tracking-widest ml-4">Process Text (Shown over video)</label>
+                                            <textarea rows={6} className="w-full bg-black/50 border border-white/5 p-4 rounded-2xl text-sm focus:outline-none focus:border-[#c1272d] transition-all font-bold resize-none" value={configs.process.text} onChange={e => setConfigs({...configs, process: {...configs.process, text: e.target.value}})} />
+                                        </div>
+                                        <div className="flex flex-col gap-4">
+                                            <label className="text-[10px] uppercase font-black text-gray-500 tracking-widest ml-4">Background Media (Image/Video)</label>
+                                            <input type="file" onChange={e => e.target.files?.[0] && handleSaveConfig('process', e.target.files[0])} accept="image/*,video/*" className="text-sm file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-[#c1272d] file:text-white hover:file:bg-[#c1272d]" />
+                                            {configs.process.url && <div className="text-xs text-green-500 font-bold ml-4">Media is currently uploaded</div>}
+                                            <button onClick={() => handleSaveConfig('process')} disabled={uploading} className="w-full py-4 mt-auto bg-[#c1272d] text-black rounded-2xl font-black uppercase tracking-widest shadow-xl hover:bg-[#c1272d] transition-all">
+                                                {uploading ? 'Saving...' : 'Save Process Settings'}
+                                            </button>
+                                        </div>
+                                    </div>
+                                )}
+                                {activeTab === 'about' && (
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        <div className="space-y-4">
+                                            <label className="text-[10px] uppercase font-black text-gray-500 tracking-widest ml-4">About Me Text</label>
+                                            <textarea rows={6} className="w-full bg-black/50 border border-white/5 p-4 rounded-2xl text-sm focus:outline-none focus:border-[#c1272d] transition-all font-bold resize-none" value={configs.about.text} onChange={e => setConfigs({...configs, about: {...configs.about, text: e.target.value}})} />
+                                        </div>
+                                        <div className="flex flex-col gap-4">
+                                            <label className="text-[10px] uppercase font-black text-gray-500 tracking-widest ml-4">Upload Your Photo</label>
+                                            <input type="file" onChange={e => e.target.files?.[0] && handleSaveConfig('about', e.target.files[0])} accept="image/*" className="text-sm file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-[#c1272d] file:text-white hover:file:bg-[#c1272d]" />
+                                            {configs.about.url && <img src={configs.about.url} className="h-20 object-contain mt-2" />}
+                                            <button onClick={() => handleSaveConfig('about')} disabled={uploading} className="w-full py-4 mt-auto bg-[#c1272d] text-black rounded-2xl font-black uppercase tracking-widest shadow-xl hover:bg-[#c1272d] transition-all">
+                                                {uploading ? 'Saving...' : 'Save About Settings'}
+                                            </button>
+                                        </div>
+                                    </div>
+                                )}
+                                {activeTab === 'packages' && (
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        <div className="space-y-4">
+                                            <label className="text-[10px] uppercase font-black text-gray-500 tracking-widest ml-4">Basic Package Cards Limit</label>
+                                            <input type="number" className="w-full bg-black/50 border border-white/5 p-4 rounded-2xl text-sm focus:outline-none focus:border-[#c1272d] transition-all font-bold" value={configs.packages.basic_limit} onChange={e => setConfigs({...configs, packages: {...configs.packages, basic_limit: Number(e.target.value)}})} />
+                                        </div>
+                                        <div className="space-y-4">
+                                            <label className="text-[10px] uppercase font-black text-gray-500 tracking-widest ml-4">Premium Package Cards Limit</label>
+                                            <input type="number" className="w-full bg-black/50 border border-white/5 p-4 rounded-2xl text-sm focus:outline-none focus:border-[#c1272d] transition-all font-bold" value={configs.packages.premium_limit} onChange={e => setConfigs({...configs, packages: {...configs.packages, premium_limit: Number(e.target.value)}})} />
+                                            <button onClick={() => handleSaveConfig('packages')} disabled={uploading} className="w-full py-4 mt-auto bg-[#c1272d] text-black rounded-2xl font-black uppercase tracking-widest shadow-xl hover:bg-[#c1272d] transition-all">
+                                                {uploading ? 'Saving...' : 'Save Packages Settings'}
+                                            </button>
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+                        ) : (
                         <div className="bg-[#0a0a0a] p-6 md:p-10 rounded-[2rem] border border-white/5 shadow-xl space-y-6">
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div className="space-y-4">
-                                    <input type="text" placeholder={activeTab === 'clients' ? "Client Name" : "Title"} className="w-full bg-black/50 border border-white/5 p-4 md:p-5 rounded-2xl text-sm focus:outline-none focus:border-[#c1272d] transition-all font-bold" value={title} onChange={e => setTitle(e.target.value)} />
+                                    {/* Hide Title and Description for Hero Slider since texts are in Settings */}
+                                    {!(activeTab === 'hero' && category === 'Slider Images') && (
+                                        <>
+                                            <input type="text" placeholder={activeTab === 'clients' ? "Client Name" : activeTab === 'faqs' ? "Question?" : "Title"} className="w-full bg-black/50 border border-white/5 p-4 md:p-5 rounded-2xl text-sm focus:outline-none focus:border-[#c1272d] transition-all font-bold" value={title} onChange={e => setTitle(e.target.value)} />
 
-                                    {activeTab === 'packages' && (
-                                        <input type="text" placeholder="Price (₹50k - ₹80k)" className="w-full bg-black/50 border border-white/5 p-4 md:p-5 rounded-2xl text-sm focus:outline-none focus:border-[#c1272d] transition-all font-bold text-[#c1272d]" value={price} onChange={e => setPrice(e.target.value)} />
+                                            {activeTab === 'packages' && (
+                                                <input type="text" placeholder="Price (₹50k - ₹80k)" className="w-full bg-black/50 border border-white/5 p-4 md:p-5 rounded-2xl text-sm focus:outline-none focus:border-[#c1272d] transition-all font-bold text-[#c1272d]" value={price} onChange={e => setPrice(e.target.value)} />
+                                            )}
+
+                                            {activeTab === 'blog' && (
+                                                <input type="text" placeholder="Date (e.g. August 15, 2026)" className="w-full bg-black/50 border border-white/5 p-4 md:p-5 rounded-2xl text-sm focus:outline-none focus:border-[#c1272d] transition-all font-bold" value={clientDate} onChange={e => setClientDate(e.target.value)} />
+                                            )}
+
+                                            {activeTab === 'clients' && (
+                                                <div className="grid grid-cols-1 gap-4">
+                                                    <input type="text" placeholder="Date (e.g. 12 Feb 2026)" className="w-full bg-black/50 border border-white/5 p-4 md:p-5 rounded-2xl text-sm focus:outline-none focus:border-[#c1272d] transition-all font-bold" value={clientDate} onChange={e => setClientDate(e.target.value)} />
+                                                    <input type="text" placeholder="Set Gallery Key (Password)" className="w-full bg-black/50 border border-white/5 p-4 md:p-5 rounded-2xl text-sm focus:outline-none focus:border-[#c1272d] transition-all font-bold text-[#c1272d]" value={clientPassword} onChange={e => setClientPassword(e.target.value)} />
+                                                </div>
+                                            )}
+
+                                            <textarea placeholder={activeTab === 'clients' ? "Paste Drive Link Here" : activeTab === 'packages' ? "Features (1 per line)" : activeTab === 'blog' ? "Blog HTML Content (or plain text)" : activeTab === 'faqs' ? "Answer..." : "Description..."} rows={4} className="w-full bg-black/50 border border-white/5 p-4 md:p-5 rounded-2xl text-sm focus:outline-none focus:border-[#c1272d] transition-all font-bold resize-none" value={description} onChange={e => setDescription(e.target.value)} />
+                                        </>
                                     )}
-
-                                    {activeTab === 'blog' && (
-                                        <input type="text" placeholder="Date (e.g. August 15, 2026)" className="w-full bg-black/50 border border-white/5 p-4 md:p-5 rounded-2xl text-sm focus:outline-none focus:border-[#c1272d] transition-all font-bold" value={clientDate} onChange={e => setClientDate(e.target.value)} />
-                                    )}
-
-                                    {activeTab === 'clients' && (
-                                        <div className="grid grid-cols-1 gap-4">
-                                            <input type="text" placeholder="Date (e.g. 12 Feb 2026)" className="w-full bg-black/50 border border-white/5 p-4 md:p-5 rounded-2xl text-sm focus:outline-none focus:border-[#c1272d] transition-all font-bold" value={clientDate} onChange={e => setClientDate(e.target.value)} />
-                                            <input type="text" placeholder="Set Gallery Key (Password)" className="w-full bg-black/50 border border-white/5 p-4 md:p-5 rounded-2xl text-sm focus:outline-none focus:border-[#c1272d] transition-all font-bold text-[#c1272d]" value={clientPassword} onChange={e => setClientPassword(e.target.value)} />
-                                        </div>
-                                    )}
-
-                                    <textarea placeholder={activeTab === 'clients' ? "Paste Drive Link Here" : activeTab === 'packages' ? "Features (1 per line)" : activeTab === 'blog' ? "Blog Description..." : "Description..."} rows={4} className="w-full bg-black/50 border border-white/5 p-4 md:p-5 rounded-2xl text-sm focus:outline-none focus:border-[#c1272d] transition-all font-bold resize-none" value={description} onChange={e => setDescription(e.target.value)} />
                                 </div>
 
                                 <div className="flex flex-col justify-center">
@@ -461,10 +604,10 @@ export default function AdminDashboard() {
                                             <Edit className="w-10 h-10" />
                                             <span className="text-sm font-black uppercase tracking-widest">Update Details</span>
                                         </button>
-                                    ) : (activeTab === 'packages' || activeTab === 'clients' ? (
+                                    ) : (activeTab === 'packages' || activeTab === 'faqs' ? (
                                         <button onClick={handleSave} disabled={uploading} className="w-full h-full min-h-[150px] md:min-h-[250px] bg-[#c1272d] text-black rounded-[2rem] flex flex-col items-center justify-center gap-4 hover:bg-[#c1272d] transition-all active:scale-[0.98]">
                                             {uploading ? <div className="animate-spin w-10 h-10 border-4 border-black border-t-transparent rounded-full" /> : <Plus className="w-10 h-10" />}
-                                            <span className="text-sm font-black uppercase tracking-widest">Save {activeTab === 'clients' ? 'Client' : 'Package'}</span>
+                                            <span className="text-sm font-black uppercase tracking-widest">Save {activeTab === 'faqs' ? 'FAQ' : 'Package'}</span>
                                         </button>
                                     ) : (
                                         <div className="relative group h-full">
@@ -492,6 +635,7 @@ export default function AdminDashboard() {
                                 </div>
                             </div>
                         </div>
+                        )}
 
                         {/* Item List */}
                         <div className="space-y-6">

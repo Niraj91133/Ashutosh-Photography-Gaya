@@ -1,31 +1,41 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Plus, Minus } from 'lucide-react';
+import { supabase } from '../lib/supabase';
+
+const DEFAULT_FAQS = [
+  {
+    question: "How far in advance should we book your services?",
+    answer: "We recommend booking at least 6 to 12 months in advance, especially for dates during peak wedding seasons, to ensure our team is available for your special day."
+  },
+  {
+    question: "Do you travel for destination weddings?",
+    answer: "Absolutely. We love capturing love stories around the globe. Our team is fully equipped and experienced in handling destination weddings and international events."
+  },
+  {
+    question: "When can we expect our final photos and videos?",
+    answer: "We focus on meticulous editing to ensure cinematic quality. You can expect a highlight reel within a few days, while the complete curated gallery and full films are typically delivered within 4 to 6 weeks."
+  }
+];
 
 export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const [faqs, setFaqs] = useState(DEFAULT_FAQS);
 
-  const faqs = [
-    {
-      question: "How far in advance should we book your services?",
-      answer: "We recommend booking at least 6 to 12 months in advance, especially for dates during peak wedding seasons, to ensure our team is available for your special day."
-    },
-    {
-      question: "Do you travel for destination weddings?",
-      answer: "Absolutely. We love capturing love stories around the globe. Our team is fully equipped and experienced in handling destination weddings and international events."
-    },
-    {
-      question: "When can we expect our final photos and videos?",
-      answer: "We focus on meticulous editing to ensure cinematic quality. You can expect a highlight reel within a few days, while the complete curated gallery and full films are typically delivered within 4 to 6 weeks."
-    },
-    {
-      question: "Do you provide raw, unedited footage?",
-      answer: "Our signature style relies heavily on our specialized color grading and editorial process. Therefore, we provide fully edited, high-resolution final products rather than unedited RAW files."
-    },
-    {
-      question: "What is your approach to posing and candid moments?",
-      answer: "We believe in a hybrid approach. While we gently guide you for those timeless, editorial portraits, a majority of our work focuses on capturing genuine, candid, and uninterrupted moments as they unfold."
-    }
-  ];
+  useEffect(() => {
+    const fetchFaqs = async () => {
+      if (!supabase) return;
+      const { data } = await supabase
+        .from('site_images')
+        .select('*')
+        .eq('section', 'faqs')
+        .order('created_at', { ascending: true });
+
+      if (data && data.length > 0) {
+        setFaqs(data.map(d => ({ question: d.title, answer: d.description })));
+      }
+    };
+    fetchFaqs();
+  }, []);
 
   return (
     <section className="py-12 md:py-32 bg-[#050505] relative overflow-hidden border-t border-white/5">
@@ -62,7 +72,7 @@ export default function FAQ() {
               
               <div 
                 className={`px-6 md:px-8 overflow-hidden transition-all duration-500 ease-in-out ${
-                  openIndex === index ? 'max-h-40 pb-6 opacity-100' : 'max-h-0 opacity-0'
+                  openIndex === index ? 'max-h-96 pb-6 opacity-100' : 'max-h-0 opacity-0'
                 }`}
               >
                 <p className="text-gray-400 font-light text-sm md:text-base leading-relaxed">

@@ -1,4 +1,35 @@
+import { useEffect, useState } from 'react';
+import { supabase } from '../lib/supabase';
+
 export default function About() {
+  const [config, setConfig] = useState({
+    text: "At Asutosh Photography, we archive the soul of every moment. Founded on the principles of luxury and storytelling, we've spent over 6 years refining the alchemy of light and emotion.\n\nWhether it's a wedding vow or the joy of a child's laugh, we deliver high-end visuals that transcend time. We believe in minimal distractions and maximum impact.",
+    url: 'https://images.pexels.com/photos/1264210/pexels-photo-1264210.jpeg?auto=compress&cs=tinysrgb&w=1200'
+  });
+
+  useEffect(() => {
+    const fetchConfig = async () => {
+      if (!supabase) return;
+      const { data } = await supabase
+        .from('site_images')
+        .select('*')
+        .eq('section', 'config')
+        .eq('category', 'about')
+        .maybeSingle();
+
+      if (data) {
+        try {
+          const parsed = JSON.parse(data.description || '{}');
+          setConfig({
+            text: parsed.text || "At Asutosh Photography, we archive the soul of every moment. Founded on the principles of luxury and storytelling, we've spent over 6 years refining the alchemy of light and emotion.\n\nWhether it's a wedding vow or the joy of a child's laugh, we deliver high-end visuals that transcend time. We believe in minimal distractions and maximum impact.",
+            url: data.url || 'https://images.pexels.com/photos/1264210/pexels-photo-1264210.jpeg?auto=compress&cs=tinysrgb&w=1200'
+          });
+        } catch(e) {}
+      }
+    };
+    fetchConfig();
+  }, []);
+
   return (
     <section id="about" className="py-24 md:py-32 bg-[#050505] text-white border-b border-white/5">
       <div className="w-full px-6 md:px-12">
@@ -7,7 +38,7 @@ export default function About() {
           <div className="relative flex justify-center lg:justify-start">
             <div className="aspect-[3/4] w-full max-w-md rounded-lg overflow-hidden shadow-xl relative z-10">
               <img
-                src="https://images.pexels.com/photos/1264210/pexels-photo-1264210.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                src={config.url}
                 alt="Our Story"
                 className="w-full h-full object-cover"
               />
@@ -24,13 +55,8 @@ export default function About() {
               </h2>
             </div>
 
-            <div className="space-y-6 text-base md:text-lg lg:text-xl font-light leading-relaxed text-gray-300 max-w-2xl">
-              <p>
-                At <span className="text-white font-medium">Asutosh Photography</span>, we archive the soul of every moment. Founded on the principles of luxury and storytelling, we've spent over 6 years refining the alchemy of light and emotion.
-              </p>
-              <p>
-                Whether it's a wedding vow or the joy of a child's laugh, we deliver high-end visuals that transcend time. We believe in minimal distractions and maximum impact.
-              </p>
+            <div className="space-y-6 text-base md:text-lg lg:text-xl font-light leading-relaxed text-gray-300 max-w-2xl whitespace-pre-line">
+              <p>{config.text}</p>
             </div>
 
             <div className="pt-6 grid grid-cols-2 gap-8 border-t border-white/5 max-w-sm">

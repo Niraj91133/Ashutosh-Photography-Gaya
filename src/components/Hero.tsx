@@ -9,6 +9,11 @@ interface HeroProps {
 export default function Hero({ onNavClick }: HeroProps) {
   const [heroImages, setHeroImages] = useState<any[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [config, setConfig] = useState({
+    big_text: 'ASUTOSH\nPHOTOGRAPHY',
+    small_text: 'Write Something About the Asutosh Photography so That User get Attracted and book Us FAst',
+    autoscroll: true
+  });
 
   useEffect(() => {
     const fetchHero = async () => {
@@ -22,7 +27,6 @@ export default function Hero({ onNavClick }: HeroProps) {
       if (data && data.length > 1) {
         setHeroImages(data);
       } else if (data && data.length === 1) {
-        // If they only have 1 image in DB, add some fallbacks so it still slides
         setHeroImages([
           data[0],
           { url: "https://images.pexels.com/photos/2253870/pexels-photo-2253870.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop", media_type: 'image' },
@@ -35,6 +39,24 @@ export default function Hero({ onNavClick }: HeroProps) {
           { url: "https://images.pexels.com/photos/1444442/pexels-photo-1444442.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop", media_type: 'image' }
         ]);
       }
+
+      const { data: configData } = await supabase
+        .from('site_images')
+        .select('*')
+        .eq('section', 'config')
+        .eq('category', 'hero')
+        .maybeSingle();
+
+      if (configData) {
+        try {
+          const parsed = JSON.parse(configData.description || '{}');
+          setConfig({
+            big_text: parsed.big_text || 'ASUTOSH\nPHOTOGRAPHY',
+            small_text: parsed.small_text || 'Write Something About the Asutosh Photography so That User get Attracted and book Us FAst',
+            autoscroll: parsed.autoscroll !== false
+          });
+        } catch(e) {}
+      }
     };
 
     fetchHero();
@@ -42,14 +64,14 @@ export default function Hero({ onNavClick }: HeroProps) {
 
   // Set up auto-scroll for slider
   useEffect(() => {
-    if (heroImages.length <= 1) return;
+    if (heroImages.length <= 1 || !config.autoscroll) return;
     
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % heroImages.length);
     }, 3500); // Faster slide interval (3.5 seconds)
     
     return () => clearInterval(interval);
-  }, [heroImages.length]);
+  }, [heroImages.length, config.autoscroll]);
 
   const nextSlide = () => {
     setCurrentIndex((prev) => (prev + 1) % heroImages.length);
@@ -122,14 +144,12 @@ export default function Hero({ onNavClick }: HeroProps) {
 
       {/* Text Content (Left Aligned) */}
       <div className="relative z-10 w-full px-6 md:px-12 mt-12 md:mt-20">
-        <h1 className="font-sans font-black text-[clamp(3rem,8vw,7rem)] text-white leading-[0.95] mb-6 tracking-tighter fade-in drop-shadow-2xl uppercase">
-          ASUTOSH
-          <br />
-          PHOTOGRAPHY
+        <h1 className="font-sans font-black text-[clamp(3rem,8vw,7rem)] text-white leading-[0.95] mb-6 tracking-tighter fade-in drop-shadow-2xl uppercase whitespace-pre-line">
+          {config.big_text}
         </h1>
 
-        <p className="text-base md:text-lg lg:text-xl font-light leading-relaxed text-gray-300 mb-10 max-w-2xl fade-in" style={{ animationDelay: '0.2s' }}>
-          Write Something About the Asutosh Photography so That User get Attracted and book Us FAst
+        <p className="text-base md:text-lg lg:text-xl font-light leading-relaxed text-gray-300 mb-10 max-w-2xl fade-in whitespace-pre-line" style={{ animationDelay: '0.2s' }}>
+          {config.small_text}
         </p>
 
         <div className="fade-in" style={{ animationDelay: '0.4s' }}>

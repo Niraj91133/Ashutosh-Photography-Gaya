@@ -35,6 +35,7 @@ const DEFAULT_PACKAGES = [
 export default function Packages() {
   const [packages, setPackages] = useState<any[]>(DEFAULT_PACKAGES);
   const [activeTab, setActiveTab] = useState<'Basic Plan' | 'Premium Plan'>('Basic Plan');
+  const [limits, setLimits] = useState({ basic_limit: 4, premium_limit: 6 });
 
   useEffect(() => {
     const fetchPackages = async () => {
@@ -67,6 +68,23 @@ export default function Packages() {
           setPackages(formatted);
         }
 
+        const { data: configData } = await supabase
+          .from('site_images')
+          .select('*')
+          .eq('section', 'config')
+          .eq('category', 'packages')
+          .maybeSingle();
+        
+        if (configData) {
+          try {
+            const parsed = JSON.parse(configData.description || '{}');
+            setLimits({
+              basic_limit: parsed.basic_limit || 4,
+              premium_limit: parsed.premium_limit || 6
+            });
+          } catch(e) {}
+        }
+
       } catch (err) {
         console.error('Error fetching packages:', err);
       }
@@ -75,10 +93,13 @@ export default function Packages() {
     fetchPackages();
   }, []);
 
-  const filteredPackages = packages.filter(pkg =>
+  let filteredPackages = packages.filter(pkg =>
     pkg.description === activeTab ||
     pkg.plan === activeTab
   );
+
+  const limit = activeTab === 'Basic Plan' ? limits.basic_limit : limits.premium_limit;
+  filteredPackages = filteredPackages.slice(0, limit);
 
   return (
     <section id="packages" className="py-24 md:py-32 bg-[#050505] border-y border-white/5 relative overflow-hidden">

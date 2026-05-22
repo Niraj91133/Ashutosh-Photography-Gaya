@@ -2,6 +2,7 @@ import { useRef, useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
+import { BLOGS } from '../lib/data';
 
 export default function Blog() {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -16,7 +17,7 @@ export default function Blog() {
         .eq('section', 'blog')
         .order('created_at', { ascending: false });
 
-      if (data) {
+      if (data && data.length > 0) {
         setBlogs(data.map(item => {
           const [title, date] = (item.title || '').split(' | ');
           return {
@@ -28,6 +29,8 @@ export default function Blog() {
             desc: item.description
           };
         }));
+      } else {
+        setBlogs(BLOGS);
       }
     };
     fetchBlogs();

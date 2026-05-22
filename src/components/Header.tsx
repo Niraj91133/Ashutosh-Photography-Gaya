@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { supabase } from '../lib/supabase';
 
 interface HeaderProps {
   activeSection: string;
@@ -10,8 +11,26 @@ interface HeaderProps {
 export default function Header({ activeSection, onNavClick }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [logoUrl, setLogoUrl] = useState('');
   const location = useLocation();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchConfig = async () => {
+      if (!supabase) return;
+      const { data } = await supabase
+        .from('site_images')
+        .select('url')
+        .eq('section', 'config')
+        .eq('category', 'hero')
+        .maybeSingle();
+
+      if (data && data.url) {
+        setLogoUrl(data.url);
+      }
+    };
+    fetchConfig();
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -54,7 +73,7 @@ export default function Header({ activeSection, onNavClick }: HeaderProps) {
           {/* Logo */}
           <Link 
             to="/" 
-            className="flex items-center group cursor-pointer"
+            className="flex items-center group cursor-pointer z-50"
             onClick={(e) => {
               e.preventDefault();
               window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -63,9 +82,13 @@ export default function Header({ activeSection, onNavClick }: HeaderProps) {
               }
             }}
           >
-            <span className="text-xl md:text-2xl font-serif font-bold tracking-tight text-[#c1272d]">
-              Asutosh Photography
-            </span>
+            {logoUrl ? (
+              <img src={logoUrl} alt="Logo" className="h-10 md:h-12 object-contain" />
+            ) : (
+              <span className="text-xl md:text-2xl font-serif font-bold tracking-tight text-[#c1272d]">
+                Asutosh Photography
+              </span>
+            )}
           </Link>
 
           {/* Desktop Navigation & CTA */}
@@ -159,9 +182,13 @@ export default function Header({ activeSection, onNavClick }: HeaderProps) {
                   }
                 }}
               >
-                <span className="text-2xl font-serif font-bold text-[#c1272d]">
-                  Asutosh Photography
-                </span>
+                {logoUrl ? (
+                  <img src={logoUrl} alt="Logo" className="h-10 object-contain" />
+                ) : (
+                  <span className="text-2xl font-serif font-bold text-[#c1272d]">
+                    Asutosh Photography
+                  </span>
+                )}
               </Link>
               <button
                 onClick={() => setIsMenuOpen(false)}
