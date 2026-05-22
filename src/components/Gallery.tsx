@@ -33,7 +33,8 @@ interface GalleryProps {
 export default function Gallery({ activeFilter, setActiveFilter }: GalleryProps) {
   const [images, setImages] = useState(DEFAULT_IMAGES);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
-  const [visibleCount, setVisibleCount] = useState(12);
+  const getInitialCount = () => typeof window !== 'undefined' && window.innerWidth < 768 ? 6 : 12;
+  const [visibleCount, setVisibleCount] = useState(getInitialCount());
 
   useEffect(() => {
     const fetchGallery = async () => {
@@ -69,7 +70,7 @@ export default function Gallery({ activeFilter, setActiveFilter }: GalleryProps)
 
   // Reset pagination when filter changes
   useEffect(() => {
-    setVisibleCount(12);
+    setVisibleCount(getInitialCount());
   }, [activeFilter]);
 
   const handlePrev = useCallback((e?: React.MouseEvent) => {
@@ -155,7 +156,7 @@ export default function Gallery({ activeFilter, setActiveFilter }: GalleryProps)
         {visibleCount < filteredImages.length && (
           <div className="mt-16 flex justify-center">
             <button
-              onClick={() => setVisibleCount(prev => prev + 12)}
+              onClick={() => setVisibleCount(prev => prev + getInitialCount())}
               className="px-8 py-3 bg-transparent border border-white/20 text-white font-medium text-sm rounded-sm hover:bg-white hover:text-black transition-all duration-300"
             >
               See More
