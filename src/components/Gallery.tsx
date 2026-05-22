@@ -90,25 +90,25 @@ export default function Gallery({ activeFilter, setActiveFilter }: GalleryProps)
   }, [selectedIndex, handlePrev, handleNext]);
 
   return (
-    <section id="gallery" className="py-24 md:py-40 bg-white border-b border-gray-100">
+    <section id="gallery" className="py-24 md:py-40 bg-[#050505] border-b border-white/5">
       <div className="w-full">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 md:mb-24 gap-6 md:gap-8 px-6 md:px-12">
           <div className="space-y-2 md:space-y-4">
             <span className="text-gold-600 font-bold uppercase tracking-[0.3em] text-[10px]">The Showcase</span>
-            <h2 className="text-3xl md:text-5xl font-serif text-dark-950 font-medium leading-tight">Collected Masterpieces</h2>
+            <h2 className="text-3xl md:text-5xl font-serif text-white font-medium leading-tight">Collected Masterpieces</h2>
             <div className="w-12 h-[2px] bg-gold-200"></div>
           </div>
 
           {/* Filter Tabs - Mobile Responsive */}
           <div className="w-full md:w-auto -mx-6 md:mx-0 px-6 md:px-0 overflow-x-auto scrollbar-hide flex">
-            <div className="flex bg-gray-50 p-1 rounded-full border border-gray-100 whitespace-nowrap">
+            <div className="flex bg-[#0a0a0a] p-1 rounded-full border border-white/5 whitespace-nowrap">
               {filters.map((filter) => (
                 <button
                   key={filter}
                   onClick={() => setActiveFilter(filter)}
                   className={`px-5 md:px-6 py-2 text-[10px] font-black uppercase tracking-widest transition-all rounded-full ${activeFilter === filter
                     ? 'bg-gold-600 text-white shadow-md'
-                    : 'text-gray-400 hover:text-dark-950'
+                    : 'text-gray-400 hover:text-white'
                     }`}
                 >
                   {filter}
@@ -125,7 +125,7 @@ export default function Gallery({ activeFilter, setActiveFilter }: GalleryProps)
               <div
                 key={index}
                 onClick={() => setSelectedIndex(index)}
-                className="break-inside-avoid relative group rounded-xl md:rounded-2xl overflow-hidden bg-gray-100 shadow-sm transition-all duration-700 cursor-zoom-in border border-gray-100"
+                className="break-inside-avoid relative group rounded-xl md:rounded-2xl overflow-hidden bg-gray-100 shadow-sm transition-all duration-700 cursor-zoom-in border border-white/5"
               >
                 {image.media_type === 'video' ? (
                   <div className="relative">

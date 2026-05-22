@@ -60,11 +60,11 @@ export default function Testimonials() {
   }, []);
 
   return (
-    <section id="testimonials" className="py-24 md:py-40 bg-white border-b border-gray-100 relative">
+    <section id="testimonials" className="py-24 md:py-40 bg-[#050505] border-b border-white/5 relative">
       <div className="w-full">
         <div className="text-center mb-24 w-full px-12 space-y-4">
           <span className="text-gold-600 font-bold uppercase tracking-[0.3em] text-[10px]">Kind Words</span>
-          <h2 className="text-4xl md:text-5xl font-serif text-dark-950 font-medium leading-tight">Client Love</h2>
+          <h2 className="text-4xl md:text-5xl font-serif text-white font-medium leading-tight">Client Love</h2>
           <div className="w-12 h-[2px] bg-gold-200 mx-auto"></div>
         </div>
 
@@ -73,7 +73,7 @@ export default function Testimonials() {
           {testimonials.map((testimonial, index) => (
             <div
               key={index}
-              className="p-10 md:p-12 bg-white rounded-2xl border border-gray-100 shadow-sm transition-all duration-500 flex flex-col items-center text-center relative"
+              className="p-10 md:p-12 bg-[#050505] rounded-2xl border border-white/5 shadow-sm transition-all duration-500 flex flex-col items-center text-center relative"
             >
               <Quote className="text-gold-100 w-16 h-16 absolute top-8 left-8 -z-0 opacity-40 transition-colors" />
 
@@ -96,7 +96,7 @@ export default function Testimonials() {
                       testimonial.initials
                     )}
                   </div>
-                  <h4 className="font-bold text-dark-950 text-base">{testimonial.name}</h4>
+                  <h4 className="font-bold text-white text-base">{testimonial.name}</h4>
                   <p className="text-[10px] text-gray-400 font-black uppercase tracking-widest mt-1">{testimonial.event}</p>
                 </div>
               </div>

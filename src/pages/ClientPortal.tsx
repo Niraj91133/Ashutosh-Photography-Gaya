@@ -150,7 +150,7 @@ export default function ClientPortal() {
                                     autoFocus
                                     autoComplete="new-password"
                                     placeholder="••••••••"
-                                    className="w-full bg-black border border-white/5 rounded-2xl px-6 py-5 text-center text-xl tracking-[0.5em] focus:outline-none focus:border-gold-600 transition-all text-gold-500 placeholder:text-gray-800"
+                                    className="w-full bg-black border border-white/5 rounded-2xl px-6 py-5 text-center text-xl tracking-[0.5em] focus:outline-none focus:border-gold-600 transition-all text-gold-500 placeholder:text-gray-300"
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
                                     onKeyDown={(e) => e.key === 'Enter' && handleAccess()}

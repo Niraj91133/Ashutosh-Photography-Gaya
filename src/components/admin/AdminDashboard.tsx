@@ -517,7 +517,7 @@ export default function AdminDashboard() {
                                         </div>
 
                                         <div className="absolute inset-0 bg-black/80 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-all translate-y-4 group-hover:translate-y-0 p-4">
-                                            <button onClick={() => handleEdit(item)} className="p-4 rounded-2xl bg-white/10 text-white hover:bg-white hover:text-black transition-all">
+                                            <button onClick={() => handleEdit(item)} className="p-4 rounded-2xl bg-white/10 text-white hover:bg-[#050505] hover:text-black transition-all">
                                                 <Edit className="w-5 h-5" />
                                             </button>
                                             <button onClick={() => handleDelete(item.id, item.isClient)} className="p-4 rounded-2xl bg-red-600/20 text-red-500 hover:bg-red-600 hover:text-white transition-all">
@@ -530,7 +530,7 @@ export default function AdminDashboard() {
 
                             {images.filter(i => (activeTab === 'clients' ? i.isClient : i.section === activeTab && i.category === category)).length === 0 && (
                                 <div className="py-20 text-center border-2 border-dashed border-white/5 rounded-[2rem]">
-                                    <p className="text-gray-800 font-black uppercase tracking-[0.3em] text-[10px] italic">No items found.</p>
+                                    <p className="text-gray-300 font-black uppercase tracking-[0.3em] text-[10px] italic">No items found.</p>
                                 </div>
                             )}
                         </div>

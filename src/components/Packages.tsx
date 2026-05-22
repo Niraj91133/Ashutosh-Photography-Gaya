@@ -103,7 +103,7 @@ export default function Packages() {
                   key={tab}
                   onClick={() => setActiveTab(tab)}
                   className={`px-8 py-3 rounded-full text-xs font-black uppercase tracking-widest transition-all ${activeTab === tab
-                    ? 'bg-gold-600 text-dark-900 shadow-lg'
+                    ? 'bg-gold-600 text-white shadow-lg'
                     : 'text-gray-400 hover:text-white'
                     }`}
                 >
@@ -129,7 +129,7 @@ export default function Packages() {
             >
               {pkg.popular && (
                 <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                  <span className="bg-gold-600 text-dark-900 px-6 py-1.5 text-xs font-bold uppercase tracking-widest shadow-lg">
+                  <span className="bg-gold-600 text-white px-6 py-1.5 text-xs font-bold uppercase tracking-widest shadow-lg">
                     Most Popular
                   </span>
                 </div>
@@ -160,8 +160,8 @@ export default function Packages() {
                 <a
                   href="tel:9667517894"
                   className={`w-full py-4 px-6 rounded-sm font-medium text-center transition-all duration-300 uppercase tracking-wider text-sm ${pkg.popular
-                    ? 'bg-gold-600 hover:bg-gold-500 text-dark-900 shadow-lg hover:shadow-gold-600/20'
-                    : 'border border-white/20 text-white hover:bg-white hover:text-dark-900'
+                    ? 'bg-gold-600 hover:bg-gold-500 text-white shadow-lg hover:shadow-gold-600/20'
+                    : 'border border-white/20 text-white hover:bg-[#050505] hover:text-white'
                     }`}
                 >
                   Book Now
@@ -190,7 +190,7 @@ export default function Packages() {
               >
                 {pkg.popular && (
                   <div className="absolute top-0 right-0">
-                    <div className="bg-gold-600 text-dark-900 px-4 py-1 text-[10px] font-bold uppercase tracking-widest">
+                    <div className="bg-gold-600 text-white px-4 py-1 text-[10px] font-bold uppercase tracking-widest">
                       Popular
                     </div>
                   </div>
@@ -221,7 +221,7 @@ export default function Packages() {
                   <a
                     href="tel:9667517894"
                     className={`w-full py-3 px-6 rounded-sm font-medium text-center transition-all duration-300 uppercase tracking-wider text-xs ${pkg.popular
-                      ? 'bg-gold-600 text-dark-900'
+                      ? 'bg-gold-600 text-white'
                       : 'border border-white/20 text-white'
                       }`}
                   >

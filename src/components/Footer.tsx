@@ -25,10 +25,10 @@ export default function Footer() {
               Capturing the essence of your most beautiful moments with elegance and artistry. We turn memories into timeless treasures.
             </p>
             <div className="flex gap-4">
-              <a href={settings.instagram_link} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-sm bg-white/5 flex items-center justify-center hover:bg-gold-600 hover:text-dark-900 text-gray-400 transition-all duration-300">
+              <a href={settings.instagram_link} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-sm bg-white/5 flex items-center justify-center hover:bg-gold-600 hover:text-white text-gray-400 transition-all duration-300">
                 <Instagram className="w-5 h-5" />
               </a>
-              <a href={settings.facebook_link} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-sm bg-white/5 flex items-center justify-center hover:bg-gold-600 hover:text-dark-900 text-gray-400 transition-all duration-300">
+              <a href={settings.facebook_link} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-sm bg-white/5 flex items-center justify-center hover:bg-gold-600 hover:text-white text-gray-400 transition-all duration-300">
                 <Facebook className="w-5 h-5" />
               </a>
             </div>

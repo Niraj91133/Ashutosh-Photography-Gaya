@@ -47,21 +47,21 @@ export default function Services({ onCategoryClick }: ServicesProps) {
   };
 
   return (
-    <section id="services" className="pt-24 pb-12 bg-white overflow-hidden">
+    <section id="services" className="pt-24 pb-12 bg-[#050505] overflow-hidden">
       <div className="w-full relative px-6 md:px-12">
         <div className="flex items-center justify-between mb-6 px-2">
-          <h2 className="text-xl font-serif font-black text-dark-950 uppercase tracking-tighter">Photography / Services</h2>
+          <h2 className="text-xl font-serif font-black text-white uppercase tracking-tighter">Photography / Services</h2>
           <div className="flex gap-3">
             <button
               onClick={() => scroll('left')}
-              className="w-12 h-12 rounded-full border border-gray-100 flex items-center justify-center bg-white hover:bg-gold-600 hover:text-white transition-all shadow-md active:scale-95 group"
+              className="w-12 h-12 rounded-full border border-white/5 flex items-center justify-center bg-[#050505] hover:bg-gold-600 hover:text-white transition-all shadow-md active:scale-95 group"
               aria-label="Scroll Left"
             >
               <ChevronLeft className="w-6 h-6 transition-transform group-hover:-translate-x-0.5" />
             </button>
             <button
               onClick={() => scroll('right')}
-              className="w-12 h-12 rounded-full border border-gray-100 flex items-center justify-center bg-white hover:bg-gold-600 hover:text-white transition-all shadow-md active:scale-95 group"
+              className="w-12 h-12 rounded-full border border-white/5 flex items-center justify-center bg-[#050505] hover:bg-gold-600 hover:text-white transition-all shadow-md active:scale-95 group"
               aria-label="Scroll Right"
             >
               <ChevronRight className="w-6 h-6 transition-transform group-hover:translate-x-0.5" />
@@ -81,7 +81,7 @@ export default function Services({ onCategoryClick }: ServicesProps) {
                 className="flex-none w-[180px] md:w-[220px] snap-center group cursor-pointer"
                 onClick={() => onCategoryClick?.(service.title)}
               >
-                <div className="relative aspect-[3/4] rounded-lg overflow-hidden bg-gray-50 border border-gray-100 shadow-sm transition-all duration-700 group-hover:shadow-xl group-hover:-translate-y-1">
+                <div className="relative aspect-[3/4] rounded-lg overflow-hidden bg-[#0a0a0a] border border-white/5 shadow-sm transition-all duration-700 group-hover:shadow-xl group-hover:-translate-y-1">
                   <img
                     src={dbImg || service.img}
                     alt={service.title}

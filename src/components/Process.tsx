@@ -7,12 +7,12 @@ export default function Process() {
     ];
 
     return (
-        <section className="py-24 md:py-40 bg-gray-50 border-b border-gray-100 overflow-hidden">
+        <section className="py-24 md:py-40 bg-[#0a0a0a] border-b border-white/5 overflow-hidden">
             <div className="w-full">
                 <div className="flex flex-col md:flex-row md:items-end justify-between mb-24 gap-8 px-12">
                     <div className="space-y-4">
                         <span className="text-gold-600 font-bold uppercase tracking-[0.3em] text-[10px]">The Journey</span>
-                        <h2 className="text-4xl md:text-5xl font-serif text-dark-950 font-medium leading-tight">Our Effortless Process</h2>
+                        <h2 className="text-4xl md:text-5xl font-serif text-white font-medium leading-tight">Our Effortless Process</h2>
                         <div className="w-12 h-[2px] bg-gold-200"></div>
                     </div>
                     <p className="text-gray-500 font-light max-w-sm">From the first call to the final reveal, we ensure a smooth, professional, and luxury experience.</p>
@@ -31,7 +31,7 @@ export default function Process() {
                                     {step.number}
                                 </span>
                                 <div className="space-y-3">
-                                    <h3 className="text-2xl font-serif font-black text-dark-950 transition-colors">{step.title}</h3>
+                                    <h3 className="text-2xl font-serif font-black text-white transition-colors">{step.title}</h3>
                                     <p className="text-sm text-gray-500 font-light leading-relaxed">{step.desc}</p>
                                 </div>
                             </div>

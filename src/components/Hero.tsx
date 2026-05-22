@@ -78,7 +78,7 @@ export default function Hero({ onNavClick }: HeroProps) {
         <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-20 fade-in" style={{ animationDelay: '0.4s' }}>
           <a
             href="tel:9667517894"
-            className="w-full sm:w-auto group relative flex items-center justify-center gap-3 bg-gold-600/90 hover:bg-gold-500 text-dark-900 px-8 py-4 rounded-sm font-medium transition-all duration-300 backdrop-blur-sm overflow-hidden"
+            className="w-full sm:w-auto group relative flex items-center justify-center gap-3 bg-gold-600/90 hover:bg-gold-500 text-white px-8 py-4 rounded-sm font-medium transition-all duration-300 backdrop-blur-sm overflow-hidden"
           >
             <div className="absolute inset-0 w-full h-full bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out"></div>
             <Phone className="w-5 h-5 relative z-10 group-hover:scale-110 transition-transform duration-300" />

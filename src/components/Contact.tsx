@@ -57,7 +57,7 @@ export default function Contact() {
             <div className="space-y-8">
               <div className="flex items-start group">
                 <div className="w-12 h-12 bg-white/5 rounded-sm flex items-center justify-center mr-6 group-hover:bg-gold-600 transition-colors duration-300 border border-white/10">
-                  <Phone className="w-5 h-5 text-gold-500 group-hover:text-dark-900 transition-colors" />
+                  <Phone className="w-5 h-5 text-gold-500 group-hover:text-white transition-colors" />
                 </div>
                 <div>
                   <h4 className="text-white text-lg font-serif mb-1">Phone</h4>
@@ -67,7 +67,7 @@ export default function Contact() {
 
               <div className="flex items-start group">
                 <div className="w-12 h-12 bg-white/5 rounded-sm flex items-center justify-center mr-6 group-hover:bg-gold-600 transition-colors duration-300 border border-white/10">
-                  <Mail className="w-5 h-5 text-gold-500 group-hover:text-dark-900 transition-colors" />
+                  <Mail className="w-5 h-5 text-gold-500 group-hover:text-white transition-colors" />
                 </div>
                 <div>
                   <h4 className="text-white text-lg font-serif mb-1">Email</h4>
@@ -78,7 +78,7 @@ export default function Contact() {
 
               <div className="flex items-start group">
                 <div className="w-12 h-12 bg-white/5 rounded-sm flex items-center justify-center mr-6 group-hover:bg-gold-600 transition-colors duration-300 border border-white/10">
-                  <MapPin className="w-5 h-5 text-gold-500 group-hover:text-dark-900 transition-colors" />
+                  <MapPin className="w-5 h-5 text-gold-500 group-hover:text-white transition-colors" />
                 </div>
                 <div>
                   <h4 className="text-white text-lg font-serif mb-1">Studio</h4>
@@ -191,7 +191,7 @@ export default function Contact() {
 
               <button
                 type="submit"
-                className="w-full bg-gradient-to-r from-gold-600 to-gold-500 text-dark-900 font-bold py-5 rounded-sm hover:shadow-lg hover:shadow-gold-600/20 transition-all duration-300 uppercase tracking-widest text-sm flex items-center justify-center gap-2 group"
+                className="w-full bg-gradient-to-r from-gold-600 to-gold-500 text-white font-bold py-5 rounded-sm hover:shadow-lg hover:shadow-gold-600/20 transition-all duration-300 uppercase tracking-widest text-sm flex items-center justify-center gap-2 group"
               >
                 Send Inquiry
                 <Send className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
