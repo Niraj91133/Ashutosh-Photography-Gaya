@@ -1,60 +1,89 @@
-import { ShieldCheck, Clock, Award, Users, Heart, Camera } from 'lucide-react';
-
 export default function WhyChooseUs() {
     const features = [
         {
-            icon: Award,
+            number: '01',
             title: 'Premium Quality',
-            desc: 'Industry-leading 4K equipment and high-end editing for a cinematic feel.'
+            desc: 'Industry-leading 4K equipment and high-end editing for a cinematic feel that mirrors true luxury.'
         },
         {
-            icon: Clock,
+            number: '02',
             title: 'Timely Delivery',
-            desc: 'We respect your time. Get your edited memories delivered on schedule, always.'
+            desc: 'We respect your time. Expect your meticulously edited memories delivered on schedule, without compromise.'
         },
         {
-            icon: Heart,
+            number: '03',
             title: 'Emotional Detail',
-            desc: 'We focus on the candid moments that tell the real story of your celebration.'
+            desc: 'We look beyond the obvious, focusing on the candid, fleeting moments that tell the authentic story.'
         },
         {
-            icon: ShieldCheck,
+            number: '04',
             title: 'Trusted Team',
-            desc: 'Over 6 years of experience documenting high-profile weddings and events.'
+            desc: 'Over 6 years of experience seamlessly documenting high-profile weddings and intimate events globally.'
         },
         {
-            icon: Camera,
+            number: '05',
             title: 'Artistic Vision',
-            desc: 'A unique blend of traditional elegance and modern luxury aesthetics.'
+            desc: 'A unique editorial approach blending traditional elegance with a modern, high-fashion aesthetic.'
         },
         {
-            icon: Users,
+            number: '06',
             title: 'Tailored Service',
-            desc: 'Personalized packages designed to fit your specific vision and needs.'
+            desc: 'Bespoke packages designed to perfectly fit your specific vision, ensuring a truly personalized experience.'
         }
     ];
 
     return (
-        <section className="py-24 md:py-40 bg-[#050505] border-b border-white/5">
-            <div className="w-full">
-                <div className="text-center mb-24 w-full px-12 space-y-4">
-                    <span className="text-gold-600 font-bold uppercase tracking-[0.3em] text-[10px]">The Asutosh Guarantee</span>
-                    <h2 className="text-4xl md:text-5xl font-serif text-white font-medium">Why Asutosh Photography?</h2>
-                    <div className="w-12 h-[2px] bg-gold-200 mx-auto"></div>
-                </div>
+        <section className="py-24 md:py-40 bg-[#050505] border-y border-white/5 relative">
+            {/* Subtle background glow */}
+            <div className="absolute top-1/2 left-0 -translate-y-1/2 w-[500px] h-[500px] bg-[#c1272d]/5 rounded-full blur-[150px] pointer-events-none"></div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 md:gap-16">
-                    {features.map((item, index) => (
-                        <div key={index} className="flex gap-6">
-                            <div className="w-12 h-12 flex-shrink-0 bg-gold-50 shadow-sm border border-gold-100 rounded-xl flex items-center justify-center text-gold-600 transition-all duration-300">
-                                <item.icon className="w-6 h-6" />
-                            </div>
-                            <div className="space-y-3">
-                                <h3 className="text-xl font-bold text-white tracking-tight">{item.title}</h3>
-                                <p className="text-gray-500 font-light leading-relaxed text-sm">{item.desc}</p>
+            <div className="w-full max-w-[1400px] mx-auto px-6 lg:px-12">
+                <div className="flex flex-col lg:flex-row gap-16 lg:gap-32">
+                    
+                    {/* Left Sticky Content */}
+                    <div className="lg:w-5/12">
+                        <div className="sticky top-40 space-y-8">
+                            <span className="text-[#c1272d] font-bold uppercase tracking-[0.3em] text-[10px]">The Asutosh Signature</span>
+                            <h2 className="text-4xl md:text-6xl font-serif text-white font-medium leading-[1.1]">
+                                Elevating the <br />
+                                <span className="italic text-gray-400">Art of Memory</span>
+                            </h2>
+                            <p className="text-gray-400 font-light leading-relaxed text-sm md:text-base max-w-sm">
+                                We don't just take photographs; we craft legacy artifacts. Every frame is treated as a masterpiece, ensuring your most precious moments are immortalized with unparalleled elegance and precision.
+                            </p>
+                            <div className="pt-8">
+                                <div className="w-16 h-[1px] bg-white/20"></div>
                             </div>
                         </div>
-                    ))}
+                    </div>
+
+                    {/* Right Editorial List */}
+                    <div className="lg:w-7/12">
+                        <div className="flex flex-col">
+                            {features.map((item, index) => (
+                                <div 
+                                    key={index} 
+                                    className="group relative flex flex-col md:flex-row md:items-start gap-6 md:gap-12 py-10 md:py-14 border-t border-white/10 first:border-t-0 transition-all duration-500 hover:bg-white/[0.02] -mx-6 px-6 md:mx-0 md:px-6 rounded-lg"
+                                >
+                                    {/* Large Number */}
+                                    <div className="text-5xl md:text-7xl font-serif italic text-white/10 font-light group-hover:text-[#c1272d]/40 transition-colors duration-500">
+                                        {item.number}
+                                    </div>
+                                    
+                                    {/* Content */}
+                                    <div className="space-y-4 pt-2">
+                                        <h3 className="text-2xl md:text-3xl font-serif text-white tracking-wide group-hover:text-[#c1272d] transition-colors duration-500">
+                                            {item.title}
+                                        </h3>
+                                        <p className="text-gray-400 font-light leading-relaxed text-sm md:text-base max-w-md">
+                                            {item.desc}
+                                        </p>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
         </section>
