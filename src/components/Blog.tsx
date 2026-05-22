@@ -45,11 +45,14 @@ export default function Blog() {
           </button>
         </div>
 
-        <div className="flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 overflow-x-auto snap-x snap-mandatory pb-8 -mx-6 px-6 md:mx-0 md:px-0 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']">
+        <div className="flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 overflow-x-auto snap-x snap-mandatory pb-8 -mx-6 px-6 md:mx-0 md:px-0 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']">
           {blogs.map((blog) => (
-            <article 
+            <a 
               key={blog.id} 
-              className="min-w-[85vw] sm:min-w-[350px] md:min-w-0 flex-shrink-0 snap-center md:snap-align-none group cursor-pointer flex flex-col bg-[#050505] rounded-sm border border-white/5 hover:border-white/20 transition-all duration-500 overflow-hidden shadow-xl"
+              href={`#blog-${blog.id}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="min-w-[260px] sm:min-w-[300px] md:min-w-0 flex-shrink-0 snap-center md:snap-align-none group cursor-pointer flex flex-col bg-[#050505] rounded-sm border border-white/5 hover:border-white/20 transition-all duration-500 overflow-hidden shadow-xl"
             >
               <div className="relative aspect-[4/3] overflow-hidden">
                 <img 
@@ -62,32 +65,24 @@ export default function Blog() {
                 </div>
               </div>
               
-              <div className="p-6 md:p-8 flex flex-col flex-grow">
-                <span className="text-gray-500 text-[10px] uppercase tracking-widest font-bold mb-3">
+              <div className="p-5 md:p-8 flex flex-col flex-grow">
+                <span className="text-gray-500 text-[9px] md:text-[10px] uppercase tracking-widest font-bold mb-3">
                   {blog.date}
                 </span>
-                <h3 className="text-xl font-serif text-white mb-3 group-hover:text-[#c1272d] transition-colors duration-300">
+                <h3 className="text-lg md:text-xl font-serif text-white mb-2 md:mb-3 group-hover:text-[#c1272d] transition-colors duration-300">
                   {blog.title}
                 </h3>
-                <p className="text-gray-400 text-sm font-light leading-relaxed mb-6 flex-grow">
+                <p className="text-gray-400 text-xs md:text-sm font-light leading-relaxed mb-6 flex-grow line-clamp-3">
                   {blog.desc}
                 </p>
                 
-                <span className="text-xs uppercase tracking-widest font-bold text-gray-300 group-hover:text-white flex items-center gap-2 transition-colors mt-auto w-max">
+                <span className="text-[10px] md:text-xs uppercase tracking-widest font-bold text-gray-300 group-hover:text-white flex items-center gap-2 transition-colors mt-auto w-max">
                   Read More
                   <span className="h-[1px] w-4 bg-[#c1272d] group-hover:w-8 transition-all duration-300"></span>
                 </span>
               </div>
-            </article>
+            </a>
           ))}
-        </div>
-
-        {/* Mobile View All Button */}
-        <div className="mt-12 flex justify-center md:hidden">
-          <button className="flex items-center gap-2 text-gray-300 hover:text-white transition-colors group text-xs uppercase tracking-widest font-bold border border-white/20 px-6 py-3 rounded-sm">
-            View All Posts
-            <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform text-[#c1272d]" />
-          </button>
         </div>
 
       </div>
