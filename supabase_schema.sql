@@ -1,8 +1,8 @@
 -- Create site_settings table
 CREATE TABLE IF NOT EXISTS site_settings (
     id BIGINT PRIMARY KEY DEFAULT 1,
-    admin_id TEXT DEFAULT 'vishalriya26',
-    admin_password TEXT DEFAULT 'Vishalriya26',
+    admin_id TEXT DEFAULT 'asutosh_admin',
+    admin_password TEXT DEFAULT 'asutosh_admin',
     phone TEXT,
     email TEXT,
     facebook_link TEXT DEFAULT '#',
@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS site_settings (
 
 -- Insert default settings if not exists
 INSERT INTO site_settings (id, admin_id, admin_password, phone, email)
-VALUES (1, 'vishalriya26', 'Vishalriya26', '9667517894', 'vishalphotography2312@gmail.com')
+VALUES (1, 'asutosh_admin', 'asutosh_admin', '9667517894', 'asutoshphotography@gmail.com')
 ON CONFLICT (id) DO NOTHING;
 
 -- Create site_images table

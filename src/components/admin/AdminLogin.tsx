@@ -26,8 +26,8 @@ export default function AdminLogin() {
             console.log('Database returned:', data);
 
             // Accepted credentials (either from DB or hardcoded fallback)
-            const isMatch = (username === (data?.admin_id || 'vishalriya26') && password === (data?.admin_password || 'Vishalriya26')) ||
-                (username === 'vishalriya26' && password === 'Vishalriya26');
+            const isMatch = (username === (data?.admin_id || 'asutosh_admin') && password === (data?.admin_password || 'asutosh_admin')) ||
+                (username === 'asutosh_admin' && password === 'asutosh_admin');
 
             if (isMatch) {
                 console.log('Login successful!');
@@ -40,7 +40,7 @@ export default function AdminLogin() {
         } catch (err) {
             console.error('Fatal login error:', err);
             // Absolute fallback
-            if (username === 'vishalriya26' && password === 'Vishalriya26') {
+            if (username === 'asutosh_admin' && password === 'asutosh_admin') {
                 localStorage.setItem('adminLoggedIn', 'true');
                 navigate('/admin/dashboard');
             } else {

@@ -82,7 +82,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <h4 className="text-white text-lg font-serif mb-1">Studio</h4>
-                  <p className="text-gray-400">Dehri on sone Rattubigha petrol pump near ( Rohtas bihar) Dalmiyanagar, Pin code 821305</p>
+                  <p className="text-gray-400">gaya(bihar) Manpur patwatoli</p>
                 </div>
               </div>
             </div>
@@ -90,7 +90,7 @@ export default function Contact() {
             {/* Map Preview */}
             <div className="mt-12 h-64 w-full rounded-sm overflow-hidden border border-white/10 opacity-70 hover:opacity-100 transition-opacity duration-300">
               <iframe
-                src="https://maps.google.com/maps?q=Dehri+on+sone+Rattubigha+petrol+pump+near+(Rohtas+bihar)+Dalmiyanagar,+Bihar+821305&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                src="https://maps.google.com/maps?q=Manpur,+Gaya,+Bihar&t=&z=13&ie=UTF8&iwloc=&output=embed"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}

@@ -38,8 +38,8 @@ export default function WhyChooseUs() {
         <section className="py-24 md:py-40 bg-white border-b border-gray-100">
             <div className="w-full">
                 <div className="text-center mb-24 w-full px-12 space-y-4">
-                    <span className="text-gold-600 font-bold uppercase tracking-[0.3em] text-[10px]">The Vishal Guarantee</span>
-                    <h2 className="text-4xl md:text-5xl font-serif text-dark-950 font-medium">Why Vishal Photography?</h2>
+                    <span className="text-gold-600 font-bold uppercase tracking-[0.3em] text-[10px]">The Asutosh Guarantee</span>
+                    <h2 className="text-4xl md:text-5xl font-serif text-dark-950 font-medium">Why Asutosh Photography?</h2>
                     <div className="w-12 h-[2px] bg-gold-200 mx-auto"></div>
                 </div>
 

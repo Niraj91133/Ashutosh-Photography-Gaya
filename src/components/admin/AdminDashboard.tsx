@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ImageIcon, CheckCircle, AlertCircle, LogOut, MessageSquare, Trash2, Camera, Film, Home, Plus, Layers, IndianRupee, Edit, X, Settings, Phone, EyeOff } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
+import imageCompression from 'browser-image-compression';
 
 const SECTIONS = [
     { id: 'hero', name: 'Banner', icon: ImageIcon, categories: ['Main Banner'] },
@@ -223,14 +224,38 @@ export default function AdminDashboard() {
             const files = Array.from(e.target.files);
 
             for (let i = 0; i < files.length; i++) {
-                const file = files[i];
-                const formData = new FormData();
-                formData.append('file', file);
-                formData.append('resource_type', file.type.startsWith('video/') ? 'video' : 'image');
+                let file = files[i];
+                let base64Image = '';
+
+                if (file.type.startsWith('image/')) {
+                    const options = { maxSizeMB: 1, maxWidthOrHeight: 1920, useWebWorker: true };
+                    try {
+                        const compressedFile = await imageCompression(file, options);
+                        base64Image = await new Promise((resolve, reject) => {
+                            const reader = new FileReader();
+                            reader.readAsDataURL(compressedFile);
+                            reader.onloadend = () => resolve(reader.result as string);
+                            reader.onerror = error => reject(error);
+                        });
+                    } catch (err) {
+                        throw new Error('Image compression failed');
+                    }
+                } else {
+                    base64Image = await new Promise((resolve, reject) => {
+                        const reader = new FileReader();
+                        reader.readAsDataURL(file);
+                        reader.onloadend = () => resolve(reader.result as string);
+                        reader.onerror = error => reject(error);
+                    });
+                }
 
                 const response = await fetch('/api/cloudinary-upload', {
                     method: 'POST',
-                    body: formData
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        image: base64Image,
+                        resource_type: file.type.startsWith('video/') ? 'video' : 'image'
+                    })
                 });
 
                 if (!response.ok) throw new Error('Cloudinary upload failed');
@@ -247,7 +272,7 @@ export default function AdminDashboard() {
                     url: publicUrl,
                     section: activeTab,
                     category: category,
-                    title: title || 'Vishal Moment',
+                    title: title || 'Asutosh Moment',
                     description: description,
                     media_type: file.type.startsWith('video/') ? 'video' : 'image'
                 };
@@ -274,7 +299,7 @@ export default function AdminDashboard() {
             {/* Header / Sidebar */}
             <header className="md:w-64 bg-[#0a0a0a] border-b md:border-r border-white/5 sticky top-0 z-[100] md:h-screen">
                 <div className="p-6 md:p-8 flex items-center justify-between">
-                    <h1 className="text-xl font-serif font-bold text-gold-500">VP Admin</h1>
+                    <h1 className="text-xl font-serif font-bold text-gold-500">AP Admin</h1>
                     <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="md:hidden">
                         {isMenuOpen ? <X /> : <Layers className="text-gold-500" />}
                     </button>
