@@ -33,6 +33,7 @@ interface GalleryProps {
 export default function Gallery({ activeFilter, setActiveFilter }: GalleryProps) {
   const [images, setImages] = useState(DEFAULT_IMAGES);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const [visibleCount, setVisibleCount] = useState(12);
 
   useEffect(() => {
     const fetchGallery = async () => {
@@ -64,19 +65,26 @@ export default function Gallery({ activeFilter, setActiveFilter }: GalleryProps)
     ? images
     : images.filter(img => img.category === activeFilter);
 
+  const paginatedImages = filteredImages.slice(0, visibleCount);
+
+  // Reset pagination when filter changes
+  useEffect(() => {
+    setVisibleCount(12);
+  }, [activeFilter]);
+
   const handlePrev = useCallback((e?: React.MouseEvent) => {
     e?.stopPropagation();
     if (selectedIndex !== null) {
-      setSelectedIndex((selectedIndex - 1 + filteredImages.length) % filteredImages.length);
+      setSelectedIndex((selectedIndex - 1 + paginatedImages.length) % paginatedImages.length);
     }
-  }, [selectedIndex, filteredImages.length]);
+  }, [selectedIndex, paginatedImages.length]);
 
   const handleNext = useCallback((e?: React.MouseEvent) => {
     e?.stopPropagation();
     if (selectedIndex !== null) {
-      setSelectedIndex((selectedIndex + 1) % filteredImages.length);
+      setSelectedIndex((selectedIndex + 1) % paginatedImages.length);
     }
-  }, [selectedIndex, filteredImages.length]);
+  }, [selectedIndex, paginatedImages.length]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -90,26 +98,20 @@ export default function Gallery({ activeFilter, setActiveFilter }: GalleryProps)
   }, [selectedIndex, handlePrev, handleNext]);
 
   return (
-    <section id="gallery" className="py-20 bg-white">
+    <section id="gallery" className="py-20 bg-[#050505]">
       <div className="w-full max-w-[1600px] mx-auto px-6 lg:px-12">
-        {/* Title Section */}
-        <div className="mb-12">
-          <span className="text-gray-500 font-bold uppercase tracking-[0.2em] text-[10px]">The Showcase</span>
-          <h2 className="text-3xl md:text-5xl font-serif text-[#050505] font-medium leading-tight mt-2">Collected Masterpieces</h2>
-        </div>
-
-        {/* Filter Tabs - Matching Reference exactly */}
-        <div className="flex flex-wrap gap-2 md:gap-3 mb-10 overflow-x-auto pb-4 scrollbar-hide">
+        {/* Filter Tabs - Single Row with Invisible Scroll */}
+        <div className="flex flex-nowrap overflow-x-auto gap-3 mb-10 pb-4 scrollbar-hide" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
           {filters.map((filter) => {
             const isActive = activeFilter === filter;
             return (
               <button
                 key={filter}
                 onClick={() => setActiveFilter(filter)}
-                className={`px-5 py-2 text-[13px] font-medium transition-all rounded-[4px] border whitespace-nowrap
+                className={`px-5 py-2 text-[13px] font-medium transition-all rounded-[4px] border whitespace-nowrap flex-shrink-0
                   ${isActive 
                     ? 'bg-[#c1272d] text-white border-[#c1272d]' 
-                    : 'bg-white text-gray-600 border-gray-300 hover:border-gray-400 hover:text-gray-900'
+                    : 'bg-transparent text-gray-400 border-white/20 hover:border-white/40 hover:text-white'
                   }`}
               >
                 {filter}
@@ -120,20 +122,20 @@ export default function Gallery({ activeFilter, setActiveFilter }: GalleryProps)
 
         {/* Clean Masonry Layout */}
         <div className="columns-2 md:columns-3 lg:columns-4 xl:columns-6 gap-4 space-y-4">
-          {filteredImages.map((image, index) => (
+          {paginatedImages.map((image, index) => (
             <div
               key={index}
               onClick={() => setSelectedIndex(index)}
-              className="break-inside-avoid relative group overflow-hidden bg-gray-100 cursor-zoom-in"
+              className="break-inside-avoid relative group overflow-hidden bg-[#0a0a0a] cursor-zoom-in rounded-sm"
             >
               {image.media_type === 'video' ? (
                 <div className="relative">
                   <video
                     src={image.url}
-                    className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
+                    className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100"
                     autoPlay muted loop playsInline
                   />
-                  <div className="absolute top-2 right-2 w-6 h-6 bg-black/40 backdrop-blur-sm rounded-full flex items-center justify-center">
+                  <div className="absolute top-2 right-2 w-6 h-6 bg-black/60 backdrop-blur-sm rounded-full flex items-center justify-center">
                     <Film className="w-3 h-3 text-white" />
                   </div>
                 </div>
@@ -142,12 +144,24 @@ export default function Gallery({ activeFilter, setActiveFilter }: GalleryProps)
                   src={image.url}
                   alt={image.title}
                   loading="lazy"
-                  className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
+                  className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100"
                 />
               )}
             </div>
           ))}
         </div>
+
+        {/* See More Button */}
+        {visibleCount < filteredImages.length && (
+          <div className="mt-16 flex justify-center">
+            <button
+              onClick={() => setVisibleCount(prev => prev + 12)}
+              className="px-8 py-3 bg-transparent border border-white/20 text-white font-medium text-sm rounded-sm hover:bg-white hover:text-black transition-all duration-300"
+            >
+              See More
+            </button>
+          </div>
+        )}
       </div>
 
       {/* Luxury Lightbox / Previewer */}
@@ -184,17 +198,17 @@ export default function Gallery({ activeFilter, setActiveFilter }: GalleryProps)
             onClick={(e) => e.stopPropagation()}
           >
             <div className="w-full h-full flex items-center justify-center">
-              {filteredImages[selectedIndex].media_type === 'video' ? (
+              {paginatedImages[selectedIndex].media_type === 'video' ? (
                 <video
-                  src={filteredImages[selectedIndex].url}
+                  src={paginatedImages[selectedIndex].url}
                   controls
                   autoPlay
                   className="max-h-[85vh] w-auto h-full object-contain"
                 />
               ) : (
                 <img
-                  src={filteredImages[selectedIndex].url}
-                  alt={filteredImages[selectedIndex].title}
+                  src={paginatedImages[selectedIndex].url}
+                  alt={paginatedImages[selectedIndex].title}
                   className="max-h-[85vh] w-auto h-full object-contain"
                 />
               )}
@@ -202,7 +216,7 @@ export default function Gallery({ activeFilter, setActiveFilter }: GalleryProps)
           </div>
 
           <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/60 text-sm font-medium">
-            {selectedIndex + 1} / {filteredImages.length}
+            {selectedIndex + 1} / {paginatedImages.length}
           </div>
         </div>
       )}
