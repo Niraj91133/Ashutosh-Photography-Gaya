@@ -9,6 +9,8 @@ import Process from './components/Process';
 import Gallery from './components/Gallery';
 import Testimonials from './components/Testimonials';
 import Packages from './components/Packages';
+import FAQ from './components/FAQ';
+import Blog from './components/Blog';
 import CTA from './components/CTA';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
@@ -68,8 +70,10 @@ function MainSite() {
         {!isHidden('gallery') && <Gallery activeFilter={activeGalleryFilter} setActiveFilter={setActiveGalleryFilter} />}
         <WhyChooseUs />
         {!isHidden('packages') && <Packages />}
+        <FAQ />
         {!isHidden('about') && <About />}
         {!isHidden('testimonials') && <Testimonials />}
+        <Blog />
         <CTA />
         {!isHidden('contact') && <Contact />}
       </main>
