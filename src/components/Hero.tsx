@@ -144,7 +144,7 @@ export default function Hero({ onNavClick }: HeroProps) {
 
       {/* Text Content (Left Aligned) */}
       <div className="relative z-10 w-full px-6 md:px-12 mt-12 md:mt-20">
-        <h1 className="font-sans font-black text-[clamp(3rem,8vw,7rem)] text-white leading-[0.95] mb-6 tracking-tighter fade-in drop-shadow-2xl uppercase whitespace-pre-line">
+        <h1 className="font-sans font-black text-[clamp(2rem,5vw,4.5rem)] text-white leading-[0.95] mb-6 tracking-tighter fade-in drop-shadow-2xl uppercase whitespace-pre-line">
           {config.big_text}
         </h1>
 
