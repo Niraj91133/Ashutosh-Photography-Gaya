@@ -54,7 +54,7 @@ export default function Blog() {
               key={blog.id} 
               className="min-w-[35vw] sm:min-w-[250px] md:min-w-0 flex-shrink-0 snap-center md:snap-align-none group cursor-pointer flex flex-col bg-[#050505] rounded-sm border border-white/5 hover:border-white/20 transition-all duration-500 overflow-hidden shadow-xl"
             >
-              <div className="relative aspect-[4/3] overflow-hidden">
+              <div className="relative h-16 sm:h-20 md:h-auto md:aspect-[4/3] overflow-hidden">
                 <img 
                   src={blog.image} 
                   alt={blog.title} 
