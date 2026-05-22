@@ -59,7 +59,7 @@ function MainSite() {
   const isHidden = (id: string) => settings.disabled_sections?.includes(id);
 
   return (
-    <div className="min-h-screen bg-[#050505] text-white font-sans selection:bg-[#c1272d] selection:text-white">
+    <div className="min-h-screen bg-[#050505] text-white font-sans selection:bg-[#c1272d] selection:text-white overflow-x-hidden w-full relative">
       <Header activeSection={activeSection} onNavClick={handleNavClick} />
       <main>
         {!isHidden('hero') && <Hero onNavClick={handleNavClick} />}

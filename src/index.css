@@ -30,6 +30,7 @@ html {
   font-family: 'Outfit', sans-serif;
   scroll-behavior: smooth;
   height: 100%;
+  overflow-x: hidden;
 }
 
 h1,
@@ -43,6 +44,7 @@ h6 {
 
 body {
   min-height: 100%;
+  overflow-x: hidden;
 }
 
 /* Hide scrollbar for horizontal scroll sections */
