@@ -97,7 +97,7 @@ Message: ${formData.message}`;
               </p>
             </div>
 
-            <div className="space-y-10">
+            <div className="flex flex-col sm:flex-row flex-wrap gap-8 md:gap-12">
               <div className="flex items-start group">
                 <div className="mt-1 mr-6 text-[#c1272d] opacity-70 group-hover:opacity-100 transition-opacity">
                   <Phone className="w-5 h-5" />
