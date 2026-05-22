@@ -49,12 +49,15 @@ export default function WhyChooseUs() {
                     <div className="hidden md:block w-32 h-[1px] bg-white/20 mb-3"></div>
                 </div>
 
-                {/* Compact Grid Layout */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
+                {/* Stacked Scroll (Mobile) / Compact Grid (Desktop) */}
+                <div className="block md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-x-8 md:gap-y-12">
                     {features.map((item, index) => (
                         <div 
                             key={index} 
-                            className="group relative flex flex-col items-start border-l border-white/10 pl-6 hover:border-[#c1272d] transition-colors duration-500"
+                            className="group relative flex flex-col items-start border-l border-white/10 pl-6 hover:border-[#c1272d] transition-colors duration-500
+                                       sticky top-[15vh] md:static bg-[#050505] md:bg-transparent z-10 
+                                       min-h-[35vh] md:min-h-0 mb-[25vh] md:mb-0 last:mb-0
+                                       py-8 md:py-0 shadow-[0_-20px_30px_rgba(5,5,5,1)] md:shadow-none"
                         >
                             <span className="text-xs font-black text-white/20 group-hover:text-[#c1272d] mb-4 tracking-[0.2em] transition-colors duration-500">
                                 {item.number}.
