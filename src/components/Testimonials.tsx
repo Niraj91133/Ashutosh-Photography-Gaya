@@ -7,22 +7,29 @@ const DEFAULT_TESTIMONIALS = [
     name: 'Priya & Rahul',
     event: 'Wedding, Patna',
     rating: 5,
-    text: 'Asutosh Photography captured our special day beautifully. Every moment was perfect!',
+    text: 'Asutosh Photography captured our special day beautifully. Every candid moment was perfect and the cinematic video is like a movie!',
     initials: 'PR'
   },
   {
     name: 'Anjali Sharma',
     event: 'Pre-Wedding, Bodhgaya',
     rating: 5,
-    text: 'Professional team with amazing creativity. Highly recommend for any occasion!',
+    text: 'Professional team with amazing creativity. They made us feel so comfortable in front of the camera. Highly recommend for any occasion!',
     initials: 'AS'
   },
   {
     name: 'Vikash Kumar',
     event: 'Birthday Party, Gaya',
     rating: 5,
-    text: 'Excellent service and beautiful photos. They made our celebration memorable.',
+    text: 'Excellent service and beautiful, high-quality photos. They made our celebration truly memorable and delivered everything on time.',
     initials: 'VK'
+  },
+  {
+    name: 'Neha & Sumit',
+    event: 'Engagement, Ranchi',
+    rating: 5,
+    text: 'The absolute best decision we made was hiring Asutosh! The premium luxury feel of their work is unmatched in the region.',
+    initials: 'NS'
   }
 ];
 
@@ -59,49 +66,58 @@ export default function Testimonials() {
     fetchTestimonials();
   }, []);
 
+  // Duplicate testimonials array twice to ensure smooth infinite scrolling
+  const marqueeItems = [...testimonials, ...testimonials, ...testimonials];
+
   return (
-    <section id="testimonials" className="py-24 md:py-40 bg-[#050505] border-b border-white/5 relative">
+    <section id="testimonials" className="py-24 md:py-40 bg-[#050505] border-y border-white/5 relative overflow-hidden">
+      
+      {/* Abstract Background Elements */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-[#c1272d]/5 rounded-full blur-[120px]"></div>
+      </div>
+
       <div className="w-full">
-        <div className="text-center mb-24 w-full px-12 space-y-4">
-          <span className="text-gold-600 font-bold uppercase tracking-[0.3em] text-[10px]">Kind Words</span>
-          <h2 className="text-4xl md:text-5xl font-serif text-white font-medium leading-tight">Client Love</h2>
-          <div className="w-12 h-[2px] bg-gold-200 mx-auto"></div>
+        <div className="text-center mb-20 w-full px-12 space-y-4 relative z-10">
+          <span className="text-[#c1272d] font-bold uppercase tracking-[0.3em] text-[10px]">Client Love</span>
+          <h2 className="text-4xl md:text-5xl font-serif text-white font-medium leading-tight">Words of Praise</h2>
+          <div className="w-12 h-[1px] bg-white/20 mx-auto"></div>
         </div>
 
-        {/* Premium Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
-          {testimonials.map((testimonial, index) => (
-            <div
-              key={index}
-              className="p-10 md:p-12 bg-[#050505] rounded-2xl border border-white/5 shadow-sm transition-all duration-500 flex flex-col items-center text-center relative"
-            >
-              <Quote className="text-gold-100 w-16 h-16 absolute top-8 left-8 -z-0 opacity-40 transition-colors" />
+        {/* Continuous Marquee Container */}
+        <div className="relative flex overflow-x-hidden group">
+          
+          {/* Gradient fade on edges for luxury effect */}
+          <div className="absolute top-0 bottom-0 left-0 w-24 md:w-48 bg-gradient-to-r from-[#050505] to-transparent z-20 pointer-events-none"></div>
+          <div className="absolute top-0 bottom-0 right-0 w-24 md:w-48 bg-gradient-to-l from-[#050505] to-transparent z-20 pointer-events-none"></div>
 
-              <div className="relative z-10 space-y-8">
-                <div className="flex justify-center gap-1">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="w-3 h-3 text-gold-500 fill-current" />
-                  ))}
-                </div>
+          <div className="flex animate-marquee gap-8 py-4 px-4 w-max">
+            {marqueeItems.map((testimonial, index) => (
+              <div
+                key={index}
+                className="w-[350px] md:w-[450px] p-10 bg-[#0a0a0a] rounded-sm border border-white/5 shadow-sm transition-all duration-500 flex flex-col relative group-hover:border-white/10"
+              >
+                <Quote className="text-[#c1272d] w-12 h-12 absolute top-6 right-6 -z-0 opacity-10" />
 
-                <p className="text-gray-600 font-light italic leading-relaxed text-lg">
-                  "{testimonial.text}"
-                </p>
-
-                <div className="pt-8 border-t border-gray-50 flex flex-col items-center">
-                  <div className="w-16 h-16 bg-gold-50 border border-gold-100 rounded-full flex items-center justify-center text-gold-700 font-serif font-bold text-xl mb-4 overflow-hidden">
-                    {testimonial.url ? (
-                      <img src={testimonial.url} alt={testimonial.name} className="w-full h-full object-cover" />
-                    ) : (
-                      testimonial.initials
-                    )}
+                <div className="relative z-10 flex flex-col h-full">
+                  <div className="flex gap-1 mb-6">
+                    {[...Array(testimonial.rating)].map((_, i) => (
+                      <Star key={i} className="w-3.5 h-3.5 text-[#c1272d] fill-[#c1272d]" />
+                    ))}
                   </div>
-                  <h4 className="font-bold text-white text-base">{testimonial.name}</h4>
-                  <p className="text-[10px] text-gray-400 font-black uppercase tracking-widest mt-1">{testimonial.event}</p>
+
+                  <p className="text-gray-300 font-light leading-relaxed text-sm md:text-base mb-10 flex-grow">
+                    "{testimonial.text}"
+                  </p>
+
+                  <div className="pt-6 border-t border-white/10 mt-auto">
+                    <h4 className="font-serif text-white text-lg tracking-wide">{testimonial.name}</h4>
+                    <p className="text-[9px] text-gray-500 font-bold uppercase tracking-[0.2em] mt-1.5">{testimonial.event}</p>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>
