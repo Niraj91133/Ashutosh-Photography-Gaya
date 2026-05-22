@@ -76,15 +76,15 @@ Message: ${formData.message}`;
   };
 
   return (
-    <section id="contact" className="py-24 md:py-32 bg-[#050505] relative border-y border-white/5 overflow-hidden">
+    <section id="contact" className="py-12 md:py-32 bg-[#050505] relative border-y border-white/5 overflow-hidden">
       {/* Background Ambience */}
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#c1272d]/5 rounded-full blur-[150px] pointer-events-none"></div>
 
       <div className="w-full relative px-6 md:px-12 z-10">
-        <div className="grid lg:grid-cols-12 gap-16 items-start">
+        <div className="grid lg:grid-cols-12 gap-8 lg:gap-16 items-start">
 
           {/* Left Column: Contact Info */}
-          <div className="lg:col-span-5 space-y-16">
+          <div className="lg:col-span-5 space-y-10 md:space-y-16">
             <div>
               <span className="text-[#c1272d] font-bold uppercase tracking-[0.3em] text-[10px]">Get in Touch</span>
               <h2 className="text-4xl md:text-5xl lg:text-6xl text-white mt-4 mb-8 font-serif leading-[1.1]">
@@ -132,10 +132,10 @@ Message: ${formData.message}`;
 
           {/* Right Column: Forms */}
           <div className="lg:col-span-7">
-            <div className="bg-[#0a0a0a] p-8 md:p-12 rounded-sm border border-white/5 shadow-2xl relative overflow-hidden">
+            <div className="bg-[#0a0a0a] p-5 md:p-12 rounded-sm border border-white/5 shadow-2xl relative overflow-hidden">
               
               {/* Tab Toggles */}
-              <div className="flex bg-[#050505] p-1 rounded-sm border border-white/10 mb-10 w-fit">
+              <div className="flex bg-[#050505] p-1 rounded-sm border border-white/10 mb-8 md:mb-10 w-fit mx-auto md:mx-0">
                 <button
                   onClick={() => setActiveTab('Inquiry')}
                   className={`px-8 py-3 text-[10px] font-bold uppercase tracking-widest transition-all rounded-sm flex items-center gap-2 ${
@@ -159,8 +159,8 @@ Message: ${formData.message}`;
                 
                 {/* --- INQUIRY FORM --- */}
                 {activeTab === 'Inquiry' && (
-                  <form onSubmit={handleInquirySubmit} className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <form onSubmit={handleInquirySubmit} className="space-y-4 md:space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                       <div>
                         <label className="block text-gray-500 text-[10px] font-bold mb-2 uppercase tracking-widest">Name</label>
                         <input
@@ -187,7 +187,7 @@ Message: ${formData.message}`;
                       </div>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                       <div>
                         <label className="block text-gray-500 text-[10px] font-bold mb-2 uppercase tracking-widest">Event Type</label>
                         <select

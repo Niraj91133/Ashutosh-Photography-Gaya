@@ -29,10 +29,10 @@ export default function Blog() {
   ];
 
   return (
-    <section className="py-24 md:py-32 bg-[#0a0a0a] border-t border-white/5 relative">
+    <section className="py-12 md:py-32 bg-[#0a0a0a] border-t border-white/5 relative">
       <div className="w-full relative px-6 md:px-12 z-10">
         
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-8 md:mb-16">
           <div className="flex flex-col items-start text-left max-w-2xl">
             <span className="text-[#c1272d] font-bold uppercase tracking-[0.3em] text-[10px]">Journal</span>
             <h2 className="text-4xl md:text-5xl font-serif text-white font-medium mt-4 leading-tight">

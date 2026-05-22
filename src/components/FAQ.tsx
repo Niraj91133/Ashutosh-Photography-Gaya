@@ -28,11 +28,11 @@ export default function FAQ() {
   ];
 
   return (
-    <section className="py-24 md:py-32 bg-[#050505] relative overflow-hidden border-t border-white/5">
+    <section className="py-12 md:py-32 bg-[#050505] relative overflow-hidden border-t border-white/5">
       <div className="absolute top-1/2 left-0 -translate-y-1/2 w-[500px] h-[500px] bg-[#c1272d]/5 rounded-full blur-[120px] pointer-events-none"></div>
 
       <div className="w-full relative px-6 md:px-12 z-10 max-w-4xl mx-auto">
-        <div className="flex flex-col items-center text-center mb-16">
+        <div className="flex flex-col items-center text-center mb-8 md:mb-16">
           <span className="text-[#c1272d] font-bold uppercase tracking-[0.3em] text-[10px] mb-4">Got Questions?</span>
           <h2 className="text-4xl md:text-5xl font-serif text-white font-medium mb-6">
             Frequently Asked <span className="italic text-gray-500">Questions</span>

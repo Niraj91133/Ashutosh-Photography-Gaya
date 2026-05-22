@@ -70,7 +70,7 @@ export default function Testimonials() {
   const marqueeItems = [...testimonials, ...testimonials, ...testimonials];
 
   return (
-    <section id="testimonials" className="py-24 md:py-32 bg-[#050505] border-y border-white/5 relative overflow-hidden">
+    <section id="testimonials" className="py-12 md:py-32 bg-[#050505] border-y border-white/5 relative overflow-hidden">
       
       {/* Abstract Background Elements */}
       <div className="absolute inset-0 pointer-events-none">
@@ -78,7 +78,7 @@ export default function Testimonials() {
       </div>
 
       <div className="w-full relative px-6 md:px-12">
-        <div className="flex flex-col items-start text-left mb-20 space-y-4 relative z-10">
+        <div className="flex flex-col items-start text-left mb-10 md:mb-20 space-y-4 relative z-10">
           <span className="text-[#c1272d] font-bold uppercase tracking-[0.3em] text-[10px]">Client Love</span>
           <h2 className="text-4xl md:text-5xl font-serif text-white font-medium leading-tight">Words of Praise</h2>
           <div className="w-12 h-[1px] bg-white/20"></div>
@@ -95,7 +95,7 @@ export default function Testimonials() {
             {marqueeItems.map((testimonial, index) => (
               <div
                 key={index}
-                className="w-[350px] md:w-[450px] p-10 bg-[#0a0a0a] rounded-sm border border-white/5 shadow-sm transition-all duration-500 flex flex-col relative group-hover:border-white/10"
+                className="w-[280px] md:w-[450px] p-6 md:p-10 bg-[#0a0a0a] rounded-sm border border-white/5 shadow-sm transition-all duration-500 flex flex-col relative group-hover:border-white/10"
               >
                 <Quote className="text-[#c1272d] w-12 h-12 absolute top-6 right-6 -z-0 opacity-10" />
 

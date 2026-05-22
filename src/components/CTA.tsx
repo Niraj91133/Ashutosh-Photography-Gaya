@@ -2,7 +2,7 @@ import { Phone } from 'lucide-react';
 
 export default function CTA() {
     return (
-        <section className="py-24 md:py-40 bg-[#050505] relative overflow-hidden">
+        <section className="pt-12 pb-16 md:py-40 bg-[#050505] relative overflow-hidden">
             {/* Subtle Background Accent */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gold-50/50 rounded-full blur-[120px] -z-10"></div>
 
