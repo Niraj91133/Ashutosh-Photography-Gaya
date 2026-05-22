@@ -211,6 +211,7 @@ export default function Header({ activeSection, onNavClick }: HeaderProps) {
             </div>
           </div>
         </div>
+        </div>
       </nav>
     </header>
   );
