@@ -16,7 +16,7 @@ export default function Process() {
       {/* Content aligned with landing page */}
       <div className="w-full relative px-6 md:px-12 z-10">
         <div className="max-w-2xl">
-          <p className="font-sans text-base md:text-[19px] text-gray-200 mb-10 leading-[1.8] font-medium tracking-wide">
+          <p className="text-base md:text-lg lg:text-xl font-light leading-relaxed text-gray-300 mb-10 max-w-2xl">
             Write Something About the Asutosh Potography<br />
             so That User get Attracted and book Us FAst
           </p>

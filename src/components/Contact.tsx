@@ -86,13 +86,13 @@ Message: ${formData.message}`;
           {/* Left Column: Contact Info */}
           <div className="lg:col-span-5 space-y-10 md:space-y-16">
             <div>
-              <span className="text-[#c1272d] font-bold uppercase tracking-[0.3em] text-[10px]">Get in Touch</span>
-              <h2 className="text-4xl md:text-5xl lg:text-6xl text-white mt-4 mb-8 font-serif leading-[1.1]">
+              <span className="text-[#c1272d] font-black uppercase tracking-[0.3em] text-[10px] md:text-xs mb-4 block">Get in Touch</span>
+              <h2 className="text-4xl md:text-5xl lg:text-6xl text-white font-serif font-medium leading-[1.1] mb-8">
                 Let's Create <br />
                 <span className="italic text-gray-500">Magic Together</span>
               </h2>
               <div className="w-12 h-[1px] bg-white/20 mb-8"></div>
-              <p className="text-gray-400 text-sm md:text-base font-light leading-relaxed max-w-md">
+              <p className="text-base md:text-lg lg:text-xl font-light leading-relaxed text-gray-300 max-w-xl">
                 Whether you're planning a grand celebration or an intimate gathering, we are here to document your legacy. Reach out to discuss your vision or share your experience with us.
               </p>
             </div>

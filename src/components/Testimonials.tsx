@@ -79,8 +79,8 @@ export default function Testimonials() {
 
       <div className="w-full relative px-6 md:px-12">
         <div className="flex flex-col items-start text-left mb-10 md:mb-20 space-y-4 relative z-10">
-          <span className="text-[#c1272d] font-bold uppercase tracking-[0.3em] text-[10px]">Client Love</span>
-          <h2 className="text-4xl md:text-5xl font-serif text-white font-medium leading-tight">Words of Praise</h2>
+          <span className="text-[#c1272d] font-black uppercase tracking-[0.3em] text-[10px] md:text-xs mb-2 block">Client Love</span>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-medium leading-[1.1] text-white">Words of Praise</h2>
           <div className="w-12 h-[1px] bg-white/20"></div>
         </div>
 
@@ -111,8 +111,8 @@ export default function Testimonials() {
                   </p>
 
                   <div className="pt-6 border-t border-white/10 mt-auto">
-                    <h4 className="font-serif text-white text-lg tracking-wide">{testimonial.name}</h4>
-                    <p className="text-[9px] text-gray-500 font-bold uppercase tracking-[0.2em] mt-1.5">{testimonial.event}</p>
+                    <h4 className="font-serif text-white text-xl md:text-2xl leading-snug">{testimonial.name}</h4>
+                    <p className="text-[10px] md:text-xs font-bold uppercase tracking-widest text-gray-500 mt-1.5">{testimonial.event}</p>
                   </div>
                 </div>
               </div>

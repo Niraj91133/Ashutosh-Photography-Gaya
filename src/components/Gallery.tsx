@@ -109,7 +109,7 @@ export default function Gallery({ activeFilter, setActiveFilter }: GalleryProps)
               <button
                 key={filter}
                 onClick={() => setActiveFilter(filter)}
-                className={`px-5 py-2 text-[13px] font-medium transition-all rounded-[4px] border whitespace-nowrap flex-shrink-0
+                className={`px-5 py-2 text-[10px] md:text-xs font-bold uppercase tracking-widest transition-all rounded-[4px] border whitespace-nowrap flex-shrink-0
                   ${isActive 
                     ? 'bg-[#c1272d] text-white border-[#c1272d]' 
                     : 'bg-transparent text-gray-400 border-white/20 hover:border-white/40 hover:text-white'
@@ -157,7 +157,7 @@ export default function Gallery({ activeFilter, setActiveFilter }: GalleryProps)
           <div className="mt-16 flex justify-center">
             <button
               onClick={() => setVisibleCount(prev => prev + getInitialCount())}
-              className="px-8 py-3 bg-transparent border border-white/20 text-white font-medium text-sm rounded-sm hover:bg-white hover:text-black transition-all duration-300"
+              className="px-8 py-3 bg-transparent border border-white/20 text-white text-[10px] md:text-xs font-bold uppercase tracking-widest rounded-sm hover:bg-white hover:text-black transition-all duration-300"
             >
               See More
             </button>

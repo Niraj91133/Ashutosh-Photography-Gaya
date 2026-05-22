@@ -93,8 +93,8 @@ export default function Packages() {
         {/* Simple Left-Aligned Header */}
         <div className="flex flex-col items-start text-left mb-16 md:mb-20 space-y-8">
           <div className="space-y-4 flex flex-col items-start">
-            <span className="text-[#c1272d] font-bold uppercase tracking-[0.3em] text-[10px]">Offerings</span>
-            <h2 className="text-4xl md:text-5xl font-serif text-white font-medium leading-tight">
+            <span className="text-[#c1272d] font-black uppercase tracking-[0.3em] text-[10px] md:text-xs mb-2 block">Offerings</span>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-medium leading-[1.1] text-white">
               Our Packages
             </h2>
             <div className="w-12 h-[1px] bg-white/20"></div>
@@ -147,7 +147,7 @@ export default function Packages() {
                   {pkg.description}
                 </p>
                 <div className="inline-block border-b border-gray-600 pb-1">
-                  <span className={`text-[11px] uppercase tracking-[0.2em] font-medium ${pkg.popular ? 'text-[#c1272d]' : 'text-gray-300'}`}>
+                  <span className={`text-[10px] md:text-xs uppercase tracking-widest font-bold ${pkg.popular ? 'text-[#c1272d]' : 'text-gray-300'}`}>
                     Available upon Request
                   </span>
                 </div>

@@ -49,8 +49,11 @@ export default function Services({ onCategoryClick }: ServicesProps) {
   return (
     <section id="services" className="py-24 md:py-32 bg-[#050505] overflow-hidden">
       <div className="w-full relative px-6 md:px-12">
-        <div className="flex items-center justify-between mb-6 px-2">
-          <h2 className="text-xl font-serif font-black text-white uppercase tracking-tighter">Photography / Services</h2>
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 px-2 gap-4">
+          <div className="flex flex-col items-start text-left">
+            <span className="text-[#c1272d] font-black uppercase tracking-[0.3em] text-[10px] md:text-xs mb-4">Portfolio</span>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-medium leading-[1.1] text-white">Our Services</h2>
+          </div>
           <div className="flex gap-3">
             <button
               onClick={() => scroll('left')}

@@ -41,8 +41,8 @@ export default function WhyChooseUs() {
                 {/* Header */}
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
                     <div className="flex flex-col items-start text-left max-w-2xl">
-                        <span className="text-[#c1272d] font-bold uppercase tracking-[0.3em] text-[10px]">Why Choose Us</span>
-                        <h2 className="text-4xl md:text-5xl font-serif text-white font-medium mt-4 leading-tight">
+                        <span className="text-[#c1272d] font-black uppercase tracking-[0.3em] text-[10px] md:text-xs mb-4 block">Why Choose Us</span>
+                        <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-medium leading-[1.1] text-white">
                             The Asutosh Photography <span className="italic text-gray-500">Difference</span>
                         </h2>
                     </div>
@@ -56,13 +56,13 @@ export default function WhyChooseUs() {
                             key={index} 
                             className="group relative flex flex-col items-start border-l border-white/10 pl-6 hover:border-[#c1272d] transition-colors duration-500"
                         >
-                            <span className="text-xs font-black text-white/20 group-hover:text-[#c1272d] mb-4 tracking-[0.2em] transition-colors duration-500">
+                            <span className="text-[10px] md:text-xs font-black uppercase tracking-[0.3em] text-white/20 group-hover:text-[#c1272d] mb-4 transition-colors duration-500">
                                 {item.number}.
                             </span>
-                            <h3 className="text-xl font-serif text-white mb-3 tracking-wide">
+                            <h3 className="text-xl md:text-2xl font-serif text-white mb-3 leading-snug">
                                 {item.title}
                             </h3>
-                            <p className="text-gray-400 font-light leading-relaxed text-sm">
+                            <p className="text-gray-400 font-light leading-relaxed text-sm md:text-base">
                                 {item.desc}
                             </p>
                         </div>

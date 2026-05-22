@@ -17,14 +17,14 @@ export default function About() {
 
           {/* Storytelling Content - Reduced Sizes */}
           <div className="space-y-8">
-            <div className="space-y-3">
-              <span className="text-[#c1272d] font-bold uppercase tracking-[0.2em] text-[10px]">Our Heritage</span>
-              <h2 className="text-3xl md:text-5xl font-serif text-white leading-[1.2]">
+            <div className="space-y-4 mb-6">
+              <span className="text-[#c1272d] font-black uppercase tracking-[0.3em] text-[10px] md:text-xs mb-4 block">Our Heritage</span>
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-medium leading-[1.1] text-white">
                 Preserving the <span className="italic text-[#c1272d]">Art of Emotion</span>
               </h2>
             </div>
 
-            <div className="space-y-4 text-base md:text-lg text-gray-600 font-light leading-relaxed max-w-xl">
+            <div className="space-y-6 text-base md:text-lg lg:text-xl font-light leading-relaxed text-gray-300 max-w-2xl">
               <p>
                 At <span className="text-white font-medium">Asutosh Photography</span>, we archive the soul of every moment. Founded on the principles of luxury and storytelling, we've spent over 6 years refining the alchemy of light and emotion.
               </p>
@@ -36,11 +36,11 @@ export default function About() {
             <div className="pt-6 grid grid-cols-2 gap-8 border-t border-white/5 max-w-sm">
               <div>
                 <p className="text-2xl font-serif text-white mb-0.5">500+</p>
-                <p className="text-[9px] text-gray-400 uppercase tracking-widest font-black">Events</p>
+                <p className="text-[10px] text-gray-400 uppercase tracking-[0.2em] font-black">Events</p>
               </div>
               <div>
                 <p className="text-2xl font-serif text-white mb-0.5">20+</p>
-                <p className="text-[9px] text-gray-400 uppercase tracking-widest font-black">Cities</p>
+                <p className="text-[10px] text-gray-400 uppercase tracking-[0.2em] font-black">Cities</p>
               </div>
             </div>
           </div>

@@ -33,8 +33,8 @@ export default function FAQ() {
 
       <div className="w-full relative px-6 md:px-12 z-10 max-w-4xl mx-auto">
         <div className="flex flex-col items-center text-center mb-8 md:mb-16">
-          <span className="text-[#c1272d] font-bold uppercase tracking-[0.3em] text-[10px] mb-4">Got Questions?</span>
-          <h2 className="text-4xl md:text-5xl font-serif text-white font-medium mb-6">
+          <span className="text-[#c1272d] font-black uppercase tracking-[0.3em] text-[10px] md:text-xs mb-4 block">Got Questions?</span>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-medium leading-[1.1] text-white mb-6">
             Frequently Asked <span className="italic text-gray-500">Questions</span>
           </h2>
           <div className="w-12 h-[1px] bg-white/20"></div>
@@ -52,7 +52,7 @@ export default function FAQ() {
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
                 className="w-full px-6 md:px-8 py-6 flex items-center justify-between text-left focus:outline-none"
               >
-                <span className={`text-sm md:text-base font-serif tracking-wide transition-colors ${openIndex === index ? 'text-[#c1272d]' : 'text-white'}`}>
+                <span className={`text-base md:text-lg font-serif leading-snug transition-colors ${openIndex === index ? 'text-[#c1272d]' : 'text-white'}`}>
                   {faq.question}
                 </span>
                 <span className="ml-4 flex-shrink-0 text-gray-500">
@@ -65,7 +65,7 @@ export default function FAQ() {
                   openIndex === index ? 'max-h-40 pb-6 opacity-100' : 'max-h-0 opacity-0'
                 }`}
               >
-                <p className="text-gray-400 font-light text-sm leading-relaxed">
+                <p className="text-gray-400 font-light text-sm md:text-base leading-relaxed">
                   {faq.answer}
                 </p>
               </div>

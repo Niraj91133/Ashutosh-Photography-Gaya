@@ -34,12 +34,12 @@ export default function Blog() {
         
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-8 md:mb-16">
           <div className="flex flex-col items-start text-left max-w-2xl">
-            <span className="text-[#c1272d] font-bold uppercase tracking-[0.3em] text-[10px]">Journal</span>
-            <h2 className="text-4xl md:text-5xl font-serif text-white font-medium mt-4 leading-tight">
+            <span className="text-[#c1272d] font-black uppercase tracking-[0.3em] text-[10px] md:text-xs mb-4 block">Journal</span>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-medium leading-[1.1] text-white">
               Latest from the <span className="italic text-gray-500">Blog</span>
             </h2>
           </div>
-          <button className="hidden md:flex items-center gap-2 text-gray-400 hover:text-white transition-colors group text-sm uppercase tracking-widest font-bold">
+          <button className="hidden md:flex items-center gap-2 text-gray-400 hover:text-white transition-colors group text-[10px] md:text-xs uppercase tracking-widest font-bold">
             View All Posts
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform text-[#c1272d]" />
           </button>
@@ -69,7 +69,7 @@ export default function Blog() {
                 <span className="text-gray-500 text-[8px] md:text-[10px] uppercase tracking-widest font-bold mb-1 md:mb-3">
                   {blog.date}
                 </span>
-                <h3 className="text-[11px] leading-tight md:text-xl md:leading-normal font-serif text-white mb-2 md:mb-3 group-hover:text-[#c1272d] transition-colors duration-300 line-clamp-2 md:line-clamp-none">
+                <h3 className="text-sm md:text-2xl font-serif text-white mb-2 md:mb-3 leading-snug group-hover:text-[#c1272d] transition-colors duration-300 line-clamp-2 md:line-clamp-none">
                   {blog.title}
                 </h3>
                 <p className="text-gray-400 text-[9px] md:text-sm font-light leading-relaxed mb-3 md:mb-6 flex-grow line-clamp-3 md:line-clamp-none">

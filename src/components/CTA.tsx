@@ -8,11 +8,11 @@ export default function CTA() {
 
             <div className="w-full px-12 text-center space-y-12">
                 <div className="space-y-6">
-                    <span className="text-[#c1272d] font-black uppercase tracking-[0.4em] text-[10px]">Take the Next Step</span>
-                    <h2 className="text-4xl md:text-7xl font-serif text-white leading-[1.1] max-w-4xl mx-auto">
+                    <span className="text-[#c1272d] font-black uppercase tracking-[0.3em] text-[10px] md:text-xs mb-4 block">Take the Next Step</span>
+                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif text-white leading-[1.1] max-w-4xl mx-auto">
                         Let's Capture Your <span className="italic text-[#c1272d]">Legacy</span> Together.
                     </h2>
-                    <p className="text-gray-500 font-light text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
+                    <p className="text-base md:text-lg lg:text-xl font-light leading-relaxed text-gray-300 max-w-2xl mx-auto">
                         Ready to turn your most precious moments into high-end visual masterpieces? Our calendars fill up fast—reserve your date today.
                     </p>
                 </div>

@@ -122,13 +122,13 @@ export default function Hero({ onNavClick }: HeroProps) {
 
       {/* Text Content (Left Aligned) */}
       <div className="relative z-10 w-full px-6 md:px-12 mt-12 md:mt-20">
-        <h1 className="font-sans font-black text-[clamp(2.8rem,7vw,6.5rem)] text-white leading-[1] mb-6 tracking-tight fade-in drop-shadow-2xl uppercase">
+        <h1 className="font-sans font-black text-[clamp(3rem,8vw,7rem)] text-white leading-[0.95] mb-6 tracking-tighter fade-in drop-shadow-2xl uppercase">
           ASUTOSH
           <br />
           PHOTOGRAPHY
         </h1>
 
-        <p className="font-sans text-sm md:text-[17px] text-gray-300 mb-10 max-w-lg leading-relaxed fade-in font-medium tracking-wide" style={{ animationDelay: '0.2s' }}>
+        <p className="text-base md:text-lg lg:text-xl font-light leading-relaxed text-gray-300 mb-10 max-w-2xl fade-in" style={{ animationDelay: '0.2s' }}>
           Write Something About the Asutosh Photography so That User get Attracted and book Us FAst
         </p>
 
