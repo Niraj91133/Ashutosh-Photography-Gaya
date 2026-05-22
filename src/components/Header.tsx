@@ -35,8 +35,6 @@ export default function Header({ activeSection, onNavClick }: HeaderProps) {
   }, [isMenuOpen]);
 
   const navItems = [
-    { id: 'hero', label: 'Photography', path: '/' },
-    { id: 'services', label: 'Cinematography', path: '/#services' },
     { id: 'gallery', label: 'Gallery', path: '/#gallery' },
     { id: 'about', label: 'About', path: '/#about' },
     { id: 'packages', label: 'Services', path: '/#packages' },
@@ -54,8 +52,18 @@ export default function Header({ activeSection, onNavClick }: HeaderProps) {
       <nav className="w-full relative px-6 md:px-12">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center group cursor-pointer">
-            <span className="text-xl md:text-2xl font-serif font-bold tracking-tight text-[#ff3333]">
+          <Link 
+            to="/" 
+            className="flex items-center group cursor-pointer"
+            onClick={(e) => {
+              e.preventDefault();
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+              if (location.pathname !== '/') {
+                navigate('/');
+              }
+            }}
+          >
+            <span className="text-xl md:text-2xl font-serif font-bold tracking-tight text-[#c1272d]">
               Asutosh Photography
             </span>
           </Link>
@@ -140,7 +148,17 @@ export default function Header({ activeSection, onNavClick }: HeaderProps) {
 
           <div className="relative z-10 flex flex-col h-full">
             <div className="flex items-center justify-between px-6 pt-8 pb-4 border-b border-white/5">
-              <Link to="/" onClick={() => setIsMenuOpen(false)}>
+              <Link 
+                to="/" 
+                onClick={(e) => {
+                  e.preventDefault();
+                  setIsMenuOpen(false);
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                  if (location.pathname !== '/') {
+                    navigate('/');
+                  }
+                }}
+              >
                 <span className="text-2xl font-serif font-bold text-[#c1272d]">
                   Asutosh Photography
                 </span>

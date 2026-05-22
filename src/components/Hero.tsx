@@ -19,10 +19,21 @@ export default function Hero({ onNavClick }: HeroProps) {
         .eq('section', 'hero')
         .order('created_at', { ascending: false });
 
-      if (data && data.length > 0) {
+      if (data && data.length > 1) {
         setHeroImages(data);
+      } else if (data && data.length === 1) {
+        // If they only have 1 image in DB, add some fallbacks so it still slides
+        setHeroImages([
+          data[0],
+          { url: "https://images.pexels.com/photos/2253870/pexels-photo-2253870.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop", media_type: 'image' },
+          { url: "https://images.pexels.com/photos/1444442/pexels-photo-1444442.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop", media_type: 'image' }
+        ]);
       } else {
-        setHeroImages([{ url: "https://images.pexels.com/photos/1024993/pexels-photo-1024993.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop", media_type: 'image' }]);
+        setHeroImages([
+          { url: "https://images.pexels.com/photos/1024993/pexels-photo-1024993.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop", media_type: 'image' },
+          { url: "https://images.pexels.com/photos/2253870/pexels-photo-2253870.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop", media_type: 'image' },
+          { url: "https://images.pexels.com/photos/1444442/pexels-photo-1444442.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop", media_type: 'image' }
+        ]);
       }
     };
 
@@ -35,7 +46,7 @@ export default function Hero({ onNavClick }: HeroProps) {
     
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % heroImages.length);
-    }, 5000);
+    }, 3500); // Faster slide interval (3.5 seconds)
     
     return () => clearInterval(interval);
   }, [heroImages.length]);
