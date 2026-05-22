@@ -90,18 +90,18 @@ export default function Packages() {
 
       <div className="w-full max-w-[1400px] mx-auto px-6 lg:px-12 relative z-10">
         
-        {/* Luxury Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 md:mb-24 gap-8">
-          <div className="space-y-4">
-            <span className="text-[#c1272d] font-bold uppercase tracking-[0.3em] text-[10px]">Investment</span>
+        {/* Simple Centered Header */}
+        <div className="flex flex-col items-center text-center mb-16 md:mb-20 space-y-8">
+          <div className="space-y-4 flex flex-col items-center">
+            <span className="text-[#c1272d] font-bold uppercase tracking-[0.3em] text-[10px]">Offerings</span>
             <h2 className="text-4xl md:text-5xl font-serif text-white font-medium leading-tight">
-              Curated Collections
+              Our Packages
             </h2>
             <div className="w-12 h-[1px] bg-white/20"></div>
           </div>
           
-          {/* Tab Navigation */}
-          <div className="flex bg-white/5 p-1 rounded-sm border border-white/10 backdrop-blur-sm self-start md:self-auto">
+          {/* Centered Tab Navigation */}
+          <div className="flex bg-white/5 p-1 rounded-sm border border-white/10 backdrop-blur-sm">
             {(['Basic Plan', 'Premium Plan'] as const).map((tab) => (
               <button
                 key={tab}
@@ -118,12 +118,12 @@ export default function Packages() {
           </div>
         </div>
 
-        {/* Editorial Cards Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-10">
+        {/* Centered Editorial Cards - Narrower Width */}
+        <div className="flex flex-wrap justify-center gap-6 md:gap-10">
           {filteredPackages.map((pkg, index) => (
             <div
               key={index}
-              className={`relative flex flex-col p-8 md:p-14 transition-all duration-500 overflow-hidden rounded-sm group
+              className={`relative flex flex-col p-8 md:p-12 w-full max-w-[420px] transition-all duration-500 overflow-hidden rounded-sm group
                 ${pkg.popular
                   ? 'bg-[#0a0a0a] border border-[#c1272d]/30 hover:border-[#c1272d]/60 shadow-[0_0_30px_rgba(193,39,45,0.05)]'
                   : 'bg-transparent border border-white/10 hover:border-white/20 hover:bg-white/[0.02]'
@@ -133,17 +133,17 @@ export default function Packages() {
               {pkg.popular && (
                 <div className="absolute top-0 right-8">
                   <div className="bg-[#c1272d] text-white px-4 py-1.5 text-[9px] font-black uppercase tracking-[0.3em] shadow-lg">
-                    Signature Choice
+                    Most Popular
                   </div>
                 </div>
               )}
 
-              {/* Card Header */}
-              <div className="mb-10 relative z-10">
+              {/* Card Header text-center */}
+              <div className="mb-10 relative z-10 text-center flex flex-col items-center">
                 <h3 className="text-2xl md:text-3xl font-serif text-white mb-4 leading-snug group-hover:text-gray-100 transition-colors">
                   {pkg.name}
                 </h3>
-                <p className="text-gray-400 text-sm md:text-base font-light leading-relaxed max-w-sm mb-6">
+                <p className="text-gray-400 text-sm md:text-base font-light leading-relaxed max-w-[280px] mb-6">
                   {pkg.description}
                 </p>
                 <div className="inline-block border-b border-gray-600 pb-1">
@@ -165,11 +165,11 @@ export default function Packages() {
                 ))}
               </div>
 
-              {/* Card Actions */}
-              <div className="flex flex-col sm:flex-row gap-4 mt-auto relative z-10">
+              {/* Card Actions - Single Button */}
+              <div className="mt-auto relative z-10">
                 <a
                   href="#contact"
-                  className={`flex-1 flex items-center justify-center py-4 px-6 rounded-sm font-semibold uppercase tracking-widest text-[10px] transition-all duration-500
+                  className={`w-full flex items-center justify-center py-4 px-6 rounded-sm font-semibold uppercase tracking-widest text-[10px] transition-all duration-500
                     ${pkg.popular
                       ? 'bg-[#c1272d] text-white hover:bg-red-800 shadow-[0_0_20px_rgba(193,39,45,0.2)] hover:shadow-[0_0_30px_rgba(193,39,45,0.4)]'
                       : 'border border-white/20 text-white hover:bg-white hover:text-black'
@@ -178,11 +178,6 @@ export default function Packages() {
                   <Mail className="w-3.5 h-3.5 mr-2" />
                   Inquire Now
                 </a>
-
-                <button className="flex-1 flex items-center justify-center py-4 px-6 font-medium text-gray-500 hover:text-white transition-colors duration-300 uppercase tracking-widest text-[10px]">
-                  <Download className="w-3.5 h-3.5 mr-2" />
-                  Brochure
-                </button>
               </div>
 
               {/* Faint Background Number/Icon */}
