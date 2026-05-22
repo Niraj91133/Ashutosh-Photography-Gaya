@@ -24,53 +24,65 @@ export default function Footer() {
             <p className="text-gray-400 font-light leading-relaxed">
               Capturing the essence of your most beautiful moments with elegance and artistry. We turn memories into timeless treasures.
             </p>
-            <div className="flex gap-4">
+            <div className="flex gap-4 flex-wrap">
               <a href={settings.instagram_link} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-sm bg-white/5 flex items-center justify-center hover:bg-[#c1272d] hover:text-white text-gray-400 transition-all duration-300">
                 <Instagram className="w-5 h-5" />
               </a>
               <a href={settings.facebook_link} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-sm bg-white/5 flex items-center justify-center hover:bg-[#c1272d] hover:text-white text-gray-400 transition-all duration-300">
                 <Facebook className="w-5 h-5" />
               </a>
+              {/* Mobile-only additional contact icons */}
+              <a href={`https://wa.me/${settings.phone?.replace(/\D/g, '') || '919667517894'}`} className="md:hidden w-10 h-10 rounded-sm bg-white/5 flex items-center justify-center hover:bg-[#c1272d] hover:text-white text-gray-400 transition-all duration-300">
+                <MessageSquare className="w-5 h-5" />
+              </a>
+              <a href="#contact" className="md:hidden w-10 h-10 rounded-sm bg-white/5 flex items-center justify-center hover:bg-[#c1272d] hover:text-white text-gray-400 transition-all duration-300">
+                <MapPin className="w-5 h-5" />
+              </a>
+              <a href={`mailto:${settings.email}`} className="md:hidden w-10 h-10 rounded-sm bg-white/5 flex items-center justify-center hover:bg-[#c1272d] hover:text-white text-gray-400 transition-all duration-300">
+                <Mail className="w-5 h-5" />
+              </a>
             </div>
 
           </div>
 
-          {/* Quick Links */}
-          <div>
-            <h4 className="text-white text-lg font-serif mb-8 flex items-center gap-2">
-              Explore
-              <span className="h-px w-8 bg-[#c1272d]"></span>
-            </h4>
-            <ul className="space-y-4">
-              {['Home', 'Services', 'Gallery', 'Packages', 'Testimonials', 'Contact'].map((item) => (
-                <li key={item}>
-                  <a href={`#${item.toLowerCase()} `} className="text-gray-400 hover:text-[#c1272d] transition-colors uppercase text-sm tracking-wider">
-                    {item}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <div className="grid grid-cols-2 gap-8 md:grid-cols-2 lg:grid-cols-2 lg:col-span-2">
+            {/* Quick Links */}
+            <div>
+              <h4 className="text-white text-lg font-serif mb-8 flex items-center gap-2">
+                Explore
+                <span className="h-px w-8 bg-[#c1272d] hidden md:block"></span>
+              </h4>
+              <ul className="space-y-4">
+                {['Home', 'Services', 'Gallery', 'Packages', 'Testimonials', 'Contact'].map((item) => (
+                  <li key={item}>
+                    <a href={`#${item.toLowerCase()} `} className="text-gray-400 hover:text-[#c1272d] transition-colors uppercase text-sm tracking-wider">
+                      {item}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-          {/* Services */}
-          <div>
-            <h4 className="text-white text-lg font-serif mb-8 flex items-center gap-2">
-              Services
-              <span className="h-px w-8 bg-[#c1272d]"></span>
-            </h4>
-            <ul className="space-y-4">
-              {['Wedding Photography', 'Cinematic Films', 'Candid Photography', 'Pre-Wedding Shoots', 'Event Coverage', 'Product Shoots'].map((item) => (
-                <li key={item}>
-                  <a href="#services" className="text-gray-400 hover:text-[#c1272d] transition-colors text-sm font-light">
-                    {item}
-                  </a>
-                </li>
-              ))}
-            </ul>
+            {/* Services */}
+            <div>
+              <h4 className="text-white text-lg font-serif mb-8 flex items-center gap-2">
+                Services
+                <span className="h-px w-8 bg-[#c1272d] hidden md:block"></span>
+              </h4>
+              <ul className="space-y-4">
+                {['Wedding Photography', 'Cinematic Films', 'Candid Photography', 'Pre-Wedding Shoots', 'Event Coverage', 'Product Shoots'].map((item) => (
+                  <li key={item}>
+                    <a href="#services" className="text-gray-400 hover:text-[#c1272d] transition-colors text-sm font-light">
+                      {item}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
 
           {/* Contact */}
-          <div>
+          <div className="hidden md:block">
             <h4 className="text-white text-lg font-serif mb-8 flex items-center gap-2">
               Contact
               <span className="h-px w-8 bg-[#c1272d]"></span>
@@ -94,12 +106,12 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-white/5 pt-8 mt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-gray-500 text-sm font-light">
+          <p className="text-gray-500 text-sm font-light text-center md:text-left w-full md:w-auto">
             © {currentYear} Asutosh Photography. All rights reserved.
           </p>
-          <div className="flex items-center gap-6">
-            <a href="/admin/login" className="text-gray-500 hover:text-[#c1272d] text-xs transition-colors uppercase tracking-widest">Admin Login</a>
-            <p className="text-gray-500 text-sm font-light flex items-center gap-1">
+          <div className="flex items-center justify-between w-full md:w-auto gap-4 md:gap-6">
+            <a href="/admin/login" className="text-gray-500 hover:text-[#c1272d] text-xs transition-colors uppercase tracking-widest whitespace-nowrap">Admin Login</a>
+            <p className="text-gray-500 text-xs md:text-sm font-light flex items-center gap-1 whitespace-nowrap">
               Made with <Heart className="w-3 h-3 text-[#c1272d] fill-current" /> in Bihar
             </p>
           </div>
