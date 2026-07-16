@@ -20,6 +20,7 @@ import ProtectedRoute from './components/admin/ProtectedRoute';
 import ClientPortal from './pages/ClientPortal';
 import BlogDetail from './pages/BlogDetail';
 import { useSiteSettings } from './hooks/useSiteSettings';
+import ScrollReveal from './components/ScrollReveal';
 
 function MainSite() {
   const settings = useSiteSettings();
@@ -67,16 +68,44 @@ function MainSite() {
       <main>
         {!isHidden('hero') && <Hero onNavClick={handleNavClick} />}
         {!isHidden('services') && <Services onCategoryClick={(cat: string) => handleNavClick('gallery', cat)} />}
-        <Process />
-        {!isHidden('gallery') && <Gallery activeFilter={activeGalleryFilter} setActiveFilter={setActiveGalleryFilter} />}
-        <WhyChooseUs />
-        {!isHidden('packages') && <Packages />}
-        <FAQ />
+        <ScrollReveal>
+          <Process />
+        </ScrollReveal>
+        {!isHidden('gallery') && (
+          <ScrollReveal>
+            <Gallery activeFilter={activeGalleryFilter} setActiveFilter={setActiveGalleryFilter} />
+          </ScrollReveal>
+        )}
+        <ScrollReveal>
+          <WhyChooseUs />
+        </ScrollReveal>
+        {!isHidden('packages') && (
+          <ScrollReveal>
+            <Packages />
+          </ScrollReveal>
+        )}
+        <ScrollReveal>
+          <FAQ />
+        </ScrollReveal>
         {!isHidden('about') && <About />}
-        {!isHidden('testimonials') && <Testimonials />}
-        {!isHidden('blog') && <Blog />}
-        <CTA />
-        {!isHidden('contact') && <Contact />}
+        {!isHidden('testimonials') && (
+          <ScrollReveal>
+            <Testimonials />
+          </ScrollReveal>
+        )}
+        {!isHidden('blog') && (
+          <ScrollReveal>
+            <Blog />
+          </ScrollReveal>
+        )}
+        <ScrollReveal>
+          <CTA />
+        </ScrollReveal>
+        {!isHidden('contact') && (
+          <ScrollReveal>
+            <Contact />
+          </ScrollReveal>
+        )}
       </main>
       <Footer />
 

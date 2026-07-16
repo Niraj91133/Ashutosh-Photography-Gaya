@@ -27,7 +27,9 @@ interface ServicesProps {
 
 export default function Services({ onCategoryClick }: ServicesProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
   const [dbImages, setDbImages] = useState<any[]>([]);
+  const [isSectionVisible, setIsSectionVisible] = useState(false);
 
   useEffect(() => {
     const fetchServices = async () => {
@@ -36,6 +38,32 @@ export default function Services({ onCategoryClick }: ServicesProps) {
       if (data) setDbImages(data);
     };
     fetchServices();
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsSectionVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      {
+        threshold: 0.05,
+        rootMargin: '0px 0px -50px 0px',
+      }
+    );
+
+    const currentRef = sectionRef.current;
+    if (currentRef) {
+      observer.observe(currentRef);
+    }
+
+    return () => {
+      if (currentRef) {
+        observer.unobserve(currentRef);
+      }
+    };
   }, []);
 
   const scroll = (direction: 'left' | 'right') => {
@@ -47,7 +75,7 @@ export default function Services({ onCategoryClick }: ServicesProps) {
   };
 
   return (
-    <section id="services" className="py-24 md:py-32 bg-[#050505] overflow-hidden">
+    <section id="services" ref={sectionRef} className="py-24 md:py-32 bg-[#050505] overflow-hidden">
       <div className="w-full relative px-6 md:px-12">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 px-2 gap-4">
           <div className="flex flex-col items-start text-left">
@@ -83,6 +111,13 @@ export default function Services({ onCategoryClick }: ServicesProps) {
                 key={index}
                 className="flex-none w-[180px] md:w-[220px] snap-center group cursor-pointer"
                 onClick={() => onCategoryClick?.(service.title)}
+                style={{
+                  opacity: isSectionVisible ? 1 : 0,
+                  transform: isSectionVisible ? 'translateY(0)' : 'translateY(24px)',
+                  transition: 'opacity 400ms cubic-bezier(0.16, 1, 0.3, 1), transform 400ms cubic-bezier(0.16, 1, 0.3, 1)',
+                  transitionDelay: `${index * 50}ms`,
+                  willChange: 'transform, opacity',
+                }}
               >
                 <div className="relative aspect-[3/4] rounded-lg overflow-hidden bg-[#0a0a0a] border border-white/5 shadow-sm transition-all duration-700 group-hover:shadow-xl group-hover:-translate-y-1">
                   <img

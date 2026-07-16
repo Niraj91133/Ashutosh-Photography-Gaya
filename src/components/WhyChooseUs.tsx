@@ -1,3 +1,5 @@
+import TextReveal from './TextReveal';
+
 export default function WhyChooseUs() {
     const features = [
         {
@@ -41,12 +43,17 @@ export default function WhyChooseUs() {
                 {/* Header */}
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
                     <div className="flex flex-col items-start text-left max-w-2xl">
-                        <span className="text-[#c1272d] font-black uppercase tracking-[0.3em] text-[10px] md:text-xs mb-4 block">Why Choose Us</span>
+                        <span className="text-[#c1272d] font-black uppercase tracking-[0.3em] text-[10px] md:text-xs mb-4 block">
+                            <TextReveal text="Why Choose Us" type="char" stagger={20} />
+                        </span>
                         <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-medium leading-[1.1] text-white">
-                            The Asutosh Photography <span className="italic text-gray-500">Difference</span>
+                            <TextReveal text="The Asutosh Photography" type="word" stagger={60} />{' '}
+                            <span className="italic text-gray-500 block md:inline mt-1 md:mt-0">
+                                <TextReveal text="Difference" type="word" delay={300} />
+                            </span>
                         </h2>
                     </div>
-                    <div className="hidden md:block w-32 h-[1px] bg-white/20 mb-3"></div>
+                    <div className="hidden md:block w-32 h-[1px] bg-white/20 mb-3 animate-pulse"></div>
                 </div>
 
                 {/* Compact Grid Layout */}
@@ -57,13 +64,13 @@ export default function WhyChooseUs() {
                             className="group relative flex flex-col items-start border-l border-white/10 pl-6 hover:border-[#c1272d] transition-colors duration-500"
                         >
                             <span className="text-[10px] md:text-xs font-black uppercase tracking-[0.3em] text-white/20 group-hover:text-[#c1272d] mb-4 transition-colors duration-500">
-                                {item.number}.
+                                <TextReveal text={`${item.number}.`} type="char" delay={index * 100} />
                             </span>
                             <h3 className="text-xl md:text-2xl font-serif text-white mb-3 leading-snug">
-                                {item.title}
+                                <TextReveal text={item.title} type="char" delay={index * 100 + 40} stagger={12} />
                             </h3>
                             <p className="text-gray-400 font-light leading-relaxed text-sm md:text-base">
-                                {item.desc}
+                                <TextReveal text={item.desc} type="word" delay={index * 100 + 150} stagger={25} />
                             </p>
                         </div>
                     ))}
