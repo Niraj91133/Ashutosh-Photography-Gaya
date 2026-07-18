@@ -7,6 +7,7 @@ import imageCompression from 'browser-image-compression';
 const SECTIONS = [
     { id: 'hero', name: 'Hero', icon: ImageIcon, categories: ['Slider Images', 'Hero Settings'] },
     { id: 'services', name: 'Services', icon: Layers, categories: ['Wedding', 'Pre-Wedding', 'Birthday', 'Product', 'Baby', 'Videography', 'Reels', 'Wedding Films', 'Editing', 'Photo & Video Editing', 'Album Design', 'Custom Album', 'Backlit Printing', 'Portrait', 'Commercial', 'Cinematic Films'] },
+    { id: 'gallery', name: 'Gallery', icon: ImageIcon, categories: ['Wedding', 'Pre-Wedding', 'Birthday', 'Product', 'Baby', 'Videography', 'Reels', 'Wedding Films', 'Editing', 'Photo & Video Editing', 'Album Design', 'Custom Album', 'Backlit Printing', 'Portrait', 'Commercial', 'Cinematic Films'] },
     { id: 'process', name: 'Process', icon: Film, categories: ['Process Settings'] },
     { id: 'packages', name: 'Packages', icon: IndianRupee, categories: ['Basic Plan', 'Premium Plan', 'Packages Settings'] },
     { id: 'faqs', name: 'FAQs', icon: MessageSquare, categories: ['General'] },
@@ -95,7 +96,7 @@ export default function AdminDashboard() {
             if (error) throw error;
             if (data) setSiteSettings(data);
         } catch (err) {
-            console.warn('Settings table not ready or empty');
+            console.warn('Settings table not ready or empty. Error:', err);
         }
     };
 

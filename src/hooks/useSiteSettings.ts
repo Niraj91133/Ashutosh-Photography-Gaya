@@ -34,7 +34,7 @@ export function useSiteSettings() {
                     setSettings(data);
                 }
             } catch (err) {
-                console.warn('Could not fetch site settings');
+                console.warn('Could not fetch site settings. Error:', err);
             }
         }
         fetchSettings();
