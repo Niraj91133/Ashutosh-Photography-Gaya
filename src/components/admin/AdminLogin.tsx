@@ -1,5 +1,7 @@
+"use client";
+
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 import { Camera, Lock, User } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 
@@ -7,7 +9,7 @@ export default function AdminLogin() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
-    const navigate = useNavigate();
+    const router = useRouter();
 
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -32,7 +34,7 @@ export default function AdminLogin() {
             if (isMatch) {
                 console.log('Login successful!');
                 localStorage.setItem('adminLoggedIn', 'true');
-                navigate('/admin/dashboard');
+                router.push('/admin/dashboard');
             } else {
                 console.warn('Credential mismatch. Input:', username, 'Expected (DB):', data?.admin_id);
                 setError('Invalid credentials');
@@ -42,7 +44,7 @@ export default function AdminLogin() {
             // Absolute fallback
             if (username === 'asutosh_admin' && password === 'asutosh_admin') {
                 localStorage.setItem('adminLoggedIn', 'true');
-                navigate('/admin/dashboard');
+                router.push('/admin/dashboard');
             } else {
                 setError('Login failed. Please try again.');
             }

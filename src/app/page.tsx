@@ -1,28 +1,24 @@
-import { useState, useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom';
-import Header from './components/Header';
-import Hero from './components/Hero';
-import About from './components/About';
-import Services from './components/Services';
-import WhyChooseUs from './components/WhyChooseUs';
-import Process from './components/Process';
-import Gallery from './components/Gallery';
-import Testimonials from './components/Testimonials';
-import Packages from './components/Packages';
-import FAQ from './components/FAQ';
-import Blog from './components/Blog';
-import CTA from './components/CTA';
-import Contact from './components/Contact';
-import Footer from './components/Footer';
-import AdminLogin from './components/admin/AdminLogin';
-import AdminDashboard from './components/admin/AdminDashboard';
-import ProtectedRoute from './components/admin/ProtectedRoute';
-import ClientPortal from './pages/ClientPortal';
-import BlogDetail from './pages/BlogDetail';
-import { useSiteSettings } from './hooks/useSiteSettings';
-import ScrollReveal from './components/ScrollReveal';
+"use client";
 
-function MainSite() {
+import { useState, useEffect } from 'react';
+import Header from '../components/Header';
+import Hero from '../components/Hero';
+import About from '../components/About';
+import Services from '../components/Services';
+import WhyChooseUs from '../components/WhyChooseUs';
+import Process from '../components/Process';
+import Gallery from '../components/Gallery';
+import Testimonials from '../components/Testimonials';
+import Packages from '../components/Packages';
+import FAQ from '../components/FAQ';
+import Blog from '../components/Blog';
+import CTA from '../components/CTA';
+import Contact from '../components/Contact';
+import Footer from '../components/Footer';
+import { useSiteSettings } from '../hooks/useSiteSettings';
+import ScrollReveal from '../components/ScrollReveal';
+
+export default function Home() {
   const settings = useSiteSettings();
   const [activeSection, setActiveSection] = useState('hero');
   const [activeGalleryFilter, setActiveGalleryFilter] = useState('All');
@@ -114,40 +110,3 @@ function MainSite() {
     </div>
   );
 }
-
-
-function App() {
-  console.log('App component rendering...');
-  return (
-
-    <Routes>
-      <Route path="/" element={<MainSite />} />
-      <Route path="/clients" element={
-        <>
-          <Header activeSection="" onNavClick={() => { }} />
-          <ClientPortal />
-          <Footer />
-        </>
-      } />
-      <Route path="/blog/:id" element={
-        <>
-          <Header activeSection="" onNavClick={() => { }} />
-          <BlogDetail />
-          <Footer />
-        </>
-      } />
-      <Route path="/admin/login" element={<AdminLogin />} />
-      <Route
-        path="/admin/dashboard"
-        element={
-          <ProtectedRoute>
-            <AdminDashboard />
-          </ProtectedRoute>
-        }
-      />
-
-    </Routes>
-  );
-}
-
-export default App;

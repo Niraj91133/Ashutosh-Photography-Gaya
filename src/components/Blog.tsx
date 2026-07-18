@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { supabase } from '../lib/supabase';
 import { BLOGS } from '../lib/data';
 
@@ -18,7 +18,7 @@ export default function Blog() {
         .order('created_at', { ascending: false });
 
       if (data && data.length > 0) {
-        setBlogs(data.map(item => {
+        setBlogs(data.map((item: any) => {
           const [title, date] = (item.title || '').split(' | ');
           return {
             id: item.id,
@@ -78,7 +78,7 @@ export default function Blog() {
           className="flex gap-6 md:gap-8 overflow-x-auto snap-x snap-mandatory pb-8 -mx-6 px-6 md:mx-0 md:px-0 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']">
           {blogs.map((blog) => (
             <Link 
-              to={`/blog/${blog.id}`}
+              href={`/blog/${blog.id}`}
               target="_blank"
               rel="noopener noreferrer"
               key={blog.id} 

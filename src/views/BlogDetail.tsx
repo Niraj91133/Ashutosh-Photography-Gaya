@@ -1,11 +1,15 @@
+"use client";
+
 import { useEffect, useRef, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'next/navigation';
+import Link from 'next/link';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import { BLOGS } from '../lib/data';
 
 export default function BlogDetail() {
-  const { id } = useParams();
+  const params = useParams();
+  const id = params?.id;
   const scrollRef = useRef<HTMLDivElement>(null);
   
   const [blog, setBlog] = useState<any>(null);
@@ -60,7 +64,7 @@ export default function BlogDetail() {
       }
 
       if (others && others.length > 0) {
-        setOtherBlogs(others.map(item => {
+        setOtherBlogs(others.map((item: any) => {
           const [title, date] = (item.title || '').split(' | ');
           return {
             id: item.id,
@@ -108,7 +112,7 @@ export default function BlogDetail() {
       <div className="min-h-screen bg-[#050505] flex items-center justify-center text-white">
         <div className="text-center">
           <h1 className="text-4xl font-serif mb-4">Blog not found</h1>
-          <Link to="/" className="text-[#c1272d] hover:text-white transition-colors">Return to Home</Link>
+          <Link href="/" className="text-[#c1272d] hover:text-white transition-colors">Return to Home</Link>
         </div>
       </div>
     );
@@ -175,7 +179,7 @@ export default function BlogDetail() {
           >
             {otherBlogs.map((otherBlog) => (
               <Link 
-                to={`/blog/${otherBlog.id}`}
+                href={`/blog/${otherBlog.id}`}
                 key={otherBlog.id} 
                 className="flex-none w-[200px] md:w-[350px] snap-center group cursor-pointer flex flex-col bg-[#0a0a0a] rounded-sm border border-white/5 hover:border-white/20 transition-all duration-500 overflow-hidden shadow-xl"
               >

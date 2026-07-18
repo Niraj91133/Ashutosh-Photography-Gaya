@@ -31,7 +31,7 @@ export default function FAQ() {
         .order('created_at', { ascending: true });
 
       if (data && data.length > 0) {
-        setFaqs(data.map(d => ({ question: d.title, answer: d.description })));
+        setFaqs(data.map((d: any) => ({ question: d.title, answer: d.description })));
       }
     };
     fetchFaqs();

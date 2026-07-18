@@ -1,6 +1,9 @@
+"use client";
+
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import Link from 'next/link';
+import { usePathname, useRouter } from 'next/navigation';
 import { supabase } from '../lib/supabase';
 
 interface HeaderProps {
@@ -12,8 +15,8 @@ export default function Header({ activeSection, onNavClick }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [logoUrl, setLogoUrl] = useState('');
-  const location = useLocation();
-  const navigate = useNavigate();
+  const pathname = usePathname();
+  const router = useRouter();
 
   useEffect(() => {
     const fetchConfig = async () => {
@@ -72,13 +75,13 @@ export default function Header({ activeSection, onNavClick }: HeaderProps) {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link 
-            to="/" 
+            href="/" 
             className="flex items-center group cursor-pointer z-50"
             onClick={(e) => {
               e.preventDefault();
               window.scrollTo({ top: 0, behavior: 'smooth' });
-              if (location.pathname !== '/') {
-                navigate('/');
+              if (pathname !== '/') {
+                router.push('/');
               }
             }}
           >
@@ -97,19 +100,19 @@ export default function Header({ activeSection, onNavClick }: HeaderProps) {
               {navItems.map((item) => (
                 <Link
                   key={item.id}
-                  to={item.path}
+                  href={item.path}
                   onClick={(e) => {
                     if (item.path.startsWith('/#')) {
                       e.preventDefault();
-                      if (location.pathname !== '/') {
-                        navigate(item.path);
+                      if (pathname !== '/') {
+                        router.push(item.path);
                       } else {
                         onNavClick(item.path.replace('/#', ''));
                       }
                     } else if (item.path === '/') {
                       e.preventDefault();
-                      if (location.pathname !== '/') {
-                        navigate('/');
+                      if (pathname !== '/') {
+                        router.push('/');
                       } else {
                         window.scrollTo({ top: 0, behavior: 'smooth' });
                       }
@@ -172,13 +175,13 @@ export default function Header({ activeSection, onNavClick }: HeaderProps) {
           <div className="relative z-10 flex flex-col h-full">
             <div className="flex items-center justify-between px-6 pt-8 pb-4 border-b border-white/5">
               <Link 
-                to="/" 
+                href="/" 
                 onClick={(e) => {
                   e.preventDefault();
                   setIsMenuOpen(false);
                   window.scrollTo({ top: 0, behavior: 'smooth' });
-                  if (location.pathname !== '/') {
-                    navigate('/');
+                  if (pathname !== '/') {
+                    router.push('/');
                   }
                 }}
               >
@@ -204,21 +207,21 @@ export default function Header({ activeSection, onNavClick }: HeaderProps) {
               {navItems.map((item, index) => (
                 <Link
                   key={item.id}
-                  to={item.path}
+                  href={item.path}
                   style={{ transitionDelay: `${index * 50}ms` }}
                   onClick={(e) => {
                     setIsMenuOpen(false);
                     if (item.path.startsWith('/#')) {
                       e.preventDefault();
-                      if (location.pathname !== '/') {
-                        navigate(item.path);
+                      if (pathname !== '/') {
+                        router.push(item.path);
                       } else {
                         onNavClick(item.path.replace('/#', ''));
                       }
                     } else if (item.path === '/') {
                       e.preventDefault();
-                      if (location.pathname !== '/') {
-                        navigate('/');
+                      if (pathname !== '/') {
+                        router.push('/');
                       } else {
                         window.scrollTo({ top: 0, behavior: 'smooth' });
                       }
@@ -233,7 +236,7 @@ export default function Header({ activeSection, onNavClick }: HeaderProps) {
               ))}
               
               <Link
-                to="/clients"
+                href="/clients"
                 onClick={() => setIsMenuOpen(false)}
                 className={`text-4xl font-serif font-bold text-left transition-all duration-500 delay-300 ${isMenuOpen ? 'translate-x-0 opacity-100' : '-translate-x-8 opacity-0'} text-gray-400 hover:text-white`}
               >

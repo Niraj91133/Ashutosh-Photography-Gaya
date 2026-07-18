@@ -1,5 +1,7 @@
+"use client";
+
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 import { ImageIcon, CheckCircle, AlertCircle, LogOut, MessageSquare, Trash2, Camera, Film, Home, Plus, Layers, IndianRupee, Edit, X, Settings, Phone, EyeOff, FileText, BookOpen, User } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 import imageCompression from 'browser-image-compression';
@@ -53,11 +55,11 @@ export default function AdminDashboard() {
         packages: { id: null as string | null, basic_limit: 4, premium_limit: 6 }
     });
 
-    const navigate = useNavigate();
+    const router = useRouter();
 
     useEffect(() => {
         const isLoggedIn = localStorage.getItem('adminLoggedIn');
-        if (!isLoggedIn) navigate('/admin/login');
+        if (!isLoggedIn) router.push('/admin/login');
         if (supabase) {
             fetchImages();
             fetchSettings();
@@ -66,7 +68,7 @@ export default function AdminDashboard() {
         const sect = SECTIONS.find(s => s.id === activeTab);
         if (sect) setCategory(sect.categories[0]);
         resetForm();
-    }, [navigate, activeTab]);
+    }, [router, activeTab]);
 
     // Lock body scroll when menu is open (Mobile)
     useEffect(() => {
@@ -149,7 +151,7 @@ export default function AdminDashboard() {
         setUploading(true);
         setStatus(null);
         try {
-            let uploadedUrl = configs[categoryKey].url;
+            let uploadedUrl = (configs[categoryKey] as any).url || '';
 
             if (file) {
                 // Upload file to Supabase Storage
@@ -167,7 +169,7 @@ export default function AdminDashboard() {
 
             setUploadProgress(80);
 
-            const payloadData = { ...configs[categoryKey] };
+            const payloadData: any = { ...configs[categoryKey] };
             delete payloadData.id;
             delete payloadData.url;
 
@@ -388,10 +390,10 @@ export default function AdminDashboard() {
                         </button>
                     ))}
                     <div className="pt-8 space-y-2 border-t border-white/5 mt-4">
-                        <button onClick={() => navigate('/')} className="w-full text-xs p-4 flex items-center gap-4 text-gray-500 hover:text-white uppercase tracking-widest">
+                        <button onClick={() => router.push('/')} className="w-full text-xs p-4 flex items-center gap-4 text-gray-500 hover:text-white uppercase tracking-widest">
                             <Home className="w-4 h-4" /> Live Site
                         </button>
-                        <button onClick={() => { localStorage.removeItem('adminLoggedIn'); navigate('/admin/login'); }} className="w-full text-xs p-4 flex items-center gap-4 text-gray-500 hover:text-red-500 uppercase tracking-widest">
+                        <button onClick={() => { localStorage.removeItem('adminLoggedIn'); router.push('/admin/login'); }} className="w-full text-xs p-4 flex items-center gap-4 text-gray-500 hover:text-red-500 uppercase tracking-widest">
                             <LogOut className="w-4 h-4" /> Logout
                         </button>
                     </div>
