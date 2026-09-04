@@ -41,10 +41,10 @@ export default function AdminDashboard() {
     const [siteSettings, setSiteSettings] = useState({
         admin_id: '',
         admin_password: '',
-        phone: '',
-        email: '',
+        phone: '6205952218',
+        email: 'nirajmanpurpatwa@gmail.com',
         facebook_link: '',
-        instagram_link: '',
+        instagram_link: 'https://instagram.com/asutosh_photography_01',
         disabled_sections: [] as string[]
     });
 
