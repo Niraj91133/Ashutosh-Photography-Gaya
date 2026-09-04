@@ -45,7 +45,8 @@ Date: ${formData.date}%0A
 Budget: ${formData.budget}%0A
 Message: ${formData.message}`;
 
-    const whatsappPhone = settings.phone?.replace(/\D/g, '') || '919667517894';
+    const cleanPhone = settings.phone?.replace(/\D/g, '') || '6205952218';
+    const whatsappPhone = cleanPhone.length === 10 ? `91${cleanPhone}` : cleanPhone;
     window.open(`https://wa.me/${whatsappPhone}?text=${message}`, '_blank');
   };
 

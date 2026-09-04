@@ -16,7 +16,7 @@ export function useSiteSettings() {
         phone: '6205952218',
         email: 'nirajmanpurpatwa@gmail.com',
         facebook_link: '#',
-        instagram_link: 'https://instagram.com/asutosh_photography_01?igshid=YmMyMTA2M2Y=',
+        instagram_link: 'https://instagram.com/asutosh_photography_01',
         disabled_sections: []
     });
 

@@ -11,8 +11,8 @@ CREATE TABLE IF NOT EXISTS site_settings (
 );
 
 -- Insert default settings if not exists
-INSERT INTO site_settings (id, admin_id, admin_password, phone, email)
-VALUES (1, 'asutosh_admin', 'asutosh_admin', '9667517894', 'asutoshphotography@gmail.com')
+INSERT INTO site_settings (id, admin_id, admin_password, phone, email, instagram_link)
+VALUES (1, 'asutosh_admin', 'asutosh_admin', '6205952218', 'nirajmanpurpatwa@gmail.com', 'https://instagram.com/asutosh_photography_01')
 ON CONFLICT (id) DO NOTHING;
 
 -- Create site_images table

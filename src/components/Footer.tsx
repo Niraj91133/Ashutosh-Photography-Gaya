@@ -4,7 +4,8 @@ import { useSiteSettings } from '../hooks/useSiteSettings';
 export default function Footer() {
   const settings = useSiteSettings();
   const currentYear = new Date().getFullYear();
-
+  const cleanPhone = settings.phone?.replace(/\D/g, '') || '6205952218';
+  const whatsappPhone = cleanPhone.length === 10 ? `91${cleanPhone}` : cleanPhone;
 
   return (
     <footer className="bg-dark-900 pt-24 pb-12 border-t border-white/5 relative overflow-hidden">
@@ -32,7 +33,7 @@ export default function Footer() {
                 <Facebook className="w-5 h-5" />
               </a>
               {/* Mobile-only additional contact icons */}
-              <a href={`https://wa.me/${settings.phone?.replace(/\D/g, '') || '919667517894'}`} className="md:hidden w-10 h-10 rounded-sm bg-white/5 flex items-center justify-center hover:bg-[#c1272d] hover:text-white text-gray-400 transition-all duration-300">
+              <a href={`https://wa.me/${whatsappPhone}`} className="md:hidden w-10 h-10 rounded-sm bg-white/5 flex items-center justify-center hover:bg-[#c1272d] hover:text-white text-gray-400 transition-all duration-300">
                 <MessageSquare className="w-5 h-5" />
               </a>
               <a href="#contact" className="md:hidden w-10 h-10 rounded-sm bg-white/5 flex items-center justify-center hover:bg-[#c1272d] hover:text-white text-gray-400 transition-all duration-300">
@@ -126,7 +127,7 @@ export default function Footer() {
         </a>
         
         {/* Highlighted WhatsApp CTA */}
-        <a href={`https://wa.me/${settings.phone?.replace(/\D/g, '') || '919667517894'}`} className="flex flex-col items-center justify-center -mt-6 bg-[#c1272d] text-white w-14 h-14 rounded-full border-[4px] border-[#050505] shadow-[0_0_20px_rgba(193,39,45,0.4)] transition-transform active:scale-95">
+        <a href={`https://wa.me/${whatsappPhone}`} className="flex flex-col items-center justify-center -mt-6 bg-[#c1272d] text-white w-14 h-14 rounded-full border-[4px] border-[#050505] shadow-[0_0_20px_rgba(193,39,45,0.4)] transition-transform active:scale-95">
           <MessageSquare className="w-5 h-5" />
         </a>
 
