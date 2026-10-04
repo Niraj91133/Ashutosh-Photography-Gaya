@@ -138,7 +138,7 @@ export default function Header({ activeSection, onNavClick }: HeaderProps) {
                 e.preventDefault();
                 onNavClick('contact');
               }}
-              className="bg-[#050505] text-white px-8 py-2.5 rounded-sm border border-[#ff3333]/50 hover:border-[#ff3333] hover:bg-[#ff3333] transition-all duration-300 text-sm font-semibold tracking-wide shadow-[0_0_15px_rgba(255,51,51,0.1)] hover:shadow-[0_0_20px_rgba(255,51,51,0.4)]"
+              className="bg-[#050505] text-white px-8 py-2.5 rounded-sm border border-[#ff3333]/50 hover:border-[#ff3333] hover:bg-[#ff3333] transition-all duration-300 text-sm font-semibold tracking-wide"
             >
               Book Now
             </a>

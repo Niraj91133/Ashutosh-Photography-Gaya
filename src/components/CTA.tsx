@@ -24,10 +24,10 @@ export default function CTA() {
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
                     <a
                         href={`tel:${phone}`}
-                        className="w-full sm:w-auto px-12 py-6 bg-[#c1272d] hover:bg-[#c1272d] text-white rounded-full font-black uppercase tracking-widest text-xs transition-all shadow-xl shadow-[#c1272d]/20 active:scale-95 flex items-center justify-center gap-3"
+                        className="w-full sm:w-auto px-12 py-6 bg-[#c1272d] hover:bg-red-700 text-white rounded-full font-black uppercase tracking-widest text-xs transition-all active:scale-95 flex items-center justify-center gap-3"
                     >
                         <Phone className="w-4 h-4" />
-                        Book Your Shoot
+                        Call to Book Shoot
                     </a>
                     <a
                         href="#gallery"

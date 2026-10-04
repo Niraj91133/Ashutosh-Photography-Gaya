@@ -85,14 +85,14 @@ export default function Services({ onCategoryClick }: ServicesProps) {
           <div className="flex gap-3">
             <button
               onClick={() => scroll('left')}
-              className="w-12 h-12 rounded-full border border-white/5 flex items-center justify-center bg-[#050505] hover:bg-[#c1272d] hover:text-white transition-all shadow-md active:scale-95 group"
+              className="w-12 h-12 rounded-full border border-white/5 flex items-center justify-center bg-[#050505] hover:bg-[#c1272d] hover:text-white transition-all active:scale-95 group"
               aria-label="Scroll Left"
             >
               <ChevronLeft className="w-6 h-6 transition-transform group-hover:-translate-x-0.5" />
             </button>
             <button
               onClick={() => scroll('right')}
-              className="w-12 h-12 rounded-full border border-white/5 flex items-center justify-center bg-[#050505] hover:bg-[#c1272d] hover:text-white transition-all shadow-md active:scale-95 group"
+              className="w-12 h-12 rounded-full border border-white/5 flex items-center justify-center bg-[#050505] hover:bg-[#c1272d] hover:text-white transition-all active:scale-95 group"
               aria-label="Scroll Right"
             >
               <ChevronRight className="w-6 h-6 transition-transform group-hover:translate-x-0.5" />
@@ -119,7 +119,7 @@ export default function Services({ onCategoryClick }: ServicesProps) {
                   willChange: 'transform, opacity',
                 }}
               >
-                <div className="relative aspect-[3/4] rounded-lg overflow-hidden bg-[#0a0a0a] border border-white/5 shadow-sm transition-all duration-700 group-hover:shadow-xl group-hover:-translate-y-1">
+                <div className="relative aspect-[3/4] rounded-lg overflow-hidden bg-[#0a0a0a] border border-white/5 transition-all duration-700 group-hover:-translate-y-1">
                   <img
                     src={dbImg || service.img}
                     alt={service.title}

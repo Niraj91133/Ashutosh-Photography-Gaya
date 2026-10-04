@@ -416,7 +416,7 @@ export default function AdminDashboard() {
                     /* General Settings Tab */
                     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
                         {/* Login Credentials */}
-                        <div className="bg-[#0a0a0a] p-8 rounded-[2rem] border border-white/5 shadow-xl space-y-6">
+                        <div className="bg-[#0a0a0a] p-8 rounded-[2rem] border border-white/5 space-y-6">
                             <div className="flex items-center gap-4 text-[#c1272d] mb-2">
                                 <Settings className="w-6 h-6" />
                                 <h3 className="font-serif font-bold text-xl">Login Credentials</h3>
@@ -434,7 +434,7 @@ export default function AdminDashboard() {
                         </div>
 
                         {/* Contact Info */}
-                        <div className="bg-[#0a0a0a] p-8 rounded-[2rem] border border-white/5 shadow-xl space-y-6">
+                        <div className="bg-[#0a0a0a] p-8 rounded-[2rem] border border-white/5 space-y-6">
                             <div className="flex items-center gap-4 text-[#c1272d] mb-2">
                                 <Phone className="w-6 h-6" />
                                 <h3 className="font-serif font-bold text-xl">Contact & Socials</h3>
@@ -460,7 +460,7 @@ export default function AdminDashboard() {
                         </div>
 
                         {/* Disable Sections */}
-                        <div className="bg-[#0a0a0a] p-8 rounded-[2rem] border border-white/5 shadow-xl space-y-6">
+                        <div className="bg-[#0a0a0a] p-8 rounded-[2rem] border border-white/5 space-y-6">
                             <div className="flex items-center gap-4 text-[#c1272d] mb-2">
                                 <EyeOff className="w-6 h-6" />
                                 <h3 className="font-serif font-bold text-xl">Hide Sections</h3>
@@ -480,7 +480,7 @@ export default function AdminDashboard() {
                             <p className="text-[9px] text-gray-600 uppercase font-bold tracking-wider ml-4">Note: Hidden sections will not appear on the live website.</p>
                         </div>
 
-                        <button onClick={handleSaveSettings} disabled={uploading} className="w-full py-6 bg-[#c1272d] text-black rounded-2xl font-black uppercase tracking-[0.2em] shadow-xl shadow-[#c1272d]/10 hover:bg-[#c1272d] transition-all">
+                        <button onClick={handleSaveSettings} disabled={uploading} className="w-full py-6 bg-[#c1272d] text-black rounded-2xl font-black uppercase tracking-[0.2em] hover:bg-[#c1272d] transition-all">
                             {uploading ? 'Saving...' : 'Save All Settings'}
                         </button>
                     </div>
@@ -499,7 +499,7 @@ export default function AdminDashboard() {
 
                         {/* Form Editor */}
                         {category.includes('Settings') ? (
-                            <div className="bg-[#0a0a0a] p-6 md:p-10 rounded-[2rem] border border-white/5 shadow-xl space-y-6">
+                            <div className="bg-[#0a0a0a] p-6 md:p-10 rounded-[2rem] border border-white/5 space-y-6">
                                 {activeTab === 'hero' && (
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                         <div className="space-y-4">
@@ -518,7 +518,7 @@ export default function AdminDashboard() {
                                             <label className="text-[10px] uppercase font-black text-gray-500 tracking-widest ml-4">Upload Logo</label>
                                             <input type="file" onChange={e => e.target.files?.[0] && handleSaveConfig('hero', e.target.files[0])} accept="image/*" className="text-sm file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-[#c1272d] file:text-white hover:file:bg-[#c1272d]" />
                                             {configs.hero.url && <img src={configs.hero.url} className="h-20 object-contain mt-2 bg-black rounded" />}
-                                            <button onClick={() => handleSaveConfig('hero')} disabled={uploading} className="w-full py-4 mt-auto bg-[#c1272d] text-black rounded-2xl font-black uppercase tracking-widest shadow-xl hover:bg-[#c1272d] transition-all">
+                                            <button onClick={() => handleSaveConfig('hero')} disabled={uploading} className="w-full py-4 mt-auto bg-[#c1272d] text-black rounded-2xl font-black uppercase tracking-widest hover:bg-[#c1272d] transition-all">
                                                 {uploading ? 'Saving...' : 'Save Hero Settings'}
                                             </button>
                                         </div>
@@ -534,7 +534,7 @@ export default function AdminDashboard() {
                                             <label className="text-[10px] uppercase font-black text-gray-500 tracking-widest ml-4">Background Media (Image/Video)</label>
                                             <input type="file" onChange={e => e.target.files?.[0] && handleSaveConfig('process', e.target.files[0])} accept="image/*,video/*" className="text-sm file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-[#c1272d] file:text-white hover:file:bg-[#c1272d]" />
                                             {configs.process.url && <div className="text-xs text-green-500 font-bold ml-4">Media is currently uploaded</div>}
-                                            <button onClick={() => handleSaveConfig('process')} disabled={uploading} className="w-full py-4 mt-auto bg-[#c1272d] text-black rounded-2xl font-black uppercase tracking-widest shadow-xl hover:bg-[#c1272d] transition-all">
+                                            <button onClick={() => handleSaveConfig('process')} disabled={uploading} className="w-full py-4 mt-auto bg-[#c1272d] text-black rounded-2xl font-black uppercase tracking-widest hover:bg-[#c1272d] transition-all">
                                                 {uploading ? 'Saving...' : 'Save Process Settings'}
                                             </button>
                                         </div>
@@ -550,7 +550,7 @@ export default function AdminDashboard() {
                                             <label className="text-[10px] uppercase font-black text-gray-500 tracking-widest ml-4">Upload Your Photo</label>
                                             <input type="file" onChange={e => e.target.files?.[0] && handleSaveConfig('about', e.target.files[0])} accept="image/*" className="text-sm file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-[#c1272d] file:text-white hover:file:bg-[#c1272d]" />
                                             {configs.about.url && <img src={configs.about.url} className="h-20 object-contain mt-2" />}
-                                            <button onClick={() => handleSaveConfig('about')} disabled={uploading} className="w-full py-4 mt-auto bg-[#c1272d] text-black rounded-2xl font-black uppercase tracking-widest shadow-xl hover:bg-[#c1272d] transition-all">
+                                            <button onClick={() => handleSaveConfig('about')} disabled={uploading} className="w-full py-4 mt-auto bg-[#c1272d] text-black rounded-2xl font-black uppercase tracking-widest hover:bg-[#c1272d] transition-all">
                                                 {uploading ? 'Saving...' : 'Save About Settings'}
                                             </button>
                                         </div>
@@ -565,7 +565,7 @@ export default function AdminDashboard() {
                                         <div className="space-y-4">
                                             <label className="text-[10px] uppercase font-black text-gray-500 tracking-widest ml-4">Premium Package Cards Limit</label>
                                             <input type="number" className="w-full bg-black/50 border border-white/5 p-4 rounded-2xl text-sm focus:outline-none focus:border-[#c1272d] transition-all font-bold" value={configs.packages.premium_limit} onChange={e => setConfigs({...configs, packages: {...configs.packages, premium_limit: Number(e.target.value)}})} />
-                                            <button onClick={() => handleSaveConfig('packages')} disabled={uploading} className="w-full py-4 mt-auto bg-[#c1272d] text-black rounded-2xl font-black uppercase tracking-widest shadow-xl hover:bg-[#c1272d] transition-all">
+                                            <button onClick={() => handleSaveConfig('packages')} disabled={uploading} className="w-full py-4 mt-auto bg-[#c1272d] text-black rounded-2xl font-black uppercase tracking-widest hover:bg-[#c1272d] transition-all">
                                                 {uploading ? 'Saving...' : 'Save Packages Settings'}
                                             </button>
                                         </div>
@@ -573,7 +573,7 @@ export default function AdminDashboard() {
                                 )}
                             </div>
                         ) : (
-                        <div className="bg-[#0a0a0a] p-6 md:p-10 rounded-[2rem] border border-white/5 shadow-xl space-y-6">
+                        <div className="bg-[#0a0a0a] p-6 md:p-10 rounded-[2rem] border border-white/5 space-y-6">
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div className="space-y-4">
                                     {/* Hide Title and Description for Hero Slider since texts are in Settings */}

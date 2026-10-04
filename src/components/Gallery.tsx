@@ -258,14 +258,14 @@ export default function Gallery({ activeFilter, setActiveFilter }: GalleryProps)
                   src={paginatedImages[selectedIndex].url}
                   controls
                   autoPlay
-                  className="max-h-[60vh] md:max-h-[65vh] w-auto h-full object-contain rounded-md shadow-2xl transition-all duration-300"
+                  className="max-h-[60vh] md:max-h-[65vh] w-auto h-full object-contain rounded-md transition-all duration-300"
                   style={{ filter: distortionScale > 0.1 ? 'url(#distorto-fx)' : 'none' }}
                 />
               ) : (
                 <img
                   src={paginatedImages[selectedIndex].url}
                   alt={paginatedImages[selectedIndex].title}
-                  className="max-h-[60vh] md:max-h-[65vh] w-auto h-full object-contain rounded-md shadow-2xl transition-all duration-300"
+                  className="max-h-[60vh] md:max-h-[65vh] w-auto h-full object-contain rounded-md transition-all duration-300"
                   style={{ filter: distortionScale > 0.1 ? 'url(#distorto-fx)' : 'none' }}
                 />
               )}
@@ -289,7 +289,7 @@ export default function Gallery({ activeFilter, setActiveFilter }: GalleryProps)
             </div>
 
             {/* Horizontal Thumbnail Slider Track */}
-            <div className="flex items-center gap-3 overflow-x-auto max-w-full md:max-w-2xl py-2 px-4 scrollbar-hide bg-black/40 backdrop-blur-md rounded-full border border-white/5 shadow-lg">
+            <div className="flex items-center gap-3 overflow-x-auto max-w-full md:max-w-2xl py-2 px-4 scrollbar-hide bg-black/40 backdrop-blur-md rounded-full border border-white/5">
               {paginatedImages.map((image, idx) => {
                 const isActive = idx === selectedIndex;
                 return (

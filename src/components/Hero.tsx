@@ -1,17 +1,28 @@
 import { useEffect, useState } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Phone } from 'lucide-react';
 import { supabase } from '../lib/supabase';
+import { useSiteSettings } from '../hooks/useSiteSettings';
 
 interface HeroProps {
   onNavClick: (section: string) => void;
 }
 
+const DEFAULT_HERO_SMALL_TEXT = 'Preserving your purest emotions, royal weddings, and candid moments into breathtaking cinematic art. Trusted by 500+ couples across Bihar for unmatched perfection. Wedding dates fill fast — Call & Reserve Your Date Now!';
+
+const isPlaceholder = (text?: string) => {
+  if (!text || !text.trim()) return true;
+  const lower = text.toLowerCase();
+  return lower.includes('write something') || lower.includes('attracted') || lower.includes('book us fast');
+};
+
 export default function Hero({ onNavClick }: HeroProps) {
+  const settings = useSiteSettings();
+  const phone = settings.phone || '6205952218';
   const [heroImages, setHeroImages] = useState<any[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [config, setConfig] = useState({
     big_text: 'ASUTOSH\nPHOTOGRAPHY',
-    small_text: 'Write Something About the Asutosh Photography so That User get Attracted and book Us FAst',
+    small_text: DEFAULT_HERO_SMALL_TEXT,
     autoscroll: true
   });
 
@@ -52,7 +63,7 @@ export default function Hero({ onNavClick }: HeroProps) {
           const parsed = JSON.parse(configData.description || '{}');
           setConfig({
             big_text: parsed.big_text || 'ASUTOSH\nPHOTOGRAPHY',
-            small_text: parsed.small_text || 'Write Something About the Asutosh Photography so That User get Attracted and book Us FAst',
+            small_text: isPlaceholder(parsed.small_text) ? DEFAULT_HERO_SMALL_TEXT : parsed.small_text,
             autoscroll: parsed.autoscroll !== false
           });
         } catch(e) {}
@@ -144,7 +155,7 @@ export default function Hero({ onNavClick }: HeroProps) {
 
       {/* Text Content (Left Aligned) */}
       <div className="relative z-10 w-full px-6 md:px-12 mt-12 md:mt-20">
-        <h1 className="font-sans font-black text-[clamp(2rem,5vw,4.5rem)] text-white leading-[0.95] mb-6 tracking-tighter fade-in drop-shadow-2xl uppercase whitespace-pre-line">
+        <h1 className="font-sans font-black text-[clamp(2rem,5vw,4.5rem)] text-white leading-[0.95] mb-6 tracking-tighter fade-in uppercase whitespace-pre-line">
           {config.big_text}
         </h1>
 
@@ -152,16 +163,23 @@ export default function Hero({ onNavClick }: HeroProps) {
           {config.small_text}
         </p>
 
-        <div className="fade-in" style={{ animationDelay: '0.4s' }}>
+        <div className="fade-in flex flex-wrap items-center gap-4" style={{ animationDelay: '0.4s' }}>
+          <a
+            href={`tel:${phone}`}
+            className="inline-flex items-center justify-center gap-2 bg-[#ff3333] hover:bg-[#c1272d] text-white px-10 py-3.5 rounded-sm transition-all duration-300 text-sm font-bold tracking-wide active:scale-95"
+          >
+            <Phone className="w-4 h-4" />
+            Call Now
+          </a>
           <a
             href="#contact"
             onClick={(e) => {
               e.preventDefault();
               onNavClick('contact');
             }}
-            className="inline-flex items-center justify-center bg-[#050505] text-white px-12 py-3.5 rounded-sm border border-[#ff3333]/60 hover:border-[#ff3333] hover:bg-[#ff3333] transition-all duration-300 text-sm font-semibold tracking-wide shadow-[0_0_15px_rgba(255,51,51,0.15)] hover:shadow-[0_0_20px_rgba(255,51,51,0.5)]"
+            className="inline-flex items-center justify-center bg-[#050505] text-white px-10 py-3.5 rounded-sm border border-[#ff3333]/60 hover:border-[#ff3333] hover:bg-[#ff3333] transition-all duration-300 text-sm font-semibold tracking-wide"
           >
-            Book Us
+            Book Online
           </a>
         </div>
       </div>

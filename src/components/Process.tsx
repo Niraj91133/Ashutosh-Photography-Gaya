@@ -1,9 +1,21 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '../lib/supabase';
+import { Phone } from 'lucide-react';
+import { useSiteSettings } from '../hooks/useSiteSettings';
+
+const DEFAULT_PROCESS_TEXT = "Every wedding is a once-in-a-lifetime story waiting to be told with cinematic brilliance and raw emotion. Don't compromise on your memories — Lock in your special date with Asutosh Photography before slots are booked out!";
+
+const isPlaceholder = (text?: string) => {
+  if (!text || !text.trim()) return true;
+  const lower = text.toLowerCase();
+  return lower.includes('write something') || lower.includes('attracted') || lower.includes('book us fast');
+};
 
 export default function Process() {
+  const settings = useSiteSettings();
+  const phone = settings.phone || '6205952218';
   const [config, setConfig] = useState({
-    text: 'Write Something About the Asutosh Potography\nso That User get Attracted and book Us FAst',
+    text: DEFAULT_PROCESS_TEXT,
     url: 'https://images.pexels.com/photos/2253870/pexels-photo-2253870.jpeg?auto=compress&cs=tinysrgb&w=1920&h=800&fit=crop'
   });
 
@@ -21,7 +33,7 @@ export default function Process() {
         try {
           const parsed = JSON.parse(data.description || '{}');
           setConfig({
-            text: parsed.text || 'Write Something About the Asutosh Potography\nso That User get Attracted and book Us FAst',
+            text: isPlaceholder(parsed.text) ? DEFAULT_PROCESS_TEXT : parsed.text,
             url: data.url || 'https://images.pexels.com/photos/2253870/pexels-photo-2253870.jpeg?auto=compress&cs=tinysrgb&w=1920&h=800&fit=crop'
           });
         } catch(e) {}
@@ -61,12 +73,21 @@ export default function Process() {
             {config.text}
           </p>
 
-          <a
-            href="#contact"
-            className="inline-flex items-center justify-center bg-[#050505] text-white px-12 py-3.5 rounded-sm border border-[#ff3333]/60 hover:border-[#ff3333] hover:bg-[#ff3333] transition-all duration-300 text-sm font-semibold tracking-wider shadow-[0_0_15px_rgba(255,51,51,0.15)] hover:shadow-[0_0_20px_rgba(255,51,51,0.5)]"
-          >
-            Book Us
-          </a>
+          <div className="flex flex-wrap items-center gap-4">
+            <a
+              href={`tel:${phone}`}
+              className="inline-flex items-center justify-center gap-2 bg-[#ff3333] hover:bg-[#c1272d] text-white px-10 py-3.5 rounded-sm transition-all duration-300 text-sm font-bold tracking-wide active:scale-95"
+            >
+              <Phone className="w-4 h-4" />
+              Call Now
+            </a>
+            <a
+              href="#contact"
+              className="inline-flex items-center justify-center bg-[#050505] text-white px-10 py-3.5 rounded-sm border border-[#ff3333]/60 hover:border-[#ff3333] hover:bg-[#ff3333] transition-all duration-300 text-sm font-semibold tracking-wider"
+            >
+              Book Online
+            </a>
+          </div>
         </div>
       </div>
     </section>

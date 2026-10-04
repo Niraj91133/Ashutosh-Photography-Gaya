@@ -120,14 +120,14 @@ export default function Footer() {
       </div>
 
       {/* Mobile Floating Bottom Navigation - Luxury Minimalist */}
-      <div className="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 w-[calc(100%-3rem)] max-w-[320px] bg-[#050505]/95 backdrop-blur-2xl border border-white/10 z-50 rounded-full h-[60px] flex justify-around items-center px-6 shadow-[0_10px_40px_rgba(0,0,0,0.8)]">
+      <div className="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 w-[calc(100%-3rem)] max-w-[320px] bg-[#050505]/95 backdrop-blur-2xl border border-white/10 z-50 rounded-full h-[60px] flex justify-around items-center px-6">
         <a href="#gallery" className="flex flex-col items-center gap-1 text-gray-400 hover:text-white transition-all mt-1">
           <Camera className="w-[18px] h-[18px]" />
           <span className="text-[8px] uppercase font-bold tracking-[0.2em]">Gallery</span>
         </a>
         
         {/* Highlighted WhatsApp CTA */}
-        <a href={`https://wa.me/${whatsappPhone}`} className="flex flex-col items-center justify-center -mt-6 bg-[#c1272d] text-white w-14 h-14 rounded-full border-[4px] border-[#050505] shadow-[0_0_20px_rgba(193,39,45,0.4)] transition-transform active:scale-95">
+        <a href={`https://wa.me/${whatsappPhone}`} className="flex flex-col items-center justify-center -mt-6 bg-[#c1272d] text-white w-14 h-14 rounded-full border-[4px] border-[#050505] transition-transform active:scale-95">
           <MessageSquare className="w-5 h-5" />
         </a>
 

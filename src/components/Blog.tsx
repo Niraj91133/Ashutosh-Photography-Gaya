@@ -58,14 +58,14 @@ export default function Blog() {
           <div className="flex gap-3">
             <button
               onClick={() => scroll('left')}
-              className="w-12 h-12 rounded-full border border-white/5 flex items-center justify-center bg-[#050505] hover:bg-[#c1272d] hover:text-white transition-all shadow-md active:scale-95 group"
+              className="w-12 h-12 rounded-full border border-white/5 flex items-center justify-center bg-[#050505] hover:bg-[#c1272d] hover:text-white transition-all active:scale-95 group"
               aria-label="Scroll Left"
             >
               <ChevronLeft className="w-6 h-6 transition-transform group-hover:-translate-x-0.5" />
             </button>
             <button
               onClick={() => scroll('right')}
-              className="w-12 h-12 rounded-full border border-white/5 flex items-center justify-center bg-[#050505] hover:bg-[#c1272d] hover:text-white transition-all shadow-md active:scale-95 group"
+              className="w-12 h-12 rounded-full border border-white/5 flex items-center justify-center bg-[#050505] hover:bg-[#c1272d] hover:text-white transition-all active:scale-95 group"
               aria-label="Scroll Right"
             >
               <ChevronRight className="w-6 h-6 transition-transform group-hover:translate-x-0.5" />
@@ -82,7 +82,7 @@ export default function Blog() {
               target="_blank"
               rel="noopener noreferrer"
               key={blog.id} 
-              className="flex-none w-[200px] md:w-[350px] snap-center group cursor-pointer flex flex-col bg-[#050505] rounded-sm border border-white/5 hover:border-white/20 transition-all duration-500 overflow-hidden shadow-xl"
+              className="flex-none w-[200px] md:w-[350px] snap-center group cursor-pointer flex flex-col bg-[#050505] rounded-sm border border-white/5 hover:border-white/20 transition-all duration-500 overflow-hidden"
             >
               <div className="relative aspect-[4/3] overflow-hidden">
                 <img 

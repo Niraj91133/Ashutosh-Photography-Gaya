@@ -66,7 +66,7 @@ export default function About() {
           {/* Image Split Layout - Compact Luxury */}
           <div className="relative flex justify-center lg:justify-start">
             <div 
-              className="aspect-[3/4] w-full max-w-md rounded-lg overflow-hidden shadow-xl relative z-10"
+              className="aspect-[3/4] w-full max-w-md rounded-lg overflow-hidden relative z-10"
               style={{
                 opacity: isSectionVisible ? 1 : 0,
                 transform: isSectionVisible ? 'scale(1) translateY(0)' : 'scale(1.05) translateY(20px)',
@@ -81,7 +81,7 @@ export default function About() {
               />
             </div>
             <div 
-              className="absolute -bottom-4 -right-4 w-48 h-48 bg-transparent shadow-md rounded-lg -z-10 hidden md:block border border-[#c1272d]"
+              className="absolute -bottom-4 -right-4 w-48 h-48 bg-transparent rounded-lg -z-10 hidden md:block border border-[#c1272d]"
               style={{
                 opacity: isSectionVisible ? 0.3 : 0,
                 transform: isSectionVisible ? 'translate(0, 0)' : 'translate(-12px, -12px)',

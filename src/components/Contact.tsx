@@ -133,7 +133,7 @@ Message: ${formData.message}`;
 
           {/* Right Column: Forms */}
           <div className="lg:col-span-7">
-            <div className="bg-[#0a0a0a] p-5 md:p-12 rounded-sm border border-white/5 shadow-2xl relative overflow-hidden">
+            <div className="bg-[#0a0a0a] p-5 md:p-12 rounded-sm border border-white/5 relative overflow-hidden">
               
               {/* Tab Toggles */}
               <div className="flex bg-[#050505] p-1 rounded-sm border border-white/10 mb-8 md:mb-10 w-fit mx-auto md:mx-0">

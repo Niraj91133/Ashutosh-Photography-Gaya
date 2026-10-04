@@ -129,7 +129,7 @@ export default function Packages() {
                 onClick={() => setActiveTab(tab)}
                 className={`px-8 py-2.5 text-xs font-semibold uppercase tracking-widest transition-all rounded-sm ${
                   activeTab === tab
-                    ? 'bg-[#c1272d] text-white shadow-lg'
+                    ? 'bg-[#c1272d] text-white'
                     : 'text-gray-400 hover:text-white hover:bg-white/5'
                 }`}
               >
@@ -146,14 +146,14 @@ export default function Packages() {
               key={index}
               className={`relative flex flex-col p-8 md:p-12 w-full max-w-[420px] transition-all duration-500 overflow-hidden rounded-sm group
                 ${pkg.popular
-                  ? 'bg-[#0a0a0a] border border-[#c1272d]/30 hover:border-[#c1272d]/60 shadow-[0_0_30px_rgba(193,39,45,0.05)]'
+                  ? 'bg-[#0a0a0a] border border-[#c1272d]/30 hover:border-[#c1272d]/60'
                   : 'bg-transparent border border-white/10 hover:border-white/20 hover:bg-white/[0.02]'
                 }`}
             >
               {/* Popular Badge */}
               {pkg.popular && (
                 <div className="absolute top-0 right-8">
-                  <div className="bg-[#c1272d] text-white px-4 py-1.5 text-[9px] font-black uppercase tracking-[0.3em] shadow-lg">
+                  <div className="bg-[#c1272d] text-white px-4 py-1.5 text-[9px] font-black uppercase tracking-[0.3em]">
                     Most Popular
                   </div>
                 </div>
@@ -192,7 +192,7 @@ export default function Packages() {
                   href="#contact"
                   className={`w-full flex items-center justify-center py-4 px-6 rounded-sm font-semibold uppercase tracking-widest text-[10px] transition-all duration-500
                     ${pkg.popular
-                      ? 'bg-[#c1272d] text-white hover:bg-red-800 shadow-[0_0_20px_rgba(193,39,45,0.2)] hover:shadow-[0_0_30px_rgba(193,39,45,0.4)]'
+                      ? 'bg-[#c1272d] text-white hover:bg-red-800'
                       : 'border border-white/20 text-white hover:bg-white hover:text-black'
                     }`}
                 >

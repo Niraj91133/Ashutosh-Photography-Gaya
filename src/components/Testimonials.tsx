@@ -95,7 +95,7 @@ export default function Testimonials() {
             {marqueeItems.map((testimonial, index) => (
               <div
                 key={index}
-                className="w-[280px] md:w-[450px] p-6 md:p-10 bg-[#0a0a0a] rounded-sm border border-white/5 shadow-sm transition-all duration-500 flex flex-col relative group-hover:border-white/10"
+                className="w-[280px] md:w-[450px] p-6 md:p-10 bg-[#0a0a0a] rounded-sm border border-white/5 transition-all duration-500 flex flex-col relative group-hover:border-white/10"
               >
                 <Quote className="text-[#c1272d] w-12 h-12 absolute top-6 right-6 -z-0 opacity-10" />
 

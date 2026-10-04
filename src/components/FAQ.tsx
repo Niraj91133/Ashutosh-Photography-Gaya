@@ -55,7 +55,7 @@ export default function FAQ() {
             <div 
               key={index} 
               className={`border border-white/10 rounded-sm overflow-hidden transition-all duration-300 ${
-                openIndex === index ? 'bg-white/[0.02] border-[#c1272d]/30 shadow-[0_5px_15px_rgba(193,39,45,0.05)]' : 'hover:border-white/20'
+                openIndex === index ? 'bg-white/[0.02] border-[#c1272d]/30' : 'hover:border-white/20'
               }`}
             >
               <button

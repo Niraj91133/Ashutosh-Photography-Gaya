@@ -126,7 +126,7 @@ export default function ClientPortal() {
             {/* Password Modal */}
             {selectedClient && (
                 <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 backdrop-blur-xl bg-black/80 animate-in fade-in duration-300">
-                    <div className="bg-[#0a0a0a] w-full max-w-md rounded-[3rem] border border-white/10 p-10 relative shadow-2xl overflow-hidden">
+                    <div className="bg-[#0a0a0a] w-full max-w-md rounded-[3rem] border border-white/10 p-10 relative overflow-hidden">
                         <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#c1272d] to-transparent opacity-50"></div>
 
                         <button
@@ -138,7 +138,7 @@ export default function ClientPortal() {
 
                         <div className="text-center space-y-6">
                             <div className="w-16 h-16 bg-[#c1272d]/10 rounded-3xl flex items-center justify-center mx-auto mb-2">
-                                <Lock className="w-8 h-8 text-[#c1272d] shadow-lg" />
+                                <Lock className="w-8 h-8 text-[#c1272d]" />
                             </div>
 
                             <div>
@@ -161,7 +161,7 @@ export default function ClientPortal() {
 
                                 <button
                                     onClick={handleAccess}
-                                    className="w-full bg-[#c1272d] hover:bg-[#c1272d] text-black py-5 rounded-2xl font-bold uppercase tracking-widest text-xs shadow-lg shadow-[#c1272d]/20 active:scale-[0.98] transition-all"
+                                    className="w-full bg-[#c1272d] hover:bg-red-700 text-black py-5 rounded-2xl font-bold uppercase tracking-widest text-xs active:scale-[0.98] transition-all"
                                 >
                                     Unlock Gallery
                                 </button>
